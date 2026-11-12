@@ -12,6 +12,9 @@ This project is edited visually in Stacki *and* by Claude. Stacki autosaves to t
 - **Keep markup Stacki-editable:** page copy lives as plain text in `src/pages/*.astro`; cards and sections are components with props and slots. Don't use `.map()` loops or computed expressions in page templates — lists that repeat (FAQs, posts, press) come from content collections and are looped inside components.
 - Stacki reads `src/content.config.ts` with esbuild — keep `esbuild` in devDependencies. New collections need a dev-server restart.
 
+## Preview hosting
+Public preview: https://joshofcourse.github.io/imagi-website/ (repo `joshofcourse/imagi-website`). Every push to `main` rebuilds it via `.github/workflows/deploy.yml` (~1 min). That build sets `SITE_BASE` so links work under the `/imagi-website/` sub-path, and `PUBLIC_NOINDEX` so search engines skip it — neither applies to local dev. Keep links root-relative (`/pricing`, `/images/…`); the build prefixes them.
+
 ## Design rules (keep it consistent)
 - **Tokens only.** Colours, spacing, radius, shadows and type sizes come from `src/styles/global.css` (mirrors the Figma Brand / Tokens / Theme variables). Never hard-code a hex value or pixel spacing in a page.
 - **Type:** one `h1` per page (Hero, Display L). Section headings are Display S (`SectionHeader`). Card titles are Heading M. Body copy Body M/L. Use the `.text-*` classes, which match the 12 Figma text styles.
