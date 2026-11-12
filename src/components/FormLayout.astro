@@ -1,0 +1,31 @@
+---
+/**
+ * Two-column "form beside content" layout, used inside a <Section> on form pages
+ * (contact, quote, W-9, demo). Stacks on small screens (supporting content first).
+ * Slots: default = the form (or embed), "aside" = supporting content
+ * (SectionHeader align="left", Checklist, Cards, Testimonial…).
+ * `reverse` puts the form on the left.
+ */
+interface Props {
+  reverse?: boolean;
+}
+
+const { reverse = false } = Astro.props;
+---
+
+<div class:list={['formlayout', { 'formlayout--reverse': reverse }]}>
+  <div class="formlayout_aside"><slot name="aside" /></div>
+  <div class="formlayout_main"><slot /></div>
+</div>
+
+<style>
+  .formlayout { display: grid; gap: var(--space-2xl); align-items: start; }
+  .formlayout_aside { display: flex; flex-direction: column; gap: var(--space-xl); align-items: flex-start; }
+  .formlayout_main { min-width: 0; }
+  @media (min-width: 900px) {
+    .formlayout { grid-template-columns: 5fr 7fr; gap: var(--space-3xl); }
+    .formlayout_aside { position: sticky; top: calc(var(--header) + var(--space-xl)); }
+    .formlayout--reverse { grid-template-columns: 7fr 5fr; }
+    .formlayout--reverse .formlayout_aside { order: 2; }
+  }
+</style>

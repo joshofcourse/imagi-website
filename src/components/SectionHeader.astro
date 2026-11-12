@@ -1,0 +1,32 @@
+---
+/**
+ * Eyebrow + heading + intro, used at the top of sections.
+ * `level="1"` makes it the page title (Display L); otherwise it's a section heading (Display S).
+ * The slot is the intro paragraph.
+ */
+import Badge from './Badge.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  level?: '1' | '2';
+  align?: 'center' | 'left';
+}
+
+const { eyebrow, title, level = '2', align = 'center' } = Astro.props;
+const Heading = level === '1' ? 'h1' : 'h2';
+---
+
+<header class:list={['sectionheader', `sectionheader--${align}`]}>
+  {eyebrow && <Badge tone="brand">{eyebrow}</Badge>}
+  <Heading class={level === '1' ? 'text-display-l' : 'text-display-s'}>{title}</Heading>
+  {Astro.slots.has('default') && <div class="sectionheader_intro text-body-l"><slot /></div>}
+</header>
+
+<style>
+  .sectionheader { display: flex; flex-direction: column; gap: var(--space-md); max-width: 760px; }
+  .sectionheader--center { align-items: center; text-align: center; margin-inline: auto; }
+  .sectionheader--left { align-items: flex-start; }
+  .sectionheader_intro { color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-sm); }
+  :global(.section--dark) .sectionheader_intro { color: inherit; opacity: 0.85; }
+</style>

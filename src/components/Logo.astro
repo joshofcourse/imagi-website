@@ -1,0 +1,20 @@
+---
+/** The imagi wordmark (brand book primary logo). Colour follows the text colour. */
+import raw from '../../public/brand/logo.svg?raw';
+
+interface Props {
+  /** Height in px; width follows the logo's proportions */
+  height?: number;
+}
+
+const { height = 28 } = Astro.props;
+const svg = raw
+  .replace('fill="#0E1704"', 'fill="currentColor"')
+  .replace(/width="361" height="80"/, `width="${Math.round((height * 361) / 80)}" height="${height}" role="img" aria-label="imagi"`);
+---
+
+<span class="logo" set:html={svg} />
+
+<style>
+  .logo { display: inline-flex; line-height: 0; }
+</style>

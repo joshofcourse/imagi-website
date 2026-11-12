@@ -1,0 +1,30 @@
+---
+/**
+ * Image beside text. `reverse` puts the image on the left.
+ * Slots: default = text column content, "media" = custom media instead of `image`.
+ */
+interface Props {
+  image?: string;
+  imageAlt?: string;
+  reverse?: boolean;
+}
+
+const { image, imageAlt = '', reverse = false } = Astro.props;
+---
+
+<div class:list={['split', { 'split--reverse': reverse }]}>
+  <div class="split_text"><slot /></div>
+  <div class="split_media">
+    {Astro.slots.has('media') ? <slot name="media" /> : image && <img src={image} alt={imageAlt} loading="lazy" />}
+  </div>
+</div>
+
+<style>
+  .split { display: grid; gap: var(--space-xl); align-items: center; }
+  .split_text { display: flex; flex-direction: column; gap: var(--space-md); align-items: flex-start; }
+  .split_media img { width: 100%; border-radius: var(--radius-lg); }
+  @media (min-width: 900px) {
+    .split { grid-template-columns: 1fr 1fr; gap: var(--space-3xl); }
+    .split--reverse .split_media { order: -1; }
+  }
+</style>

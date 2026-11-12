@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import PersonCard from '../components/PersonCard.astro';
+import Button from '../components/Button.astro';
+import Testimonial from '../components/Testimonial.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="imagi Ambassadors 2026/27"
+  description="Apply to join imagi’s community. Fill in our application form."
+>
+  <Hero eyebrow="Better together" title="Join the imagi community" image="/images/ambassadors/imagi-community-photo.webp" imageAlt="A group of people in imagi caps and jackets cheering together">
+    <p>The best imagi ideas come from classrooms like yours. This is where you hang out, trade what’s working, get first looks at new features, and talk all things AI with educators just like you. Come join us.</p>
+    <Fragment slot="actions">
+      <Button href="https://www.facebook.com/groups/imagieducatorcommunity" size="l" arrow external>Join the community</Button>
+      <Button href="https://forms.gle/TLJhEZBg3kCivHRr7" variant="outline" size="l" external>Join the waitlist</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <SectionHeader eyebrow="Get involved" title="Three ways to be involved" />
+    <Grid cols={3}>
+      <Card band="highlight" eyebrow="1" title="Community" href="https://www.facebook.com/groups/imagieducatorcommunity" linkLabel="Join our Facebook group" external>
+        <p>Anyone can be part of our community, wherever you are in the world.</p>
+        <p>Learn from others, share your successes, and hear about new product updates.</p>
+      </Card>
+      <Card band="accent" eyebrow="2" title="Ambassadors" href="https://forms.gle/TLJhEZBg3kCivHRr7" linkLabel="Join the waitlist" external>
+        <p>A select group of imagi users, chosen each year. Join webinars and hackathons, test new features, earn swag and a certificate.</p>
+        <p>Applications for 2027/28 open soon. Join the waitlist to hear first.</p>
+      </Card>
+      <Card band="orange" eyebrow="3" title="Ambassador GOLD">
+        <p>Awarded to the most dedicated of Ambassadors.</p>
+        <p>If you’re selected, you’ll get paid opportunities to lead PD sessions, present at conferences, and you’ll receive extra training too.</p>
+        <p>GOLD Ambassadors will be chosen later, but if you’re interested, you can opt in for consideration during your Ambassador application.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section tone="subtle" id="cohort">
+    <SectionHeader eyebrow="Ambassadors 26/27" title="Meet our 2026/27 cohort">
+      <p>Real educators building with AI in their classrooms. Read their stories and see what you could be part of.</p>
+    </SectionHeader>
+    <div class="cohort">
+      <PersonCard name="Gigi Mims" image="/images/ambassadors/gieshala_gigi_mims_headshot.jpg" />
+      <PersonCard name="Mark Godinez" image="/images/ambassadors/mark_godinez_headshot.jpg" />
+      <PersonCard name="Janelle Yearwood" image="/images/ambassadors/janelle-yearwood-headshot.jpg" />
+      <PersonCard name="Kelly Powers" image="/images/ambassadors/kelly_powers_headshot.jpg" />
+      <PersonCard name="Julie Gonzalez" image="/images/ambassadors/julie_gonzalez_headshot.jpg" />
+      <PersonCard name="Samantha Gleisten" image="/images/ambassadors/samantha_gleisten_headshot.png" />
+    </div>
+    <p class="note text-body-m">…and many more.</p>
+    <div class="actions">
+      <Button href="https://imagilabs.com/en-us/imagi-ambassadors-26-27" size="l" arrow>Meet the Ambassadors</Button>
+      <Button href="https://forms.gle/TLJhEZBg3kCivHRr7" variant="outline" size="l" external>Want in? Join the waitlist</Button>
+    </div>
+  </Section>
+
+  <Section>
+    <SectionHeader eyebrow="In their words" title="What is it like being an Ambassador?" />
+    <Grid cols={3}>
+      <Testimonial tone="subtle" name="Rebecca" role="STEM Program Manager, Boys & Girls Club of Palm Beach County, Florida · Ambassador 25/26">
+        The best part of being in the imagi Ambassador cohort is that you’re blending community, collaboration, and computer science all at once.
+      </Testimonial>
+      <Testimonial tone="subtle" name="Dr. Sonia" role="Computer Science Teacher & CSTA Standards Writer, Massachusetts · Ambassador 25/26">
+        I was very honored to be chosen as an imagi Ambassador. There are so many excellent educators out there, so it felt really special. I shared the news with everyone: my team, LinkedIn, even my family and friends.
+      </Testimonial>
+      <Testimonial tone="subtle" name="Gigi" role="Computer Science Teacher, Senatobia School District, Mississippi · Ambassador 25/26">
+        The way imagi celebrates its ambassadors makes me proud to wear the button and talk about it. These conversations remind me of my why, and I get even more motivated.
+      </Testimonial>
+    </Grid>
+  </Section>
+
+  <Section tone="muted">
+    <SectionHeader eyebrow="Out and about" title="Ambassadors in action" />
+    <Grid cols={3}>
+      <Card image="/images/ambassadors/1000072719.jpg" imageAlt="imagi Ambassadors at an event booth" title="Meet up at events" />
+      <Card image="/images/ambassadors/image2.jpeg" imageAlt="imagi Ambassadors helping out at a conference" title="Help out at conferences" />
+      <Card image="/images/ambassadors/pxl_20260714_235842283.mp-3.jpg" imageAlt="imagi Ambassadors learning together" title="Learn from others" />
+    </Grid>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader eyebrow="FAQ" title="Ambassador FAQs" />
+    <FaqList group="ambassadors" />
+  </Section>
+
+  <Section>
+    <CtaBand title="Applications for 2027/28 open soon">
+      <p>Join the waitlist to hear first.</p>
+      <Fragment slot="actions">
+        <Button href="https://forms.gle/TLJhEZBg3kCivHRr7" variant="secondary" size="l" arrow external>Join the waitlist</Button>
+        <Button href="https://www.facebook.com/groups/imagieducatorcommunity" variant="inverse" size="l" external>Join the community</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>
+
+<style>
+  .cohort { display: grid; gap: var(--space-lg); grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 640px) { .cohort { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1000px) { .cohort { grid-template-columns: repeat(6, 1fr); } }
+  .note { color: var(--text-secondary); text-align: center; }
+  .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-sm); }
+</style>

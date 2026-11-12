@@ -1,0 +1,121 @@
+---
+/** Site header: logo, three dropdown menus and the two calls to action. Edit the menus below. */
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+
+const menus = [
+  {
+    label: 'Try imagi',
+    links: [
+      { label: 'Try free', href: 'https://edu.imagilabs.com/' },
+      { label: 'Pricing', href: '/pricing' },
+      { label: 'Get a quote', href: '/quote' },
+      { label: 'Download W-9', href: '/w-9' },
+    ],
+  },
+  {
+    label: 'For Schools',
+    links: [
+      { label: 'Get started', href: '/get-started' },
+      { label: 'Hour of AI', href: '/hour-of-ai' },
+      { label: 'PD Training', href: '/pd-training' },
+      { label: 'Computer Science', href: '/computer-science' },
+      { label: 'Resources', href: '/resources' },
+    ],
+  },
+  {
+    label: 'Who we are',
+    links: [
+      { label: 'Our mission', href: '/about-imagi' },
+      { label: 'Trust and safety', href: '/safety' },
+      { label: 'Ambassadors', href: '/ambassadors' },
+      { label: 'Press', href: '/press' },
+      { label: 'Blog', href: '/blog' },
+    ],
+  },
+];
+---
+
+<header class="nav" data-figma="Site/Nav">
+  <div class="container">
+    <div class="nav_inner">
+      <a class="nav_logo" href="/" aria-label="imagi home"><Logo height={28} /></a>
+
+      <button class="nav_toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-panel"><Icon name="menu" /></button>
+      <div class="nav_panel" id="nav-panel">
+          <nav class="nav_menus" aria-label="Main">
+            {menus.map((menu) => (
+              <div class="nav_menu">
+                <button class="nav_trigger text-label-m" type="button" aria-haspopup="true">
+                  {menu.label} <Icon name="chevron-down" size={16} />
+                </button>
+                <ul class="nav_dropdown">
+                  {menu.links.map((link) => (
+                    <li><a class="text-label-m" href={link.href}>{link.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+          <div class="nav_actions">
+            <Button href="/demo" variant="outline" size="s">Book demo</Button>
+            <Button href="https://edu.imagilabs.com/" size="s">Log in | Try free</Button>
+          </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav { position: sticky; top: 0; z-index: 50; background: var(--surface-page); border-bottom: var(--border-thin) solid var(--border-default); }
+  .nav_inner { display: flex; align-items: center; justify-content: space-between; min-height: var(--header); gap: var(--space-lg); }
+  .nav_logo { display: inline-flex; color: var(--text-primary); }
+
+  /* Phones: a menu button opens a panel */
+  .nav_toggle { background: none; border: 0; cursor: pointer; padding: var(--space-xs); border-radius: var(--radius-sm); }
+  .nav_panel {
+    display: none;
+    position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--surface-page); border-bottom: var(--border-thin) solid var(--border-default);
+    padding: var(--space-md) var(--gutter) var(--space-xl);
+    flex-direction: column; gap: var(--space-lg);
+    box-shadow: var(--shadow-m);
+  }
+  .nav[data-open] .nav_panel { display: flex; }
+  .nav_menus { display: flex; flex-direction: column; gap: var(--space-md); }
+  .nav_trigger { display: inline-flex; align-items: center; gap: var(--space-2xs); background: none; border: 0; padding: 0; cursor: default; color: var(--text-secondary); }
+  .nav_trigger :global(.icon) { display: none; }
+  .nav_dropdown { list-style: none; padding: var(--space-xs) 0 0; display: grid; gap: var(--space-xs); }
+  .nav_dropdown a { text-decoration: none; }
+  .nav_actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+
+  /* Desktop: inline menus with hover/focus dropdowns */
+  @media (min-width: 1000px) {
+    .nav_toggle { display: none; }
+    .nav_panel { position: static; display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex: 1; padding: 0; border: 0; box-shadow: none; background: none; }
+    .nav_menus { flex-direction: row; gap: var(--space-xl); margin-inline: auto; }
+    .nav_menu { position: relative; }
+    .nav_trigger { cursor: pointer; color: var(--text-primary); min-height: var(--header); }
+    .nav_trigger :global(.icon) { display: block; transition: rotate 0.15s; }
+    .nav_dropdown {
+      position: absolute; top: calc(100% - var(--space-xs)); left: calc(var(--space-md) * -1);
+      min-width: 220px; padding: var(--space-xs);
+      background: var(--surface-page); border-radius: var(--radius-md); box-shadow: var(--shadow-l);
+      opacity: 0; visibility: hidden; translate: 0 4px; transition: opacity 0.15s, translate 0.15s, visibility 0.15s;
+    }
+    .nav_menu:hover .nav_dropdown, .nav_menu:focus-within .nav_dropdown { opacity: 1; visibility: visible; translate: 0 0; }
+    .nav_menu:hover .nav_trigger :global(.icon), .nav_menu:focus-within .nav_trigger :global(.icon) { rotate: 180deg; }
+    .nav_dropdown a { display: block; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); }
+    .nav_dropdown a:hover { background: var(--surface-subtle); }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('.nav');
+  const toggle = nav?.querySelector<HTMLButtonElement>('.nav_toggle');
+  toggle?.addEventListener('click', () => {
+    const open = nav!.toggleAttribute('data-open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>

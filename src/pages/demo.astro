@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FormLayout from '../components/FormLayout.astro';
+import Checklist from '../components/Checklist.astro';
+import IconDisc from '../components/IconDisc.astro';
+import Button from '../components/Button.astro';
+import SchoolLogos from '../components/SchoolLogos.astro';
+---
+
+<BaseLayout
+  title="Request a demo"
+  description="Discover how imagi can revolutionize coding education at your school and see it in action with our experts."
+>
+  <Hero eyebrow="Request a demo" title="Turn your students into AI creators.">
+    <p>Tell us about your classroom, school, or district. We'll put together a plan that gives every student safe access to real-world AI tools, starting with Lovable.</p>
+    <p>Select your location:</p>
+    <Fragment slot="actions">
+      <Button href="#us-stephanie" size="l" arrow>United States</Button>
+      <Button href="#row-dora" variant="outline" size="l" arrow>Rest of the world</Button>
+    </Fragment>
+  </Hero>
+
+  <Section id="us-stephanie">
+    <FormLayout>
+      <Fragment slot="aside">
+        <SectionHeader align="left" eyebrow="United States" title="See imagi in action.">
+          <p>Your personalized demo by Stephanie from the US.</p>
+        </SectionHeader>
+        <Checklist>
+          <li>Pick a time that suits you</li>
+          <li>Tell us about your classroom, school, or district</li>
+          <li>Get a plan for safe access to real-world AI tools</li>
+        </Checklist>
+      </Fragment>
+      <div class="embed">
+        <IconDisc icon="calendar" size="l" />
+        <p class="text-heading-m">Booking calendar</p>
+        <p class="text-body-s">Placeholder for the HubSpot meetings embed (Stephanie Kortan, US).</p>
+      </div>
+    </FormLayout>
+  </Section>
+
+  <Section tone="subtle" id="row-dora">
+    <FormLayout>
+      <Fragment slot="aside">
+        <SectionHeader align="left" eyebrow="Rest of the world" title="See imagi in action.">
+          <p>Your personalized demo by Dora from Europe.</p>
+        </SectionHeader>
+        <Checklist>
+          <li>Pick a time that suits you</li>
+          <li>Tell us about your classroom, school, or district</li>
+          <li>Get a plan for safe access to real-world AI tools</li>
+        </Checklist>
+      </Fragment>
+      <div class="embed">
+        <IconDisc icon="calendar" size="l" />
+        <p class="text-heading-m">Booking calendar</p>
+        <p class="text-body-s">Placeholder for the HubSpot meetings embed (Dora Palfi, country-based demo).</p>
+      </div>
+    </FormLayout>
+  </Section>
+
+  <Section>
+    <SchoolLogos />
+  </Section>
+</BaseLayout>
+
+<style>
+  .embed {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-sm);
+    min-height: 640px; padding: var(--space-xl); text-align: center;
+    background: var(--surface-page); border-radius: var(--radius-lg); box-shadow: var(--shadow-m);
+  }
+  .embed .text-body-s { color: var(--text-secondary); max-width: 320px; }
+</style>

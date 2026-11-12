@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'imagi gives K-12 students safe access to real-world AI tools like Lovable, so they can think, build and create.' } = Astro.props;
+const fullTitle = title === 'imagi' ? title : `${title} | imagi`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {import.meta.env.PUBLIC_NOINDEX && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/png" href="/brand/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/PangeaVAR.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <Nav />
+    <main id="top"><slot /></main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="Resources for Teaching AI and Computer Science | imagi"
+  description="Free guides, lesson ideas, and practical help for K-12 teachers bringing AI literacy and computer science into the classroom."
+>
+  <Hero eyebrow="Resources" title="Tutorials & resources">
+    <p>Teach computer science and AI literacy with free guides, video tutorials and classroom printables.</p>
+    <Fragment slot="meta">
+      <Badge tone="neutral" size="m">Video tutorials</Badge>
+      <Badge tone="neutral" size="m">Free guides</Badge>
+      <Badge tone="neutral" size="m">Classroom printables</Badge>
+    </Fragment>
+    <Fragment slot="actions">
+      <Button href="https://edu.imagilabs.com/" size="l" arrow>Access imagi Edu</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <SectionHeader eyebrow="Tutorials" title="Getting started">
+      <p>Short videos and guides to get you and your students up and running on imagi Edu.</p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card icon="play" title="What is imagi (Python)" href="https://www.youtube.com/watch?v=8hlX-b6DkRA&list=PL_DB3gg7iKcbV85H8uiskOmJZT-j9UeTp&index=1" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="The pedagogy" href="https://www.youtube.com/watch?v=c1pbtVnpeSE&list=PL_DB3gg7iKcbV85H8uiskOmJZT-j9UeTp&index=3" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="Educator training (1 hr webinar)" href="https://youtu.be/7mVCFN9XAuc" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="Registering & platform tour" href="https://youtu.be/eWIYbC2Z81g" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="Adding students & assigning courses" href="https://youtu.be/Zewfd8Kgsqo" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="How students log in to imagi Edu" href="https://www.youtube.com/watch?v=aDaUyNM0Xf8&list=PL_DB3gg7iKcbV85H8uiskOmJZT-j9UeTp&index=6" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="How to access your teaching content" href="https://www.youtube.com/watch?v=5a2V6Pgh2Cc&list=PL_DB3gg7iKcbV85H8uiskOmJZT-j9UeTp&index=7" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="Reviewing student progress & safety" href="https://youtu.be/K3hQAFBFFHs" linkLabel="Watch on YouTube" external />
+      <Card icon="file-check" iconTone="accent" title="Setup guide" href="https://docs.google.com/document/d/1Klgo9yFVVWsLawhbFU4qHxLQyej0WuekW1vI7rb7KuA/edit" linkLabel="Open the guide" external>
+        <p>Follow this clickable guide, which takes you through how to set up a class, add students, and get ready to start using imagi x Lovable.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader eyebrow="Tutorials" title="Using AI">
+      <p>AI building with Lovable x imagi: examples, admin setup, safety and sharing.</p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card icon="sparkles" iconTone="accent" title="Student and teacher Lovable examples" href="https://imagi-project-gallery.lovable.app/" linkLabel="Explore the project gallery" external />
+      <Card icon="play" title="District admin instructions" href="https://youtu.be/JBtGY4rF_G4" linkLabel="Watch on YouTube" external>
+        <p>Registering, allocating credits, managing teachers.</p>
+      </Card>
+      <Card icon="play" title="Making your first AI-assisted project (Teacher)" href="https://youtu.be/2Xd5JdARrRI" linkLabel="Watch on YouTube" external>
+        <p>Watch how to start a new AI project.</p>
+      </Card>
+      <Card icon="play" title="Safety with AI and imagi" href="https://youtu.be/nx6sg2cl0bQ" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="Setting credit limits for students" href="https://youtu.be/1dPf9txYbeM" linkLabel="Watch on YouTube" external>
+        <Fragment slot="tags">
+          <Badge tone="neutral">Paid feature</Badge>
+        </Fragment>
+      </Card>
+      <Card icon="play" title="How to transfer a project to another Lovable account" href="https://youtu.be/4XUIn01APhk" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="Sharing your Lovable builds" href="https://youtu.be/HYV6tszNDDQ" linkLabel="Watch on YouTube" external>
+        <p>Share to classroom or publish to web.</p>
+      </Card>
+      <Card icon="play" title="Student video: Build Your First AI Game" href="https://youtu.be/udOaArBMxlM" linkLabel="Watch on YouTube" external>
+        <p>Use alongside our lesson.</p>
+      </Card>
+      <Card icon="download" iconTone="accent" title="Prompt planning template" href="https://imagilabs.com/hubfs/My_AI_Project_Student_Planning_Sheet.pdf" linkLabel="Download the PDF" external>
+        <p>Support students' AI literacy with this tool. Use it to plan, iterate, and reflect on their AI prompting.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section>
+    <SectionHeader eyebrow="Tutorials" title="Using Python">
+      <p>Teach creative coding with Python, the imagiCharm and the AI Debugging buddy.</p>
+    </SectionHeader>
+    <Grid cols={4}>
+      <Card icon="play" title="Why Python" href="https://youtu.be/h97VznTJvIM" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="Coding your first project on imagi Edu" href="https://www.youtube.com/watch?v=GxUbokNtIa4&list=PL_DB3gg7iKcbV85H8uiskOmJZT-j9UeTp&index=8" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="Using the imagiCharm with imagi Edu" href="https://youtu.be/-L0ozmWOFZw" linkLabel="Watch on YouTube" external />
+      <Card icon="play" title="Code with the imagi Debugging buddy" href="https://youtu.be/XqlPYi43ys8" linkLabel="Watch on YouTube" external />
+    </Grid>
+    <Grid cols={4}>
+      <Card icon="pen-tool" iconTone="accent" title="Design paper" href="https://imagilabs.docsend.com/view/2ud35fdxzqn46tda" linkLabel="Download" external>
+        <p>Blank 8x8 grids for hand-drawing pixel art before coding.</p>
+      </Card>
+      <Card icon="award" iconTone="accent" title="Student certificates" href="https://imagilabs.docsend.com/view/s/y8bx4r8bifan425s" linkLabel="Download" external>
+        <p>Celebrate your young coders with customizable awards.</p>
+      </Card>
+      <Card icon="file-text" iconTone="accent" title="Lesson 1 PDF" href="https://imagilabs.docsend.com/view/8wiqycxh54purjud" linkLabel="Download" external>
+        <p>Enjoy our first lesson within the imagi Python curriculum.</p>
+      </Card>
+      <Card icon="book-open" iconTone="accent" title="Learning Center" href="https://imagilabs.notion.site/imagi-Learning-Center-5afe3d51d30645849f2738c9b5eb1154" linkLabel="Explore resources" external>
+        <p>Project examples, code challenges, and Python documentation.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section tone="muted">
+    <SectionHeader eyebrow="Curriculum, common problems & community" title="Additional resources" />
+    <Grid cols={3}>
+      <Card icon="file-check" iconTone="brand" title="US curriculum alignment" href="https://docs.google.com/spreadsheets/d/10jgiajFh2zzLsnHeBXgrjhMi3UQAxFPwUPtTrICBWsM/edit" linkLabel="Open the sheet" external>
+        <p>imagi's Curriculum Scope and Sequence.</p>
+      </Card>
+      <Card icon="users" iconTone="brand" title="Educator community" href="https://www.facebook.com/groups/imagieducatorcommunity" linkLabel="Join the Facebook group" external>
+        <p>Learn about all things imagi from those who know it best! Get support from educators around the world.</p>
+      </Card>
+      <Card icon="help-circle" iconTone="brand" title="Troubleshooting help app" href="https://imagi-troubleshooting-guide.netlify.app/" linkLabel="Find the solution" external>
+        <p>Got a problem? Search our interactive troubleshooting app.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section>
+    <CtaBand title="Training and professional development">
+      <p>Need specific support, or want to organize a custom workshop for your school or district? Book a call with our team.</p>
+      <Fragment slot="actions">
+        <Button href="/demo" variant="secondary" size="l" arrow>Schedule call</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>

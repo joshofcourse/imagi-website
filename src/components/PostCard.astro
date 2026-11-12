@@ -1,0 +1,41 @@
+---
+/** Blog post card for listings: cover image, tags, title, excerpt, author and date. */
+import type { CollectionEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
+import Badge from './Badge.astro';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const author = await getEntry(post.data.author);
+const date = post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+
+<article class="postcard">
+  <a class="postcard_image" href={`/blog/${post.id}`} tabindex="-1" aria-hidden="true">
+    <img src={post.data.image} alt={post.data.imageAlt} loading="lazy" />
+  </a>
+  <div class="postcard_body">
+    {post.data.tags.length > 0 && (
+      <div class="postcard_tags">{post.data.tags.slice(0, 2).map((t) => <Badge tone="neutral">{t}</Badge>)}</div>
+    )}
+    <h3 class="text-heading-m"><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
+    <p class="postcard_excerpt text-body-s">{post.data.description}</p>
+    <p class="postcard_meta text-label-s">{author?.data.name} · {date}</p>
+  </div>
+</article>
+
+<style>
+  .postcard { display: flex; flex-direction: column; background: var(--surface-page); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-s); height: 100%; }
+  .postcard_image img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: scale 0.3s; }
+  .postcard_image { overflow: hidden; }
+  .postcard:hover .postcard_image img { scale: 1.03; }
+  .postcard_body { display: flex; flex-direction: column; gap: var(--space-sm); padding: var(--space-lg) var(--space-xl) var(--space-xl); flex: 1; }
+  .postcard_tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+  h3 a { text-decoration: none; }
+  h3 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .postcard_excerpt { color: var(--text-secondary); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .postcard_meta { color: var(--text-secondary); margin-top: auto; }
+</style>

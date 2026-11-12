@@ -1,0 +1,7 @@
+---
+title: "CNET Japan"
+summary: "\u30b9\u30de\u30fc\u30c8\u30ad\u30fc\u30db\u30eb\u30c0\u30fc\u3067\u5973\u5b50\u306e\u958b\u767a\u30b9\u30ad\u30eb\u3092\u652f\u63f4--\u30b8\u30a7\u30f3\u30c0\u30fc\u30ae\u30e3\u30c3\u30d7\u89e3\u6d88\u3092\u76ee\u6307\u3059"
+url: "https://japan.cnet.com/article/35156692/"
+image: "/images/press/press2.png"
+order: 18
+---

@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="Frequently Asked Questions"
+  description="Answers on curriculum, standards, pricing, procurement, data privacy, and getting started with imagi in your school, district, or family."
+>
+  <Hero eyebrow="Help center" title="Get answers about imagi for your classroom or district.">
+    <p>Pick a topic, or contact our support team if you can’t find what you need.</p>
+  </Hero>
+
+  <Section spacing="tight">
+    <Grid cols={4}>
+      <Card icon="sparkles" iconTone="highlight" title="General" href="#general" linkLabel="See answers" />
+      <Card icon="laptop" iconTone="brand" title="Getting started: accounts & access" href="#getting-started" linkLabel="See answers" />
+      <Card icon="wand" iconTone="accent" title="AI tools: Lovable" href="#lovable" linkLabel="See answers" />
+      <Card icon="heart" iconTone="highlight" title="imagiCharm device" href="#imagicharm" linkLabel="See answers" />
+      <Card icon="shield-check" iconTone="brand" title="Data privacy, security & compliance" href="#data-privacy" linkLabel="See answers" />
+      <Card icon="settings" iconTone="accent" title="Troubleshooting" href="#troubleshooting" linkLabel="See answers" />
+      <Card icon="credit-card" iconTone="highlight" title="Pricing & plans" href="#pricing-plans" linkLabel="See answers" />
+      <Card icon="mail" iconTone="muted" title="Still need help?" href="mailto:support@imagilabs.com" linkLabel="Email support" />
+    </Grid>
+  </Section>
+
+  <Section tone="subtle" id="general">
+    <SectionHeader title="General" />
+    <FaqList group="general" />
+  </Section>
+
+  <Section id="getting-started">
+    <SectionHeader title="Getting started: accounts & access" />
+    <FaqList group="getting-started" />
+  </Section>
+
+  <Section tone="subtle" id="lovable">
+    <SectionHeader title="AI tools: Lovable" />
+    <FaqList group="lovable" />
+  </Section>
+
+  <Section id="imagicharm">
+    <SectionHeader title="imagiCharm" />
+    <FaqList group="imagicharm" />
+  </Section>
+
+  <Section tone="subtle" id="data-privacy">
+    <SectionHeader title="Data privacy, security & compliance" />
+    <FaqList group="data-privacy" />
+  </Section>
+
+  <Section id="troubleshooting">
+    <SectionHeader title="Troubleshooting" />
+    <FaqList group="troubleshooting" />
+  </Section>
+
+  <Section tone="subtle" id="pricing-plans">
+    <SectionHeader title="Pricing & plans" />
+    <FaqList group="pricing-plans" />
+  </Section>
+
+  <Section>
+    <CtaBand title="We’re here to help. Connect anytime.">
+      <p>Have more questions? Our support team can help.</p>
+      <Fragment slot="actions">
+        <Button href="mailto:support@imagilabs.com" variant="secondary" size="l" arrow>Contact support</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>

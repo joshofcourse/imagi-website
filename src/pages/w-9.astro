@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FormLayout from '../components/FormLayout.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="Request imagi's W-9 and Vendor Documents"
+  description="Request imagi's W-9 form and vendor documentation for your school or district's procurement process."
+>
+  <Hero eyebrow="Vendor documents" title="Request our W-9">
+    <p>Fill this in and we'll email the W-9 straight away, along with any other vendor paperwork your school needs.</p>
+  </Hero>
+
+  <Section id="w-9-form">
+    <FormLayout>
+      <Fragment slot="aside">
+        <SectionHeader align="left" eyebrow="imagi W-9 and vendor documents" title="Anything missing?">
+          <p>Everything else your procurement team may ask for.</p>
+        </SectionHeader>
+        <div class="docs">
+          <Card icon="file-text" title="Get a quote" href="/quote" linkLabel="Get a quote">
+            <p>A written quote, priced for your student numbers.</p>
+          </Card>
+          <Card icon="file-check" title="Vendor registration details" href="/contact" linkLabel="Ask for vendor details">
+            <p>Upon request.</p>
+          </Card>
+          <Card icon="shield-check" title="Data privacy agreement" href="/contact" linkLabel="Ask for a DPA">
+            <p>Upon request.</p>
+          </Card>
+        </div>
+      </Fragment>
+      <Form submitLabel="Send me the W-9">
+        <Field label="First name" name="firstname" required />
+        <Field label="Last name" name="lastname" required />
+        <Field label="Email" name="email" type="email" required full />
+        <Field label="Profession" name="profession" type="select" options={['Administrator', 'Coach', 'Coordinator', 'Curriculum Specialist', 'District Administrator', 'Gifted and Talented', 'Guardian', 'Homeschool', 'Librarian/Media Specialist', 'Observer', 'Superintendent/Assistant Superintendent', 'Teacher', 'Tech or STEM Coordinator', 'Other']} required />
+        <Field label="Phone number" name="phone" type="tel" />
+        <Field label="Country" name="country" required full />
+      </Form>
+    </FormLayout>
+  </Section>
+
+  <Section>
+    <CtaBand title="Need something else?">
+      <p>Contact us directly and we will make sure your request reaches the right person.</p>
+      <Fragment slot="actions">
+        <Button href="/contact" variant="secondary" size="l" arrow>Contact us</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>
+
+<style>
+  .docs { display: flex; flex-direction: column; gap: var(--space-md); width: 100%; }
+</style>

@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FormLayout from '../components/FormLayout.astro';
+import Checklist from '../components/Checklist.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+---
+
+<BaseLayout
+  title="Get a Quote: imagi for Schools and Districts"
+  description="Tell us your student numbers and we'll send pricing your budget holder can act on. Response within 1 business day."
+>
+  <Hero eyebrow="Upgrade from freemium to paid plan" title="Get a quote for your school">
+    <p>Fill out the form below to receive a personalized quote that meets your specific needs. Please provide as much detail as possible to help us create the most accurate quote for your school.</p>
+  </Hero>
+
+  <Section id="quote-form">
+    <FormLayout>
+      <Fragment slot="aside">
+        <SectionHeader align="left" eyebrow="Your quote" title="Your school's plan">
+          <p>Our team member will be in touch with you once the form is submitted.</p>
+        </SectionHeader>
+        <Checklist>
+          <li>Real-world AI tools, starting with Lovable</li>
+          <li>A safe space for students to build</li>
+          <li>Built for COPPA and FERPA compliance</li>
+        </Checklist>
+        <p class="aside-note text-body-s">Want coding devices for your classroom? <a href="https://imagilabs.notion.site/How-do-I-use-the-imagiCharm-with-imagi-Edu-1376c19e04944126b6b2a53ca4111b10" target="_blank" rel="noopener">See how imagiCharms work with imagi Edu</a>.</p>
+      </Fragment>
+      <Form submitLabel="Submit">
+        <Field label="First name" name="firstname" required />
+        <Field label="Last name" name="lastname" required />
+        <Field label="Email" name="email" type="email" required />
+        <Field label="Phone number" name="phone" type="tel" required />
+        <Field label="Profession" name="profession" type="select" options={['Administrator', 'Coach', 'Coordinator', 'Curriculum Specialist', 'District Administrator', 'Gifted and Talented', 'Guardian', 'Homeschool', 'Librarian/Media Specialist', 'Observer', 'Superintendent/Assistant Superintendent', 'Teacher', 'Tech or STEM Coordinator', 'Other']} required />
+        <Field label="School or organization" name="school_or_organization" required />
+        <Field label="School website" name="website" required />
+        <Field label="School district" name="school_district" />
+        <Field label="Country" name="country" required />
+        <Field label="City" name="city" required />
+        <Field label="Applicable grades" name="applicable_grades" type="checkboxes" options={['Preschool', 'Pre-Kindergarten', 'Transitional Kindergarten', 'Kindergarten', '1st Grade', '2nd Grade', '3rd Grade', '4th Grade', '5th Grade', '6th Grade', '7th Grade', '8th Grade', '9th Grade', '10th Grade', '11th Grade', '12th Grade', '13th Grade', 'Post-Graduate', 'Ungraded', 'Other']} required full />
+        <Field label="Number of students: AI tools (Lovable)" name="students_ai_tools" type="number" placeholder="0" required />
+        <Field label="Number of students: CS/Python curriculum" name="students_python" type="number" placeholder="0" required />
+        <Field label="I'm also interested in" name="interested_in" type="checkboxes" options={['imagiCharms: coding devices for the classroom', 'Professional development for teachers']} full />
+        <Field label="Any questions or message for us?" name="message" type="textarea" />
+      </Form>
+    </FormLayout>
+  </Section>
+</BaseLayout>
+
+<style>
+  .aside-note { color: var(--text-secondary); }
+  .aside-note a { color: var(--text-primary); text-decoration: underline; }
+</style>

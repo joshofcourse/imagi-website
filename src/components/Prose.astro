@@ -1,0 +1,23 @@
+---
+/** Long-form text (blog articles, legal pages). Styles plain HTML/Markdown in the slot. */
+---
+
+<div class="prose text-body-m"><slot /></div>
+
+<style>
+  .prose { max-width: 720px; margin-inline: auto; width: 100%; }
+  .prose :global(> * + *) { margin-top: var(--space-md); }
+  .prose :global(h2), .prose :global(h3), .prose :global(h4) { margin-top: var(--space-2xl); font-variation-settings: var(--cut-display); }
+  .prose :global(h2) { font-size: var(--heading-l); line-height: var(--heading-l-lh); font-weight: 600; }
+  .prose :global(h3) { font-size: var(--heading-m); line-height: var(--heading-m-lh); font-weight: 600; }
+  .prose :global(h4), .prose :global(h5) { font-size: var(--heading-s); line-height: var(--heading-s-lh); font-weight: 700; font-variation-settings: var(--cut-text); }
+  .prose :global(h2 + *), .prose :global(h3 + *), .prose :global(h4 + *) { margin-top: var(--space-sm); }
+  .prose :global(ul), .prose :global(ol) { padding-left: 1.4em; }
+  .prose :global(li + li) { margin-top: var(--space-xs); }
+  .prose :global(img) { border-radius: var(--radius-lg); margin-block: var(--space-lg); }
+  .prose :global(blockquote) { padding: var(--space-lg) var(--space-xl); background: var(--surface-subtle); border-radius: var(--radius-md); font-size: var(--body-l); }
+  .prose :global(a) { text-underline-offset: 3px; }
+  .prose :global(table) { width: 100%; border-collapse: collapse; font-size: var(--body-s); }
+  .prose :global(th), .prose :global(td) { text-align: left; padding: var(--space-sm); border-bottom: var(--border-thin) solid var(--border-default); vertical-align: top; }
+  .prose :global(hr) { border: 0; border-top: var(--border-thin) solid var(--border-default); margin-block: var(--space-2xl); }
+</style>

@@ -1,0 +1,174 @@
+/* imagi design system — mirrors the Figma file "[INT] - Imagi Website Internal".
+   Brand = named colours, Tokens = spacing/radius/type, Theme = roles that point at Brand.
+   Change a value here and every page follows. */
+
+@font-face {
+  font-family: 'Pangea';
+  src: url('/fonts/PangeaVAR.woff2') format('woff2-variations'), url('/fonts/PangeaVAR.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- Brand ---------- */
+  --color-sage: #daf39b;
+  --color-zest: #cef542;
+  --color-sprout: #aaeb3b;
+  --color-lime: #80dc1e;
+  --color-leaf: #62ad12;
+  --color-moss: #184714;
+  --color-forest: #15350e;
+  --color-black: #0e1704;
+  --color-white: #ffffff;
+  --color-cream: #fffeed;
+  --color-sand: #f5f3d9;
+  --color-blossom: #f48cc0;
+  --color-pink: #ef62a5;
+  --color-grey-100: #f9f6f2;
+  --color-grey-300: #e0dcd5;
+  --color-grey-500: #aea8a0;
+  --color-grey-700: #716c66;
+  --color-grey-900: #3c3935;
+  --color-icon-yellow: #fff839;
+  --color-icon-orange: #e8a42f;
+  --color-icon-red: #d4503b;
+  --color-icon-blue: #3d94dc;
+  --color-icon-purple: #8255e0;
+
+  /* ---------- Theme (roles) ---------- */
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-grey-700);
+  --text-inverse: var(--color-white);
+  --text-accent: var(--color-leaf);
+  --text-error: var(--color-icon-red);
+
+  --surface-page: var(--color-white);
+  --surface-subtle: var(--color-cream);
+  --surface-muted: var(--color-sand);
+  --surface-brand: var(--color-lime);
+  --surface-brand-soft: var(--color-sage);
+  --surface-highlight: var(--color-zest);
+  --surface-accent: var(--color-blossom);
+  --surface-dark: var(--color-forest);
+
+  --border-default: var(--color-grey-300);
+  --border-strong: var(--color-grey-500);
+  --border-focus: var(--color-lime);
+
+  --action-primary: var(--color-forest);
+  --action-primary-hover: var(--color-moss);
+  --action-secondary: var(--color-lime);
+  --action-secondary-hover: var(--color-sprout);
+
+  /* ---------- Tokens: space ---------- */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  /* Vertical padding of every page section */
+  --section-y: clamp(var(--space-3xl), 8vw, var(--space-4xl));
+
+  /* ---------- Tokens: radius & border ---------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+  --border-thin: 1px;
+  --border-thick: 2px;
+
+  /* ---------- Tokens: layout ---------- */
+  --container: 1138px;
+  --gutter: 24px;
+  --header: 80px;
+
+  /* ---------- Tokens: shadow (Forest-tinted) ---------- */
+  --shadow-s: 0 2px 8px rgb(21 53 14 / 0.06);
+  --shadow-m: 0 8px 24px rgb(21 53 14 / 0.08);
+  --shadow-l: 0 20px 48px rgb(21 53 14 / 0.12);
+
+  /* ---------- Tokens: type ----------
+     Display = Bold, display cut. Heading = SemiBold (S uses the Text cut, Bold).
+     Body = Text. Label = Text Medium. Sizes scale down fluidly on small screens. */
+  --font-family: 'Pangea', 'Helvetica Neue', Arial, sans-serif;
+  --cut-display: 'opsz' 20;
+  --cut-text: 'opsz' 10;
+
+  --display-l: clamp(2.75rem, 1.9rem + 2.6vw, 4.5rem);   /* 72 */
+  --display-l-lh: 1.11;
+  --display-m: clamp(2.375rem, 1.8rem + 1.9vw, 3.5rem);  /* 56 */
+  --display-m-lh: 1.11;
+  --display-s: clamp(2rem, 1.6rem + 1.25vw, 2.75rem);    /* 44 */
+  --display-s-lh: 1.09;
+  --heading-l: clamp(1.625rem, 1.4rem + 0.6vw, 2rem);   /* 32 */
+  --heading-l-lh: 1.19;
+  --heading-m: 1.5rem;                                   /* 24 */
+  --heading-m-lh: 1.25;
+  --heading-s: 1.25rem;                                  /* 20 */
+  --heading-s-lh: 1.3;
+  --body-l: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);  /* 20 */
+  --body-l-lh: 1.4;
+  --body-m: 1.125rem;                                    /* 18 */
+  --body-m-lh: 1.44;
+  --body-s: 1rem;                                        /* 16 */
+  --body-s-lh: 1.375;
+  --label-l: 1.125rem;                                   /* 18 */
+  --label-l-lh: 1.22;
+  --label-m: 1rem;                                       /* 16 */
+  --label-m-lh: 1.25;
+  --label-s: 0.875rem;                                   /* 14 */
+  --label-s-lh: 1.29;
+}
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-family);
+  font-variation-settings: var(--cut-text);
+  font-size: var(--body-m);
+  line-height: var(--body-m-lh);
+  color: var(--text-primary);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+}
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: var(--border-thick) solid var(--border-focus); outline-offset: 3px; }
+
+/* ---------- Text styles (match Figma text styles 1:1) ---------- */
+.text-display-l, .text-display-m, .text-display-s,
+.text-heading-l, .text-heading-m { font-variation-settings: var(--cut-display); text-wrap: balance; }
+.text-display-l { font-size: var(--display-l); line-height: var(--display-l-lh); font-weight: 700; letter-spacing: -0.01em; }
+.text-display-m { font-size: var(--display-m); line-height: var(--display-m-lh); font-weight: 700; letter-spacing: -0.01em; }
+.text-display-s { font-size: var(--display-s); line-height: var(--display-s-lh); font-weight: 700; letter-spacing: -0.005em; }
+.text-heading-l { font-size: var(--heading-l); line-height: var(--heading-l-lh); font-weight: 600; }
+.text-heading-m { font-size: var(--heading-m); line-height: var(--heading-m-lh); font-weight: 600; }
+.text-heading-s { font-size: var(--heading-s); line-height: var(--heading-s-lh); font-weight: 700; font-variation-settings: var(--cut-text); text-wrap: balance; }
+.text-body-l { font-size: var(--body-l); line-height: var(--body-l-lh); font-weight: 400; }
+.text-body-m { font-size: var(--body-m); line-height: var(--body-m-lh); font-weight: 400; }
+.text-body-s { font-size: var(--body-s); line-height: var(--body-s-lh); font-weight: 400; }
+.text-label-l { font-size: var(--label-l); line-height: var(--label-l-lh); font-weight: 500; }
+.text-label-m { font-size: var(--label-m); line-height: var(--label-m-lh); font-weight: 500; }
+.text-label-s { font-size: var(--label-s); line-height: var(--label-s-lh); font-weight: 500; }
+.text-secondary { color: var(--text-secondary); }
+
+/* ---------- Layout ---------- */
+/* Generic only: max width, centring and gutters. Section layout goes on a `*_inner` element inside it. */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Visually hidden, still read by screen readers */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

@@ -1,0 +1,63 @@
+---
+/**
+ * Pill button. Variants match the Figma Button component:
+ * primary (Forest), secondary (Lime), outline, inverse (white, for dark sections).
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'inverse';
+  size?: 's' | 'm' | 'l';
+  /** Show an arrow after the label */
+  arrow?: boolean;
+  /** For a form submit button instead of a link */
+  type?: 'button' | 'submit';
+  /** Open in a new tab */
+  external?: boolean;
+}
+
+const { href, variant = 'primary', size = 'm', arrow = false, type = 'button', external = false } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  class:list={['button', `button--${variant}`, `button--${size}`]}
+  href={href}
+  type={href ? undefined : type}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+>
+  <slot />
+  {arrow && <Icon name="arrow-right" size={size === 's' ? 16 : 20} />}
+</Tag>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    border: var(--border-thick) solid transparent;
+    border-radius: var(--radius-pill);
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    max-width: 100%;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  @media (min-width: 640px) { .button { white-space: nowrap; } }
+  .button--s { padding: 6px var(--space-md); font-size: var(--label-s); line-height: var(--label-s-lh); min-height: 36px; }
+  .button--m { padding: 10px var(--space-lg); font-size: var(--label-m); line-height: var(--label-m-lh); min-height: 48px; }
+  .button--l { padding: 14px var(--space-xl); font-size: var(--label-l); line-height: var(--label-l-lh); min-height: 56px; }
+
+  .button--primary { background: var(--action-primary); color: var(--text-inverse); }
+  .button--primary:hover { background: var(--action-primary-hover); }
+  .button--secondary { background: var(--action-secondary); color: var(--text-primary); }
+  .button--secondary:hover { background: var(--action-secondary-hover); }
+  .button--outline { border-color: currentColor; color: var(--text-primary); background: transparent; }
+  .button--outline:hover { background: var(--text-primary); color: var(--text-inverse); border-color: var(--text-primary); }
+  .button--inverse { background: var(--color-white); color: var(--text-primary); }
+  .button--inverse:hover { background: var(--color-zest); }
+</style>

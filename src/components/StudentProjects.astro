@@ -1,0 +1,20 @@
+---
+/** "Real student projects" cards — apps students built in imagi with Lovable. Edit the list below. */
+import Card from './Card.astro';
+import Grid from './Grid.astro';
+
+const projects = [
+  { title: 'Easyan', image: 'student-prj_05.png', url: 'https://easyan.lovable.app/', text: 'A tool that makes 3D model creation simple. Design and build in three dimensions, right from the browser.' },
+  { title: 'Glitch Event', image: 'student-prj_02.png', url: 'https://glitch-event-hub.lovable.app/', text: 'A platform where the world is glitched, enemies get harder, and the final boss throws energy rings.' },
+  { title: 'Gorilla in the Jungle', image: 'student-prj_04.png', url: 'https://sky-high-flappy-bird.lovable.app/', text: 'A Flappy Bird-inspired game where players guide a gorilla through the jungle, avoiding obstacles.' },
+  { title: 'Team Balancer', image: 'student-prj_03.png', url: 'https://skill-balanced-teams.lovable.app/', text: 'An app that creates fair teams based on player skills.' },
+];
+---
+
+<Grid cols={4}>
+  {projects.map((p) => (
+    <Card title={p.title} image={`/images/projects/${p.image}`} href={p.url} linkLabel="Try it" external>
+      {p.text}
+    </Card>
+  ))}
+</Grid>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout title="Page not found">
+  <Hero eyebrow="404 error" title="Sorry, we couldn’t find that page.">
+    <p>The page you were looking for at this URL doesn’t exist or has moved.</p>
+    <Fragment slot="actions">
+      <Button href="/" size="l" arrow>Go to the home page</Button>
+      <Button href="/contact" variant="outline" size="l">Contact us</Button>
+    </Fragment>
+  </Hero>
+</BaseLayout>

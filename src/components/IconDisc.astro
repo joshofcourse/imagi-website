@@ -1,0 +1,27 @@
+---
+/** An icon on a soft rounded tile. Tones match the Figma Icon Disc variants. */
+import Icon from './Icon.astro';
+
+interface Props {
+  icon: string;
+  tone?: 'brand' | 'highlight' | 'accent' | 'muted' | 'dark';
+  size?: 'm' | 'l';
+}
+
+const { icon, tone = 'highlight', size = 'm' } = Astro.props;
+---
+
+<span class:list={['disc', `disc--${tone}`, `disc--${size}`]}>
+  <Icon name={icon} size={size === 'l' ? 28 : 22} />
+</span>
+
+<style>
+  .disc { display: inline-grid; place-items: center; border-radius: var(--radius-md); flex: none; }
+  .disc--m { width: 48px; height: 48px; }
+  .disc--l { width: 64px; height: 64px; }
+  .disc--brand { background: var(--surface-brand); }
+  .disc--highlight { background: var(--surface-highlight); }
+  .disc--accent { background: var(--surface-accent); }
+  .disc--muted { background: var(--surface-muted); }
+  .disc--dark { background: var(--surface-dark); color: var(--text-inverse); }
+</style>

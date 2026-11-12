@@ -1,0 +1,36 @@
+---
+/**
+ * Plan comparison table. Pass the column headings as `columns`; put <tr> rows in the slot:
+ * <tr><th scope="row">Feature</th><td>…</td>…</tr>. Use <Icon name="check" label="Included" />
+ * and <Icon name="x" label="Not included" /> for yes/no cells.
+ */
+interface Props {
+  columns: string[];
+  caption?: string;
+}
+
+const { columns, caption } = Astro.props;
+---
+
+<div class="comparetable">
+  <table>
+    {caption && <caption class="sr-only">{caption}</caption>}
+    <thead>
+      <tr>
+        {columns.map((c, i) => <th scope="col" class:list={['text-label-m', { first: i === 0 }]}>{c}</th>)}
+      </tr>
+    </thead>
+    <tbody class="text-body-s"><slot /></tbody>
+  </table>
+</div>
+
+<style>
+  .comparetable { overflow-x: auto; background: var(--surface-page); border-radius: var(--radius-lg); box-shadow: var(--shadow-s); }
+  table { width: 100%; min-width: 720px; border-collapse: collapse; }
+  th, :global(.comparetable td), :global(.comparetable tbody th) { padding: var(--space-md) var(--space-lg); text-align: center; border-bottom: var(--border-thin) solid var(--border-default); vertical-align: middle; }
+  thead th { background: var(--surface-highlight); }
+  thead th.first, :global(.comparetable tbody th) { text-align: left; font-weight: 500; }
+  :global(.comparetable tbody tr:last-child) > :global(*) { border-bottom: 0; }
+  :global(.comparetable td .icon) { margin-inline: auto; }
+  :global(.comparetable td .icon[aria-label='Not included']) { color: var(--text-secondary); }
+</style>

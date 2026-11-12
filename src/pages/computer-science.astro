@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Split from '../components/Split.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Stat from '../components/Stat.astro';
+import Testimonial from '../components/Testimonial.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="K-12 Computer Science Curriculum: Python, Games, and Hardware | imagi"
+  description="Teach computer science with projects students want to finish. Python, games, and programmable hardware, with full lesson plans for teachers teaching CS."
+>
+  <Hero eyebrow="Computer science" title="Students write real Python from day one">
+    <p>Every class comes with a lesson plan, slides and learning outcomes, so any teacher can lead it, no CS background needed.</p>
+    <Fragment slot="actions">
+      <Button href="#lesson-plan" size="l" arrow>Try a free lesson</Button>
+      <Button href="/demo" variant="outline" size="l">Or book a demo</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <Split image="/images/computer-science/bring_coding_to_your_district.webp" imageAlt="Students coding on laptops in class while their teacher helps">
+      <h2 class="text-display-s">Why it matters</h2>
+      <p class="text-body-l text-secondary">Half of students quit coding the moment they have to leave blocks behind for real script-based languages (Northwestern, 2017). That's the exact moment imagi is built for.</p>
+      <p class="text-body-l text-secondary">Python is the language your students will actually use again, whether that's college, a job, or just building something they're proud of. We start them there, with training wheels your class won't outgrow.</p>
+      <p class="text-body-l text-secondary">Girls are half as likely as boys to stay interested in CS by age 14 (Google/Gallup). One hour with imagi and 67% say their interest went up. That's not a nice-to-have stat, that's the gap we built the product to close.</p>
+    </Split>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader title="Everything your teachers need to shine">
+      <p>From classroom-ready lessons and creative coding projects to guided AI activities, professional learning, and the confidence to bring computer science to life for every student.</p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card icon="file-text" title="Zero-prep lesson plans">
+        <p>Every class ships with a lesson plan, slides, and learning outcomes already done. Customize what you want, skip what you don't.</p>
+      </Card>
+      <Card icon="graduation-cap" iconTone="accent" title="Professional development workshops">
+        <p>CSTA-endorsed workshops built to make you confident by your next class, not just credentialed on paper.</p>
+      </Card>
+      <Card icon="layers" iconTone="brand" title="One platform, every subject">
+        <p>Bring coding into math, reading, art, whatever you teach. No separate tool, no separate login.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section>
+    <SectionHeader title="The numbers teachers report back to us" />
+    <div class="stats">
+    <Grid cols={3}>
+      <Stat value="100%" label="of teachers report their students' confidence in tech increased" />
+      <Stat value="85%" label="of students describe coding with imagi as fun" />
+      <Stat value="67%" label="of girls report an increased interest in technology after just one hour of coding with imagi" />
+    </Grid>
+    </div>
+  </Section>
+
+  <Section tone="muted">
+    <Split>
+      <Badge tone="brand">Summer PD 2026</Badge>
+      <h2 class="text-display-s">65 teachers. One summer. Ready to teach CS.</h2>
+      <p class="text-body-l text-secondary">Teachers across the US joined imagi’s Summer PD to build the skills and confidence to teach computer science creatively. Here’s what changed.</p>
+      <Button href="/blog/summer-pd-2026-impact" variant="outline" arrow>Read the Summer PD results</Button>
+      <Fragment slot="media">
+        <div class="pd">
+          <div class="pd_panel">
+            <p class="text-label-m">Teachers who felt they had the knowledge and skills to teach CS</p>
+            <div class="pd_stats">
+              <Stat value="40%" label="Before PD" />
+              <Stat value="85%" label="After PD" />
+            </div>
+          </div>
+          <Testimonial name="We Teach CS participant" role="Texas">
+            “I’m sold on imagi and am anxious to start using it more often.”
+          </Testimonial>
+        </div>
+      </Fragment>
+    </Split>
+  </Section>
+
+  <Section id="lesson-plan">
+    <Split image="/images/computer-science/tinypng_-_see_what_s_new_in_the_imagi_curriculum_-_blog_post_header_415d7e86-259a-4a90-9eb4-618fc69ac9b7.jpg" imageAlt="Pages from an imagi lesson plan and slides on built-in functions" reverse>
+      <h2 class="text-display-s">Lesson plans</h2>
+      <p class="text-body-l text-secondary">Every class comes with a lesson plan, slides, and learning outcomes ready to go, and you can customize any of it. Pick from 30+ classes, including cross-curricular ones that bring coding into art, math, or reading. Preview any class before you commit, no CS background needed.</p>
+      <p class="text-body-l text-secondary">Standards keep evolving. CSTA's new 2026 PK-12 Computer Science Standards now weave AI literacy through every grade band, and imagi Edu tracks that closely so you're never behind. Students never need an email address either. You create and manage their accounts.</p>
+      <Button href="https://docs.google.com/presentation/d/10GAXhte27DH_Wo61AlYulu73oOia9uDoOZ5o-EUlgXA/edit" external arrow>Start my free lesson</Button>
+    </Split>
+  </Section>
+
+  <Section tone="subtle">
+    <Grid cols={3}>
+      <Testimonial name="Kelly Powers" role="CS Teacher, Private School - NY, USA" image="/images/computer-science/kelly-p.jpeg">
+        You have something special - a rigorous and engaging curriculum where students are passionate about creating projects with code and sharing those projects.
+      </Testimonial>
+      <Testimonial name="Mr. Godinez" role="Academy of IT, Florida" image="/images/computer-science/1619653945474.jpeg">
+        Through imagi, students learn that their first attempt doesn't always work, and that's the point. It teaches them to refine their instructions and think critically about coding and AI.
+      </Testimonial>
+      <Testimonial name="Paige Besthoff" role="Computer Science Teacher, Public School - Spotswood, NJ" image="/images/computer-science/1644789063101.jpeg">
+        You don’t have to know anything about teaching computer science. After the PD our art, math and reading teachers were all able to incorporate the imagi platform into their curriculum. There are so many cross-curricular opportunities available.
+      </Testimonial>
+    </Grid>
+  </Section>
+
+  <Section>
+    <CtaBand title="Try imagi for free">
+      <p>No slide deck. Just the product. We'll open the platform and walk you through a real lesson, exactly the way your students will see it.</p>
+      <Fragment slot="actions">
+        <Button href="/demo" variant="secondary" size="l" arrow>Book demo</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>
+
+<style>
+  .stats :global(.stat) { text-align: center; max-width: 320px; margin-inline: auto; }
+  .pd { display: flex; flex-direction: column; gap: var(--space-lg); }
+  .pd_panel { display: flex; flex-direction: column; gap: var(--space-lg); padding: var(--space-xl); border-radius: var(--radius-lg); background: var(--surface-page); box-shadow: var(--shadow-s); }
+  .pd_stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+</style>

@@ -1,0 +1,383 @@
+---
+/**
+ * /styleguide — every token and component in the build, with live examples and where each one is used.
+ * The usage numbers are worked out from the source at build time (src/lib/usage.ts).
+ * `data-figma` marks examples that the Figma import turns into components ("Set|Prop=Value").
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import StyleguideEntry from '../components/StyleguideEntry.astro';
+import Button from '../components/Button.astro';
+import Badge from '../components/Badge.astro';
+import Icon from '../components/Icon.astro';
+import IconDisc from '../components/IconDisc.astro';
+import Logo from '../components/Logo.astro';
+import Card from '../components/Card.astro';
+import Grid from '../components/Grid.astro';
+import Split from '../components/Split.astro';
+import Checklist from '../components/Checklist.astro';
+import Stat from '../components/Stat.astro';
+import Testimonial from '../components/Testimonial.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+import FormLayout from '../components/FormLayout.astro';
+import CompareTable from '../components/CompareTable.astro';
+import PostCard from '../components/PostCard.astro';
+import PersonCard from '../components/PersonCard.astro';
+import Prose from '../components/Prose.astro';
+import LogoStrip from '../components/LogoStrip.astro';
+
+const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const brand = [
+  { group: 'Greens', items: [['sage', '#DAF39B'], ['zest', '#CEF542'], ['sprout', '#AAEB3B'], ['lime', '#80DC1E'], ['leaf', '#62AD12'], ['moss', '#184714'], ['forest', '#15350E'], ['black', '#0E1704']] },
+  { group: 'Neutrals & pinks', items: [['white', '#FFFFFF'], ['cream', '#FFFEED'], ['sand', '#F5F3D9'], ['blossom', '#F48CC0'], ['pink', '#EF62A5']] },
+  { group: 'Greys', items: [['grey-100', '#F9F6F2'], ['grey-300', '#E0DCD5'], ['grey-500', '#AEA8A0'], ['grey-700', '#716C66'], ['grey-900', '#3C3935']] },
+  { group: 'Icon colours', items: [['icon-yellow', '#FFF839'], ['icon-orange', '#E8A42F'], ['icon-red', '#D4503B'], ['icon-blue', '#3D94DC'], ['icon-purple', '#8255E0']] },
+];
+const roles = [
+  ['text-primary', 'Black'], ['text-secondary', 'Grey 700'], ['text-inverse', 'White'], ['text-accent', 'Leaf'],
+  ['surface-page', 'White'], ['surface-subtle', 'Cream'], ['surface-muted', 'Sand'], ['surface-brand', 'Lime'],
+  ['surface-brand-soft', 'Sage'], ['surface-highlight', 'Zest'], ['surface-accent', 'Blossom'], ['surface-dark', 'Forest'],
+  ['border-default', 'Grey 300'], ['border-strong', 'Grey 500'], ['action-primary', 'Forest'], ['action-secondary', 'Lime'],
+];
+const typeStyles = [
+  ['display-l', 'Display L', '72 / 80 · Bold · Display cut', 'Page titles (one per page, in the Hero)'],
+  ['display-m', 'Display M', '56 / 62 · Bold · Display cut', 'Big numbers (Stat)'],
+  ['display-s', 'Display S', '44 / 48 · Bold · Display cut', 'Section headings, CTA titles'],
+  ['heading-l', 'Heading L', '32 / 38 · SemiBold', 'Article subheads'],
+  ['heading-m', 'Heading M', '24 / 30 · SemiBold', 'Card titles'],
+  ['heading-s', 'Heading S', '20 / 26 · Bold · Text cut', 'FAQ questions, small titles'],
+  ['body-l', 'Body L', '20 / 28 · Regular', 'Intros and leads'],
+  ['body-m', 'Body M', '18 / 26 · Regular', 'Default body copy'],
+  ['body-s', 'Body S', '16 / 22 · Regular', 'Card text, captions'],
+  ['label-l', 'Label L', '18 / 22 · Medium', 'Large buttons'],
+  ['label-m', 'Label M', '16 / 20 · Medium', 'Buttons, nav, form labels'],
+  ['label-s', 'Label S', '14 / 18 · Medium', 'Badges, small buttons, meta'],
+];
+const spacing = [['2xs', 4], ['xs', 8], ['sm', 12], ['md', 16], ['lg', 24], ['xl', 32], ['2xl', 48], ['3xl', 64], ['4xl', 96]];
+const radii = [['sm', '8px', 'Inputs'], ['md', '16px', 'Icon tiles, FAQ items'], ['lg', '32px', 'Cards, images, panels'], ['pill', '999px', 'Buttons, badges']];
+const iconNames = ['arrow-right', 'arrow-left', 'arrow-down', 'arrow-up-right', 'chevron-down', 'check', 'x', 'plus', 'minus', 'menu', 'search', 'shield', 'shield-check', 'lock', 'eye', 'sparkles', 'home', 'users', 'graduation-cap', 'school', 'globe', 'file-check', 'file-text', 'ban', 'book-open', 'clock', 'calendar', 'mail', 'play', 'monitor', 'laptop', 'code', 'message-circle', 'heart', 'star', 'rocket', 'lightbulb', 'puzzle', 'target', 'bar-chart', 'award', 'layers', 'wand', 'zap', 'download', 'external-link', 'map-pin', 'phone', 'credit-card', 'briefcase', 'quote', 'help-circle', 'settings', 'pen-tool', 'smile', 'facebook', 'x-social', 'instagram', 'youtube', 'linkedin'];
+const buttonVariants = ['primary', 'secondary', 'outline', 'inverse'] as const;
+const sizes = ['l', 'm', 's'] as const;
+const badgeTones = ['brand', 'neutral', 'dark', 'accent', 'outline'] as const;
+const discTones = ['highlight', 'brand', 'accent', 'muted', 'dark'] as const;
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+---
+
+<BaseLayout title="Styleguide" description="Every token and component in the imagi website, with where each one is used.">
+  <Hero eyebrow="Design system" title="Styleguide">
+    <p>Every token and component in the site, with live examples. Each component shows how many times it's placed, on which pages, and which other components contain it, so you know what changes when you tweak it.</p>
+    <p>Tokens live in <code>src/styles/global.css</code>; components in <code>src/components/</code>.</p>
+  </Hero>
+
+  <Section id="colour">
+    <SectionHeader align="left" eyebrow="Tokens" title="Colour">
+      <p>Brand colours are the palette. Pages use the theme roles below, which point at brand colours — change a role to re-theme everything that uses it.</p>
+    </SectionHeader>
+    {brand.map((g) => (
+      <div class="sg-block">
+        <h3 class="text-heading-m">{g.group}</h3>
+        <div class="sg-swatches">
+          {g.items.map(([name, hex]) => (
+            <div class="sg-swatch">
+              <div class="sg-swatch_chip" style={`background: var(--color-${name})`} />
+              <p class="text-label-m">{name}</p>
+              <p class="text-body-s text-secondary">{hex}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+    <div class="sg-block">
+      <h3 class="text-heading-m">Theme roles</h3>
+      <div class="sg-swatches">
+        {roles.map(([role, points]) => (
+          <div class="sg-swatch">
+            <div class="sg-swatch_chip" style={`background: var(--${role})`} />
+            <p class="text-label-m">--{role}</p>
+            <p class="text-body-s text-secondary">{points}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="subtle" id="type">
+    <SectionHeader align="left" eyebrow="Tokens" title="Typography">
+      <p>Pangea in 12 styles — the same names as the Figma text styles. Use the <code>.text-*</code> classes.</p>
+    </SectionHeader>
+    <div class="sg-type">
+      {typeStyles.map(([cls, name, spec, use]) => (
+        <div class="sg-type_row">
+          <div class="sg-type_meta">
+            <p class="text-label-m">{name}</p>
+            <p class="text-body-s text-secondary">{spec}</p>
+            <p class="text-body-s text-secondary">{use}</p>
+          </div>
+          <p class={`text-${cls}`}>Every student can build with AI</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section id="space">
+    <SectionHeader align="left" eyebrow="Tokens" title="Spacing, radius & shadow">
+      <p>Every gap and padding uses these steps. Sections share one vertical rhythm (<code>--section-y</code>: 64–96px).</p>
+    </SectionHeader>
+    <div class="sg-block">
+      <h3 class="text-heading-m">Spacing</h3>
+      <div class="sg-spacing">
+        {spacing.map(([name, px]) => (
+          <div class="sg-spacing_row">
+            <p class="text-label-m">{name}</p>
+            <div class="sg-spacing_bar" style={`width: var(--space-${name})`} />
+            <p class="text-body-s text-secondary">{px}px</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <Grid cols={4}>
+      {radii.map(([name, px, use]) => (
+        <div class="sg-radius">
+          <div class="sg-radius_shape" style={`border-radius: var(--radius-${name})`} />
+          <p class="text-label-m">radius-{name} · {px}</p>
+          <p class="text-body-s text-secondary">{use}</p>
+        </div>
+      ))}
+    </Grid>
+    <Grid cols={3}>
+      <div class="sg-shadow" style="box-shadow: var(--shadow-s)"><p class="text-label-m">Shadow S</p><p class="text-body-s text-secondary">Cards, FAQ items</p></div>
+      <div class="sg-shadow" style="box-shadow: var(--shadow-m)"><p class="text-label-m">Shadow M</p><p class="text-body-s text-secondary">Forms, featured media</p></div>
+      <div class="sg-shadow" style="box-shadow: var(--shadow-l)"><p class="text-label-m">Shadow L</p><p class="text-body-s text-secondary">Menus and overlays</p></div>
+    </Grid>
+  </Section>
+
+  <Section tone="subtle" id="basics">
+    <SectionHeader align="left" eyebrow="Components" title="Basics" />
+    <StyleguideEntry name="Button">
+      {sizes.map((size) => (
+        <div class="sg-row">
+          {buttonVariants.map((variant) => (
+            <div class:list={['sg-spec', { 'sg-spec--dark': variant === 'inverse' }]} data-figma={`Button|Variant=${cap(variant)}, Size=${size.toUpperCase()}, Arrow=Yes`}>
+              <Button variant={variant} size={size} arrow>Button label</Button>
+            </div>
+          ))}
+          {buttonVariants.map((variant) => (
+            <div class:list={['sg-spec', { 'sg-spec--dark': variant === 'inverse' }]} data-figma={`Button|Variant=${cap(variant)}, Size=${size.toUpperCase()}, Arrow=No`}>
+              <Button variant={variant} size={size}>Button label</Button>
+            </div>
+          ))}
+        </div>
+      ))}
+    </StyleguideEntry>
+    <StyleguideEntry name="Badge">
+      {['m', 's'].map((size) => (
+        <div class="sg-row">
+          {badgeTones.map((tone) => (
+            <div class="sg-spec" data-figma={`Badge|Tone=${cap(tone)}, Size=${size.toUpperCase()}`}>
+              <Badge tone={tone} size={size as 's' | 'm'}>Badge label</Badge>
+            </div>
+          ))}
+        </div>
+      ))}
+    </StyleguideEntry>
+    <StyleguideEntry name="Icon">
+      <div class="sg-icons">
+        {iconNames.map((name) => (
+          <div class="sg-icon">
+            <div class="sg-spec" data-figma={`Icon/${name}`}><Icon name={name} /></div>
+            <p class="text-label-s text-secondary">{name}</p>
+          </div>
+        ))}
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="IconDisc">
+      {['l', 'm'].map((size) => (
+        <div class="sg-row">
+          {discTones.map((tone) => (
+            <div class="sg-spec" data-figma={`Icon Disc|Tone=${cap(tone)}, Size=${size.toUpperCase()}`}>
+              <IconDisc icon="sparkles" tone={tone} size={size as 'm' | 'l'} />
+            </div>
+          ))}
+        </div>
+      ))}
+    </StyleguideEntry>
+    <StyleguideEntry name="Logo">
+      <div class="sg-row">
+        <div class="sg-spec" data-figma="Logo"><Logo height={32} /></div>
+      </div>
+    </StyleguideEntry>
+  </Section>
+
+  <Section id="cards">
+    <SectionHeader align="left" eyebrow="Components" title="Cards & content" />
+    <StyleguideEntry name="Card">
+      <Grid cols={3}>
+        <div class="sg-spec sg-spec--block" data-figma="Card|Type=Icon">
+          <Card icon="shield-check" iconTone="accent" title="Card with icon" href="#" linkLabel="Learn more">
+            <p>Feature cards: an icon tile, a title and a short description.</p>
+          </Card>
+        </div>
+        <div class="sg-spec sg-spec--block" data-figma="Card|Type=Image">
+          <Card image="/images/projects/student-prj_02.png" title="Card with image" href="#" linkLabel="Try it">
+            <p>Projects, press and photo cards put the image on top.</p>
+          </Card>
+        </div>
+        <div class="sg-spec sg-spec--block" data-figma="Card|Type=Band">
+          <Card band="highlight" eyebrow="Eyebrow" title="Card with colour band" href="#" linkLabel="See the activity">
+            <Fragment slot="tags"><Badge tone="neutral">Tag</Badge><Badge tone="neutral">Tag</Badge></Fragment>
+            <p>Activities and sessions use a coloured header band.</p>
+          </Card>
+        </div>
+      </Grid>
+    </StyleguideEntry>
+    <StyleguideEntry name="PostCard">
+      <Grid cols={3}>
+        <div class="sg-spec sg-spec--block" data-figma="Post Card"><PostCard post={posts[0]} /></div>
+      </Grid>
+    </StyleguideEntry>
+    <StyleguideEntry name="PersonCard">
+      <Grid cols={4}>
+        <div class="sg-spec sg-spec--block" data-figma="Person Card"><PersonCard name="Dora" role="Co-Founder & CEO" image="/images/about-imagi/dora-imagi.png" /></div>
+      </Grid>
+    </StyleguideEntry>
+    <StyleguideEntry name="Testimonial">
+      <Grid cols={3}>
+        <div class="sg-spec sg-spec--block" data-figma="Testimonial">
+          <Testimonial name="Kelly Powers" role="CS Teacher, Private School - NY, USA">You have something special - a rigorous and engaging curriculum where students are passionate about creating projects.</Testimonial>
+        </div>
+      </Grid>
+    </StyleguideEntry>
+    <StyleguideEntry name="Stat">
+      <div class="sg-row">
+        <div class="sg-spec" data-figma="Stat"><Stat value="85%" label="of students describe coding with imagi as fun" /></div>
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="Checklist">
+      <Grid cols={2}>
+        <div class="sg-spec sg-spec--block" data-figma="Checklist|Mark=Check"><Checklist><li>Teachers see every prompt</li><li>AI content is moderated</li></Checklist></div>
+        <div class="sg-spec sg-spec--block" data-figma="Checklist|Mark=Cross"><Checklist mark="x"><li>No ads, ever</li><li>No selling student data</li></Checklist></div>
+      </Grid>
+    </StyleguideEntry>
+    <StyleguideEntry name="FaqList" description="Accordion of questions from the FAQs collection (src/content/faqs/<group>/). Example: the Safety group.">
+      <div class="sg-spec sg-spec--block" data-figma="FAQ List"><FaqList group="safety" /></div>
+    </StyleguideEntry>
+    <StyleguideEntry name="CompareTable">
+      <div class="sg-spec sg-spec--block" data-figma="Compare Table">
+        <CompareTable columns={['Features', 'Free', 'Pro']}>
+          <tr><th scope="row">Standards-aligned</th><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td></tr>
+          <tr><th scope="row">AI credits</th><td>Limited</td><td>2,500</td></tr>
+        </CompareTable>
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="Prose">
+      <div class="sg-spec sg-spec--block" data-figma="Prose">
+        <Prose>
+          <h2>Article subhead</h2>
+          <p>Long-form text for blog posts and legal pages. Links look <a href="#">like this</a>, and lists are indented.</p>
+          <ul><li>A list item</li><li>Another list item</li></ul>
+          <blockquote>A pull quote sits on a cream panel.</blockquote>
+        </Prose>
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="LogoStrip" description="A row of partner or school logos. SchoolLogos uses it with the shared school set.">
+      <div class="sg-spec sg-spec--block" data-figma="Logo Strip">
+        <LogoStrip title="Trusted by schools and districts">
+          <img src="/images/schools/10.png" alt="Butler University" /><img src="/images/schools/30.png" alt="Hackley School" /><img src="/images/schools/47.png" alt="Emma Willard School" /><img src="/images/schools/62.png" alt="KTH" />
+        </LogoStrip>
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="SchoolLogos" />
+    <StyleguideEntry name="StudentProjects" />
+    <StyleguideEntry name="PostList" />
+    <StyleguideEntry name="PressList" />
+  </Section>
+
+  <Section tone="subtle" id="forms">
+    <SectionHeader align="left" eyebrow="Components" title="Forms" />
+    <StyleguideEntry name="Field">
+      <div class="sg-spec sg-spec--block" data-figma="Field Set">
+        <div class="sg-fields">
+          <Field label="Text field" name="sg-text" placeholder="Placeholder" required />
+          <Field label="Select" name="sg-select" type="select" options={['One', 'Two']} />
+          <Field label="Checkboxes" name="sg-check" type="checkboxes" options={['Option one', 'Option two', 'Option three']} />
+          <Field label="Message" name="sg-message" type="textarea" />
+        </div>
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="Form">
+      <div class="sg-spec sg-spec--block sg-narrow" data-figma="Form">
+        <Form submitLabel="Submit">
+          <Field label="First name" name="sg-first" required />
+          <Field label="Last name" name="sg-last" required />
+          <Field label="Email" name="sg-email" type="email" required full />
+        </Form>
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="FormLayout" />
+  </Section>
+
+  <Section id="layout">
+    <SectionHeader align="left" eyebrow="Components" title="Page sections & layout" />
+    <StyleguideEntry name="Hero" description="The first section of every page (one Display L title). This page's own header is a Hero without an image; with `image` it splits into two columns." />
+    <StyleguideEntry name="Section" />
+    <StyleguideEntry name="SectionHeader">
+      <div class="sg-spec sg-spec--block" data-figma="Section Header">
+        <SectionHeader eyebrow="Eyebrow" title="Section heading">
+          <p>An intro paragraph sits under the heading in Body L.</p>
+        </SectionHeader>
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="Split">
+      <div class="sg-spec sg-spec--block" data-figma="Split">
+        <Split image="/images/projects/student-prj_04.png" imageAlt="">
+          <h3 class="text-display-s">Image beside text</h3>
+          <p class="text-body-m text-secondary">Use <code>reverse</code> to put the image on the left.</p>
+          <Button arrow>Call to action</Button>
+        </Split>
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="Grid" description="Responsive grid for cards: 2, 3 or 4 columns, one column on phones." />
+    <StyleguideEntry name="CtaBand">
+      <div class="sg-spec sg-spec--block" data-figma="CTA Band">
+        <CtaBand title="Get your free teacher account">
+          <p>Sign up, pick a project, and see what your students do with it.</p>
+          <Fragment slot="actions"><Button variant="secondary" size="l" arrow>Try imagi free</Button></Fragment>
+        </CtaBand>
+      </div>
+    </StyleguideEntry>
+    <StyleguideEntry name="Nav" description="Site header with the three menus and two calls to action. It's part of BaseLayout, so it's on every page (shown at the top of this page)." />
+    <StyleguideEntry name="Footer" description="Site footer: logo, social links, four link columns and the legal row. Part of BaseLayout, so it's on every page (shown at the bottom of this page)." />
+  </Section>
+</BaseLayout>
+
+<style>
+  .sg-block { display: flex; flex-direction: column; gap: var(--space-md); }
+  .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-lg); }
+  .sg-swatch { display: flex; flex-direction: column; gap: var(--space-2xs); }
+  .sg-swatch_chip { height: 88px; border-radius: var(--radius-md); box-shadow: inset 0 0 0 var(--border-thin) var(--border-default); margin-bottom: var(--space-xs); }
+  .sg-type { display: flex; flex-direction: column; }
+  .sg-type_row { display: grid; grid-template-columns: 260px 1fr; gap: var(--space-xl); align-items: baseline; padding-block: var(--space-lg); border-bottom: var(--border-thin) solid var(--border-default); }
+  .sg-type_meta { display: flex; flex-direction: column; gap: var(--space-2xs); }
+  .sg-spacing { display: flex; flex-direction: column; gap: var(--space-sm); }
+  .sg-spacing_row { display: grid; grid-template-columns: 60px 1fr 60px; gap: var(--space-md); align-items: center; }
+  .sg-spacing_bar { height: 24px; background: var(--surface-brand); border-radius: var(--radius-sm); }
+  .sg-radius, .sg-shadow { display: flex; flex-direction: column; gap: var(--space-2xs); }
+  .sg-radius_shape { height: 120px; background: var(--surface-highlight); margin-bottom: var(--space-sm); }
+  .sg-shadow { background: var(--surface-page); border-radius: var(--radius-lg); padding: var(--space-xl); }
+  .sg-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+  .sg-spec { display: inline-flex; }
+  .sg-spec--block { display: block; }
+  .sg-spec--dark { padding: var(--space-sm); background: var(--surface-dark); border-radius: var(--radius-md); }
+  .sg-narrow { max-width: 640px; }
+  .sg-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: var(--space-md); }
+  .sg-icon { display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); padding: var(--space-md); background: var(--surface-page); border-radius: var(--radius-md); text-align: center; }
+  .sg-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  code { font-size: 0.9em; padding: 1px 6px; background: var(--surface-muted); border-radius: var(--radius-sm); }
+</style>

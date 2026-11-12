@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+import SchoolLogos from '../components/SchoolLogos.astro';
+import StudentProjects from '../components/StudentProjects.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="Hour of AI Lesson Plans, Free for K-12 Teachers"
+  description="Free 1-hour AI coding lessons for grades 3-12. Ready-to-teach slides, about 10 minutes of prep, no coding experience needed. Built with Lovable and OpenAI."
+>
+  <Hero eyebrow="Hour of AI · From Nov 16, 2026" title="Their first hour as AI creators">
+    <p>In one class period, students direct Lovable to build something real, question what it makes, and make it their own, safely inside imagi Edu. No coding experience needed, for you or your students.</p>
+    <Fragment slot="meta">
+      <Badge tone="neutral" size="m">60 minutes</Badge>
+      <Badge tone="neutral" size="m">Grades 3–12</Badge>
+      <Badge tone="neutral" size="m">Works on Chromebooks</Badge>
+    </Fragment>
+    <Fragment slot="actions">
+      <Button href="https://edu.imagilabs.com/" size="l" arrow>Get started in imagi Edu</Button>
+      <Button href="#reserve" variant="outline" size="l">Reserve free access</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <SectionHeader eyebrow="Three activities" title="Pick the one hour that fits your class.">
+      <p>Each activity comes with a lesson plan, teacher slides and a setup guide. Free for teachers, nothing to download, no student accounts needed.</p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card band="highlight" eyebrow="Python" title="Creative Coding with Python and AI" href="https://info.imagilabs.com/python" linkLabel="See the activity" external>
+        <Fragment slot="tags">
+          <Badge tone="neutral">Grades 3–8</Badge>
+          <Badge tone="neutral">1 hour</Badge>
+          <Badge tone="neutral">Beginner</Badge>
+        </Fragment>
+        <p>Students design pixel art and animations while learning loops and variables, with an AI Debugging Buddy that helps them fix their code.</p>
+      </Card>
+      <Card band="orange" eyebrow="Vibe coding" title="Build Your First Game Using AI" href="https://info.imagilabs.com/game" linkLabel="See the activity" external>
+        <Fragment slot="tags">
+          <Badge tone="brand">2,500 free credits</Badge>
+          <Badge tone="neutral">Grades 6–12</Badge>
+          <Badge tone="neutral">1 hour</Badge>
+          <Badge tone="neutral">Beginner</Badge>
+        </Fragment>
+        <p>Students describe a game in plain language, build it with Lovable inside imagi Edu, then publish and share it. The best place to start with AI building.</p>
+      </Card>
+      <Card band="accent" eyebrow="Vibe coding" title="Build Your Dream School" href="https://info.imagilabs.com/dreamschool" linkLabel="See the activity" external>
+        <Fragment slot="tags">
+          <Badge tone="brand">2,500 free credits</Badge>
+          <Badge tone="neutral">Grade 6+</Badge>
+          <Badge tone="neutral">60 min</Badge>
+          <Badge tone="neutral">Intermediate</Badge>
+        </Fragment>
+        <p>Students imagine their dream school, build an app with AI that solves a real school problem, and pitch it to their school leader. Best after the game activity.</p>
+      </Card>
+    </Grid>
+    <p class="note text-body-s">Teachers who sign up during Hour of AI get 2,500 bonus Lovable credits for the two vibe coding activities, enough for a whole class. Credits expire December 31, 2026; published student projects stay viewable.</p>
+  </Section>
+
+  <Section tone="subtle" id="reserve" narrow>
+    <SectionHeader eyebrow="Hour of AI 2026" title="One hour. Every student walks out with a tool, app, or website they built with AI." />
+    <Form submitLabel="Reserve free access for your class">
+      <Field label="First name" name="firstname" required />
+      <Field label="Last name" name="lastname" required />
+      <Field label="School email" name="email" type="email" placeholder="Valid education email required" required full />
+      <Field label="Profession" name="profession" type="select" options={['Teacher', 'Administrator', 'Coordinator', 'Curriculum Specialist', 'District Administrator', 'Librarian/Media Specialist', 'Tech or STEM Coordinator', 'Other']} required />
+      <Field label="School or district name" name="company" required />
+      <Field label="Country" name="country" required />
+      <Field label="How did you hear about us?" name="how_did_you_hear_about_us" required />
+    </Form>
+  </Section>
+
+  <Section tone="page">
+    <SchoolLogos />
+  </Section>
+
+  <Section tone="muted">
+    <SectionHeader title="Real student projects">
+      <p>Try some of our favorite student-coded projects made inside the imagi tool.</p>
+    </SectionHeader>
+    <StudentProjects />
+  </Section>
+
+  <Section>
+    <CtaBand title="Get your free teacher account">
+      <p>Sign up, pick a project, and see what your students do with it.</p>
+      <Fragment slot="actions">
+        <Button href="https://edu.imagilabs.com/" variant="secondary" size="l" arrow>Try imagi free</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>
+
+<style>
+  .note { color: var(--text-secondary); text-align: center; max-width: 720px; margin-inline: auto; }
+</style>

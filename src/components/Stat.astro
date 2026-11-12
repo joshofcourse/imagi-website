@@ -1,0 +1,20 @@
+---
+/** A big number with a label underneath (Display M). */
+interface Props {
+  value: string;
+  label: string;
+}
+
+const { value, label } = Astro.props;
+---
+
+<div class="stat">
+  <p class="stat_value text-display-m">{value}</p>
+  <p class="stat_label text-heading-s">{label}</p>
+  {Astro.slots.has('default') && <p class="stat_note text-body-s"><slot /></p>}
+</div>
+
+<style>
+  .stat { display: flex; flex-direction: column; gap: var(--space-xs); }
+  .stat_note { color: var(--text-secondary); }
+</style>

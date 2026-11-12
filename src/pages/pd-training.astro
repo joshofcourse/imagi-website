@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Testimonial from '../components/Testimonial.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="AI Professional Development for Teachers | imagi"
+  description="Practical AI training for K-12 teachers. Leave with lessons you can teach, not slides you’ll never open again. Available for individuals, schools, and districts."
+>
+  <Hero eyebrow="PD training" title="Bring AI into your classroom with confidence.">
+    <p>A live, hands-on session with an imagi educator, online or in person. Teachers build something real with Lovable and leave ready to teach it.</p>
+    <Fragment slot="meta">
+      <Badge tone="neutral" size="m">1 · Learn with an imagi educator</Badge>
+      <Badge tone="neutral" size="m">2 · Build something real with Lovable</Badge>
+      <Badge tone="neutral" size="m">3 · Teach it to your students</Badge>
+    </Fragment>
+    <Fragment slot="actions">
+      <Button href="/quote" size="l" arrow>Get quote</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <SectionHeader title="Leave ready to teach your students to create and build with AI">
+      <p>You don't need to be an AI expert. In one session you'll design and build the same activities your students will, and leave with everything ready for your classroom. Live, hands-on, online or in person.</p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card icon="shield-check" title="Safe AI in your classroom">
+        <p>Learn what to open up and what to keep closed, so your students build with AI instead of copying answers from it.</p>
+      </Card>
+      <Card icon="calendar" iconTone="accent" title="Lessons ready for Monday">
+        <p>You leave with classroom-ready activities, slides and learning outcomes. Nothing to build from scratch on a Sunday night.</p>
+      </Card>
+      <Card icon="code" iconTone="brand" title="Confidence at every level">
+        <p>Most teachers arrive having never written a line of code. You'll write some, watch it run, and find out Python is friendlier than it looks.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader title="Pick the session that fits your school">
+      <p>Two ways, both live with an imagi educator. Tell us who is coming and we'll shape the session around them.</p>
+    </SectionHeader>
+    <Grid cols={2}>
+      <Card band="highlight" icon="monitor" iconTone="brand" title="Online" href="/quote" linkLabel="Get a quote">
+        <p>30 minutes to 3 hours, and it fits inside the working day. Good for a single department, a fast start, or a taste of imagi before you commit to more.</p>
+      </Card>
+      <Card band="accent" icon="school" iconTone="brand" title="In person" href="/quote" linkLabel="Get a quote">
+        <p>A half day or a full day at your school. Better for larger groups and more hands-on time with your team.</p>
+      </Card>
+    </Grid>
+    <Grid cols={3}>
+      <Card icon="users" iconTone="muted" title="No experience required">
+        <p>Whether your teachers are brand new to AI or already building with it, we adjust the session to match. Beginners get the basics. Experienced teachers go further.</p>
+      </Card>
+      <Card icon="heart" iconTone="muted" title="Support doesn't end with the session">
+        <p>Leave with ongoing access to resources and support, not just a one-time training.</p>
+      </Card>
+      <Card icon="puzzle" iconTone="muted" title="More than a demo">
+        <p>Sessions include hands-on building and real cross-curricular ideas, so AI creation fits into any subject your teachers already teach, not just a standalone tech class.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section tone="muted">
+    <Grid cols={3}>
+      <Testimonial name="Kelly Powers" role="CS Teacher, Private School - NY, USA" image="/images/computer-science/kelly-p.jpeg">
+        You have something special - a rigorous and engaging curriculum where students are passionate about creating projects with code and sharing those projects.
+      </Testimonial>
+      <Testimonial name="Mr. Godinez" role="Academy of IT, Florida" image="/images/computer-science/1619653945474.jpeg">
+        Through imagi, students learn that their first attempt doesn't always work, and that's the point. It teaches them to refine their instructions and think critically about coding and AI.
+      </Testimonial>
+      <Testimonial name="Paige Besthoff" role="Computer Science Teacher, Public School - Spotswood, NJ" image="/images/computer-science/1644789063101.jpeg">
+        You don’t have to know anything about teaching computer science. After the PD our art, math and reading teachers were all able to incorporate the imagi platform into their curriculum. There are so many cross-curricular opportunities available.
+      </Testimonial>
+    </Grid>
+  </Section>
+
+  <Section>
+    <CtaBand title="Train one teacher or your whole staff">
+      <p>Tell us your setup and we’ll suggest what fits.</p>
+      <Fragment slot="actions">
+        <Button href="/quote" variant="secondary" size="l" arrow>Book training</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>

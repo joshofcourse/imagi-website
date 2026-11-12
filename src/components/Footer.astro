@@ -1,0 +1,116 @@
+---
+/** Site footer: logo, tagline, social links, four link columns and the legal row. Edit the columns below. */
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+
+const columns = [
+  {
+    title: 'For Schools',
+    links: [
+      { label: 'Get started', href: '/get-started' },
+      { label: 'Hour of AI', href: '/hour-of-ai' },
+      { label: 'PD Training', href: '/pd-training' },
+      { label: 'Computer Science', href: '/computer-science' },
+      { label: 'Resources', href: '/resources' },
+    ],
+  },
+  {
+    title: 'For Families',
+    links: [{ label: 'imagiCharm', href: '/for-parents' }],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'Log in | Try free', href: 'https://edu.imagilabs.com/' },
+      { label: 'Ambassadors', href: '/ambassadors' },
+      { label: 'About us', href: '/about-imagi' },
+      { label: 'Press', href: '/press' },
+      { label: 'Careers', href: '/career' },
+      { label: 'Blog', href: '/blog' },
+    ],
+  },
+  {
+    title: 'Support',
+    links: [
+      { label: 'Contact us', href: '/contact' },
+      { label: 'Get a quote', href: '/quote' },
+      { label: 'Request W-9', href: '/w-9' },
+      { label: 'Safety', href: '/safety' },
+      { label: 'FAQ', href: '/faq' },
+    ],
+  },
+];
+
+const social = [
+  { icon: 'facebook', label: 'Facebook', href: 'https://www.facebook.com/imagilabs' },
+  { icon: 'x-social', label: 'X', href: 'https://x.com/imagilabs' },
+  { icon: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/imagilabs/' },
+  { icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@imagi-channel' },
+  { icon: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/imagilabs/' },
+];
+
+const legal = [
+  { label: 'Terms of Service', href: '/terms-of-service' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Cookie Policy', href: '/cookie-policy' },
+  { label: 'Terms of Sale', href: '/terms-of-sale' },
+];
+---
+
+<footer class="footer" data-figma="Site/Footer">
+  <div class="container">
+    <div class="footer_inner">
+      <div class="footer_top">
+        <div class="footer_brand">
+          <a href="/" aria-label="imagi home"><Logo height={32} /></a>
+          <p class="text-body-s">A safe space for educators and students to build the future with AI.</p>
+          <ul class="footer_social">
+            {social.map((s) => (
+              <li><a href={s.href} target="_blank" rel="noopener"><Icon name={s.icon} size={20} label={s.label} /></a></li>
+            ))}
+          </ul>
+        </div>
+        <nav class="footer_columns" aria-label="Footer">
+          {columns.map((col) => (
+            <div>
+              <p class="text-label-m footer_heading">{col.title}</p>
+              <ul>
+                {col.links.map((link) => <li><a class="text-body-s" href={link.href}>{link.label}</a></li>)}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </div>
+      <div class="footer_bottom text-body-s">
+        <p>© 2026 imagilabs. <a href="/privacy-policy">Do not sell my personal information</a></p>
+        <ul>
+          {legal.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--surface-dark); color: var(--text-inverse); padding-block: var(--space-3xl) var(--space-xl); }
+  .footer_inner { display: flex; flex-direction: column; gap: var(--space-3xl); }
+  .footer_top { display: grid; gap: var(--space-2xl); }
+  .footer_brand { display: flex; flex-direction: column; gap: var(--space-md); max-width: 280px; }
+  .footer_brand p { opacity: 0.8; }
+  .footer a { text-decoration: none; }
+  .footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  ul { list-style: none; padding: 0; }
+  .footer_social { display: flex; gap: var(--space-sm); }
+  .footer_social a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-pill); background: var(--color-moss); }
+  .footer_social a:hover { background: var(--color-lime); color: var(--text-primary); text-decoration: none; }
+  .footer_columns { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); }
+  .footer_columns ul { display: flex; flex-direction: column; gap: var(--space-xs); margin-top: var(--space-md); }
+  .footer_heading { color: var(--color-zest); }
+  .footer_bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-md); padding-top: var(--space-xl); border-top: var(--border-thin) solid rgb(255 255 255 / 0.15); opacity: 0.8; }
+  .footer_bottom p a { margin-left: var(--space-md); }
+  .footer_bottom ul { display: flex; flex-wrap: wrap; gap: var(--space-lg); }
+  @media (min-width: 900px) {
+    .footer_top { grid-template-columns: 1fr 2fr; }
+    .footer_columns { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>

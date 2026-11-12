@@ -1,0 +1,37 @@
+---
+/**
+ * A form card. Put <Field> components in the slot.
+ * Note: forms are static here; point `action` at the real endpoint (e.g. HubSpot) before launch.
+ */
+import Button from './Button.astro';
+
+interface Props {
+  submitLabel: string;
+  action?: string;
+  /** Show the standard consent checkboxes and privacy note */
+  consent?: boolean;
+}
+
+const { submitLabel, action = '#', consent = true } = Astro.props;
+---
+
+<form class="form" action={action} method="post">
+  <div class="form_fields"><slot /></div>
+  {consent && (
+    <div class="form_consent text-body-s">
+      <label class="form_check"><input type="checkbox" name="newsletter" /> <span>Sign me up for imagi's newsletter.</span></label>
+      <label class="form_check"><input type="checkbox" name="consent" required /> <span>I agree to imagi storing and processing my personal data.*</span></label>
+      <p class="form_note">You can unsubscribe anytime. Learn how we handle your data in our <a href="/privacy-policy">Privacy Policy</a>.</p>
+    </div>
+  )}
+  <div><Button type="submit" size="l" arrow>{submitLabel}</Button></div>
+</form>
+
+<style>
+  .form { display: flex; flex-direction: column; gap: var(--space-xl); padding: var(--space-xl); background: var(--surface-page); border-radius: var(--radius-lg); box-shadow: var(--shadow-m); width: 100%; }
+  .form_fields { display: grid; gap: var(--space-lg); }
+  @media (min-width: 640px) { .form_fields { grid-template-columns: 1fr 1fr; } }
+  .form_consent { display: flex; flex-direction: column; gap: var(--space-sm); color: var(--text-secondary); }
+  .form_check { display: flex; gap: var(--space-sm); align-items: flex-start; cursor: pointer; color: var(--text-primary); }
+  .form_check input { width: 20px; height: 20px; accent-color: var(--action-primary); margin-top: 1px; flex: none; }
+</style>

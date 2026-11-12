@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Split from '../components/Split.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="Careers at imagi"
+  description="Help build the tools that teach kids to create with AI. See open roles at imagi and what it’s like to work here."
+>
+  <Hero eyebrow="We’re hiring" title="Join the team at imagi">
+    <p>We make the tools and lessons that give students a safe way to create with AI. If that sounds like work worth doing, we’d like to meet you.</p>
+    <Fragment slot="actions">
+      <Button href="https://imagi.homerun.co/" size="l" arrow external>See open roles</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <Split image="/images/career/imagi-3.jpeg" imageAlt="The imagi team">
+      <SectionHeader eyebrow="Our culture" title="Life at imagi" align="left" />
+      <p class="text-body-l lead">We are a small, international team with a big mission. We move fast, care deeply about educators and students, and love working together. We are re-imagining education for the students growing up in the age of AI.</p>
+      <Button href="https://www.linkedin.com/company/imagilabs/posts/" variant="outline" size="m" arrow external>Follow us</Button>
+    </Split>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader eyebrow="Careers" title="Open roles" />
+    <Grid cols={2}>
+      <Card icon="code" iconTone="highlight" title="Founding Engineer (Full-Stack)" href="https://imagi.homerun.co/founding-engineer-full-stack/en" linkLabel="View the role" external>
+        <Fragment slot="tags">
+          <Badge tone="neutral">Full-time</Badge>
+          <Badge tone="neutral">Stockholm</Badge>
+        </Fragment>
+      </Card>
+      <Card icon="pen-tool" iconTone="accent" title="Product Designer (UX/UI)" href="https://imagi.homerun.co/product-designer-ux-ui/en" linkLabel="View the role" external>
+        <Fragment slot="tags">
+          <Badge tone="neutral">Full-time</Badge>
+          <Badge tone="neutral">Stockholm</Badge>
+        </Fragment>
+      </Card>
+    </Grid>
+    <div class="more">
+      <Button href="https://imagi.homerun.co/" variant="outline" size="l" arrow external>Discover more</Button>
+    </div>
+  </Section>
+
+  <Section>
+    <CtaBand title="Come join us!">
+      <p>Are you ready to take the next step in your career? Explore the opportunities waiting for you at imagi. Discover a place where your work is meaningful, your contributions are valued, and you can make a lasting impact.</p>
+      <Fragment slot="actions">
+        <Button href="https://imagi.homerun.co/" variant="secondary" size="l" arrow external>Work with us</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>
+
+<style>
+  .lead { color: var(--text-secondary); }
+  .more { display: flex; justify-content: center; }
+</style>

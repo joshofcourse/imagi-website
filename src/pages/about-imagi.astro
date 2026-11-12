@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Split from '../components/Split.astro';
+import Grid from '../components/Grid.astro';
+import PersonCard from '../components/PersonCard.astro';
+import Button from '../components/Button.astro';
+import SchoolLogos from '../components/SchoolLogos.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="About imagi: Creative AI Literacy for K-12"
+  description="Who we are, why we build what we build, and how imagi helps K-12 students learn to create with AI instead of copying from it."
+>
+  <Hero eyebrow="Our mission" title="About imagi" image="/images/about-imagi/dsc02706_original-1.jpeg" imageAlt="The imagi team in matching imagi jackets in their office">
+    <p>imagi is a K-12 learning platform that gives students safe access to real-world AI tools, like Lovable, so they grow from AI consumers to future-ready AI creators.</p>
+    <Fragment slot="actions">
+      <Button href="/demo" size="l" arrow>Book a demo</Button>
+      <Button href="/career" variant="outline" size="l">Join the team</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <Split image="/images/about-imagi/smooth-white-image-outline-1-.png" imageAlt="imagi co-founders Dora and Beatrice">
+      <SectionHeader eyebrow="Since 2018" title="Founding story" align="left" />
+      <p class="text-body-l lead">imagi was established by Dora (CEO) and Beatrice (CTO) in 2018, following a user-centered research project conducted at KTH University in Stockholm. This reality is what Dora and Beatrice are devoted to changing.</p>
+      <p class="text-body-l lead">Since 2020, our products have been on the market, reaching and supporting groups underrepresented in tech. We are beginning to reshape the landscape of the tech industry and engineering education pathways.</p>
+    </Split>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader eyebrow="Our team" title="The people behind imagi">
+      <p>We’re an award-winning team across Sweden and the US, united by one belief: every student deserves the opportunity to become an AI creator, not just a consumer.</p>
+    </SectionHeader>
+    <Grid cols={4}>
+      <PersonCard name="Dora" role="Co-Founder & CEO" image="/images/about-imagi/dora-imagi.png" />
+      <PersonCard name="Beatrice" role="Co-Founder & CTO" image="/images/about-imagi/beatrice-imagi.png" />
+      <PersonCard name="Shruti" role="Company Operations Manager" image="/images/about-imagi/shruti.jpeg" />
+      <PersonCard name="Steph" role="Director of District Partnership" image="/images/about-imagi/steph.jpeg" />
+      <PersonCard name="Janelle" role="Head of Marketing" image="/images/about-imagi/janelle.jpeg" />
+      <PersonCard name="Garrett" role="Curriculum and PD Specialist" image="/images/about-imagi/garrett.jpeg" />
+      <PersonCard name="Naomi" role="Educator Success Manager" image="/images/about-imagi/naomi.jpeg" href="https://www.linkedin.com/in/naomi-kerr-ab7032212/" />
+      <PersonCard name="Helen" role="Marketing Operations Manager" image="/images/about-imagi/helen.jpeg" />
+    </Grid>
+  </Section>
+
+  <Section tone="muted">
+    <SchoolLogos />
+  </Section>
+
+  <Section>
+    <CtaBand title="Come join us!">
+      <p>Are you ready to take the next step in your career? Explore the opportunities waiting for you at imagi. Discover a place where your work is meaningful, your contributions are valued, and you can make a lasting impact.</p>
+      <Fragment slot="actions">
+        <Button href="/career" variant="secondary" size="l" arrow>Work with us</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>
+
+<style>
+  .lead { color: var(--text-secondary); }
+</style>

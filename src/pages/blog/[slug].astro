@@ -1,0 +1,55 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import Badge from '../../components/Badge.astro';
+import Prose from '../../components/Prose.astro';
+import PostList from '../../components/PostList.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', (p) => p.data.published);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const author = await getEntry(post.data.author);
+const date = post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article>
+    <section class="posthero">
+      <div class="container">
+        <div class="posthero_inner">
+          <div class="posthero_tags">{post.data.tags.map((t) => <Badge tone="neutral">{t}</Badge>)}</div>
+          <h1 class="text-display-l">{post.data.title}</h1>
+          <p class="posthero_meta text-label-m">
+            By <a href={`/blog/author/${post.data.author.id}`}>{author?.data.name}</a> · {date}
+          </p>
+          <img class="posthero_image" src={post.data.image} alt={post.data.imageAlt} />
+        </div>
+      </div>
+    </section>
+
+    <Section spacing="tight">
+      <Prose><Content /></Prose>
+    </Section>
+  </article>
+
+  <Section tone="subtle">
+    <SectionHeader title="More stories" />
+    <PostList exclude={post.id} limit={3} />
+  </Section>
+</BaseLayout>
+
+<style>
+  .posthero { background: var(--surface-subtle); padding-block: var(--space-3xl) 0; }
+  .posthero_inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-lg); max-width: 960px; margin-inline: auto; }
+  .posthero_tags { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-xs); }
+  .posthero_meta { color: var(--text-secondary); }
+  .posthero_meta a { color: var(--text-primary); }
+  .posthero_image { width: 100%; border-radius: var(--radius-lg); margin-top: var(--space-lg); margin-bottom: calc(var(--space-3xl) * -1); box-shadow: var(--shadow-m); aspect-ratio: 16 / 9; object-fit: cover; }
+  .posthero + :global(.section) { padding-top: calc(var(--space-3xl) + var(--space-2xl)); }
+</style>

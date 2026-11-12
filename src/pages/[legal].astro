@@ -1,0 +1,25 @@
+---
+/** Legal pages (Privacy Policy, Terms…) from src/content/legal/*.md — edit the Markdown there. */
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Prose from '../components/Prose.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('legal');
+  return pages.map((page) => ({ params: { legal: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <Hero eyebrow="Legal" title={page.data.title}>
+    {page.data.updated && <p>{page.data.updated}</p>}
+  </Hero>
+  <Section>
+    <Prose><Content /></Prose>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import CompareTable from '../components/CompareTable.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="Pricing for Classrooms, Schools, and Districts"
+  description="Start free with one class. School and district pricing available with a custom quote. See what’s included in each plan."
+>
+  <Hero eyebrow="Pricing" title="Pricing that fits everyone">
+    <p>imagi is a safe platform for students to think, build, and create with real-world AI tools.</p>
+  </Hero>
+
+  <Section tone="subtle" spacing="tight">
+    <Grid cols={3}>
+      <Card eyebrow="Classroom" title="imagi Edu Free">
+        <p>Try Python with grades 3–8. Teacher access to AI creation (using a valid school email address).</p>
+        <div slot="footer" class="plan">
+          <p class="plan_price text-display-s">Free</p>
+          <p class="plan_note text-body-s">Join anytime</p>
+          <Button href="https://edu.imagilabs.com/" variant="outline" arrow>Start free</Button>
+        </div>
+      </Card>
+      <Card eyebrow="Teacher" title="imagi Edu Pro" tone="brand-soft">
+        <p>Full access to the CS and AI Literacy curriculum. Safe access to Lovable to build with AI for 50 students.</p>
+        <div slot="footer" class="plan">
+          <p class="plan_price text-display-s">$500</p>
+          <p class="plan_note text-body-s">One-time payment, 12 months</p>
+          <Button href="https://buy.stripe.com/9B6aEX2ml05S4LheSf5gc08" arrow external>Buy imagi Edu Pro</Button>
+        </div>
+      </Card>
+      <Card eyebrow="School or district" title="imagi Edu Pro for Schools">
+        <p>Roll out real-world AI tools along with CS and AI Literacy across your school or district, with one place to manage teachers, seats and credits.</p>
+        <div slot="footer" class="plan">
+          <p class="plan_price text-display-s">Custom</p>
+          <p class="plan_note text-body-s">Get in touch for a quote</p>
+          <Button href="/quote" variant="outline" arrow>Request a quote</Button>
+        </div>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section>
+    <SectionHeader title="Compare the plans" />
+    <CompareTable caption="Plan comparison" columns={['Features', 'Free', 'Pro (Teacher)', 'Pro (Schools and Districts)']}>
+      <tr><th scope="row">Standards-aligned</th><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">Ready-to-teach lesson plans</th><td>Limited</td><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">Python coding platform</th><td>50 students, 1 classroom</td><td>50 students, many classrooms</td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">AI Debugging Buddy</th><td>Teacher only</td><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">Pairs with optional imagiCharms</th><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">Teachers build apps with AI (Lovable)</th><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">Student-safe AI app building (Lovable)</th><td><Icon name="x" label="Not included" /></td><td>Up to 50 students</td><td>Customizable</td></tr>
+      <tr><th scope="row">AI credits</th><td>Limited</td><td>2,500</td><td>Customizable</td></tr>
+      <tr><th scope="row">Real-time AI safety monitor</th><td>N/A</td><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">Built for FERPA & COPPA compliance</th><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">GDPR compliant</th><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">Dedicated support</th><td><Icon name="x" label="Not included" /></td><td>Optional</td><td><Icon name="check" label="Included" /></td></tr>
+      <tr><th scope="row">Access</th><td>Immediate</td><td>Within 24 hours</td><td>Within 24 hours</td></tr>
+      <tr><th scope="row">Term</th><td>Forever</td><td>12 months</td><td>Customizable</td></tr>
+      <tr><th scope="row">SSO</th><td><Icon name="x" label="Not included" /></td><td><Icon name="x" label="Not included" /></td><td><Icon name="check" label="Included" /></td></tr>
+    </CompareTable>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader title="For procurement teams" />
+    <Grid cols={3}>
+      <Card icon="clock" iconTone="highlight" title="Teaching within 24 hours">
+        <p>Once payment clears, teachers get platform access within 24 hours. It runs in the browser, so there's nothing for IT to install.</p>
+      </Card>
+      <Card icon="shield-check" iconTone="brand" title="Privacy you can hand straight to IT">
+        <p>Built for FERPA, COPPA, and GDPR compliance, with a real-time safety monitor that watches or blocks every student prompt.</p>
+      </Card>
+      <Card icon="layers" iconTone="accent" title="Customizable pricing">
+        <p>Classroom plans cover 50 students for 12 months. Rolling out wider? We'll send one quote that covers every school.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section>
+    <SectionHeader title="More about our pricing plans" />
+    <FaqList group="pricing" />
+  </Section>
+
+  <Section tone="subtle">
+    <CtaBand title="Not sure which plan fits?">
+      <p>Tell us how many students and we’ll tell you what it costs. No pressure and no sales sequence.</p>
+      <Fragment slot="actions">
+        <Button href="/contact" variant="secondary" size="l" arrow>Contact us</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>
+
+<style>
+  .plan { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); padding-top: var(--space-lg); border-top: var(--border-thin) solid var(--border-default); }
+  .plan_note { color: var(--text-secondary); margin-bottom: var(--space-md); }
+</style>

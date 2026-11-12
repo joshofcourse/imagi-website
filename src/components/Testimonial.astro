@@ -1,0 +1,37 @@
+---
+/** A quote with the person's name, role and optional photo. The slot is the quote. */
+import Icon from './Icon.astro';
+
+interface Props {
+  name: string;
+  role?: string;
+  image?: string;
+  tone?: 'page' | 'subtle' | 'muted';
+}
+
+const { name, role, image, tone = 'page' } = Astro.props;
+---
+
+<figure class:list={['testimonial', `testimonial--${tone}`]}>
+  <Icon name="quote" size={28} />
+  <blockquote class="text-body-l"><slot /></blockquote>
+  <figcaption>
+    {image && <img src={image} alt="" loading="lazy" />}
+    <span>
+      <span class="text-label-m">{name}</span>
+      {role && <span class="testimonial_role text-body-s">{role}</span>}
+    </span>
+  </figcaption>
+</figure>
+
+<style>
+  .testimonial { display: flex; flex-direction: column; gap: var(--space-lg); padding: var(--space-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-s); height: 100%; margin: 0; }
+  .testimonial--page { background: var(--surface-page); }
+  .testimonial--subtle { background: var(--surface-subtle); }
+  .testimonial--muted { background: var(--surface-muted); }
+  .testimonial :global(.icon) { color: var(--color-leaf); }
+  figcaption { display: flex; align-items: center; gap: var(--space-sm); margin-top: auto; }
+  figcaption > span { display: flex; flex-direction: column; }
+  figcaption img { width: 48px; height: 48px; border-radius: var(--radius-pill); object-fit: cover; }
+  .testimonial_role { color: var(--text-secondary); }
+</style>

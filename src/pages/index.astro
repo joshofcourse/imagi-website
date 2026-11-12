@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Split from '../components/Split.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import Stat from '../components/Stat.astro';
+import IconDisc from '../components/IconDisc.astro';
+import Testimonial from '../components/Testimonial.astro';
+import SchoolLogos from '../components/SchoolLogos.astro';
+import StudentProjects from '../components/StudentProjects.astro';
+import LogoStrip from '../components/LogoStrip.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+---
+
+<BaseLayout
+  title="imagi"
+  description="imagi gives K-12 students safe access to real-world AI tools like Lovable, so they can think, build and create."
+>
+  <Hero
+    eyebrow="imagi × Lovable"
+    title="Your students don't just use AI. They build real apps."
+    image="/images/home/columbus-student1.00_36_08_16.still022-1.jpg"
+    imageAlt="Two students smiling as they build a project on a laptop"
+  >
+    <p>imagi is a safe platform for students to think, build and create with real-world AI tools.</p>
+    <Fragment slot="meta">
+      <Badge tone="neutral" size="m">Study tools</Badge>
+      <Badge tone="neutral" size="m">Real apps</Badge>
+      <Badge tone="neutral" size="m">Digital portfolios</Badge>
+      <Badge tone="neutral" size="m">Custom websites</Badge>
+      <Badge tone="neutral" size="m">Future-ready skills</Badge>
+    </Fragment>
+    <Fragment slot="actions">
+      <Button href="https://edu.imagilabs.com/" size="l" arrow>Get started free</Button>
+      <Button href="/quote" variant="outline" size="l">Get a quote</Button>
+    </Fragment>
+  </Hero>
+
+  <Section spacing="tight">
+    <SchoolLogos />
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader eyebrow="Why imagi" title="Because blocking AI is not a learning strategy">
+      <p>Students need more than access. They need boundaries, guidance, and the confidence to think for themselves. imagi gives schools a safe way to bring real-world AI tools into everyday learning so that students can build, question, create, and stay in control.</p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card icon="shield-check" iconTone="highlight" title="Safe student access">
+        <p>Protected logins, managed environments, and school-ready controls so students can explore AI without being sent into unmanaged tools.</p>
+      </Card>
+      <Card icon="code" iconTone="brand" title="Real building, not just prompts">
+        <p>Guided activities help students turn ideas into real, working projects, connecting AI to actual coding, creation, and problem-solving, not just a finished worksheet.</p>
+      </Card>
+      <Card icon="graduation-cap" iconTone="accent" title="Confidence for teachers">
+        <p>Step-by-step training and support help you bring real AI tools into your classroom safely, so you don't need a technical background to lead the way.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section>
+    <Grid cols={4}>
+      <Stat value="140+" label="Countries">Used in 140+ countries around the world</Stat>
+      <Stat value="100+" label="School districts">Trusted by 100+ districts across 30+ US states</Stat>
+      <Stat value="30k+" label="Teachers">30k+ teachers registered for K-12 AI literacy</Stat>
+      <Stat value="0.7M+" label="Learners">0.7M+ learners coding, creating and building</Stat>
+    </Grid>
+  </Section>
+
+  <Section tone="muted">
+    <SectionHeader eyebrow="How it works" title="How students learn to create with AI, step by step">
+      <p>imagi guides students from safe access to hands-on creation, helping them build real projects through coding, design thinking, and problem-solving.</p>
+    </SectionHeader>
+    <div class="steps">
+      <Split image="/images/home/broll.00_43_12_07.still035-1.jpg" imageAlt="A teacher smiling at her laptop in a classroom">
+        <Badge tone="brand" size="m">Step 1</Badge>
+        <h3 class="text-heading-l">Create a safe space</h3>
+        <p class="text-body-l text-secondary">Set up protected student access without personal accounts, unnecessary data sharing or open-ended exposure.</p>
+      </Split>
+      <Split image="/images/get-started/students-project.webp" imageAlt="Two students working on a project together on a laptop" reverse>
+        <Badge tone="brand" size="m">Step 2</Badge>
+        <h3 class="text-heading-l">Make AI use visible</h3>
+        <p class="text-body-l text-secondary">Guide students through structured lessons where they plan, prompt, test and explain their thinking.</p>
+      </Split>
+      <Split image="/images/home/screenshot-2026-06-03-at-16.43.49.png" imageAlt="A student holding up the laptop with the app she built">
+        <Badge tone="brand" size="m">Step 3</Badge>
+        <h3 class="text-heading-l">Let students build</h3>
+        <p class="text-body-l text-secondary">Students use AI to create problem-solving tools, apps and digital projects connected to real classroom goals.</p>
+      </Split>
+    </div>
+  </Section>
+
+  <Section>
+    <SectionHeader eyebrow="Teacher voices" title="What teachers say" />
+    <Grid cols={3}>
+      <Testimonial name="Kelly Powers" role="CS Teacher, Private School - NY, USA" image="/images/computer-science/kelly-p.jpeg" tone="subtle">
+        You have something special - a rigorous and engaging curriculum where students are passionate about creating projects with code and sharing those projects.
+      </Testimonial>
+      <Testimonial name="Mr. Godinez" role="Academy of IT, Florida" image="/images/computer-science/1619653945474.jpeg" tone="subtle">
+        Through imagi, students learn that their first attempt doesn't always work — and that's the point. It teaches them to refine their instructions and think critically about coding and AI.
+      </Testimonial>
+      <Testimonial name="Paige Besthoff" role="Computer Science Teacher, Public School - Spotswood, NJ" image="/images/computer-science/1644789063101.jpeg" tone="subtle">
+        You don’t have to know anything about teaching computer science. After the PD our art, math and reading teachers were all able to incorporate the imagi platform into their curriculum.
+      </Testimonial>
+    </Grid>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader title="Real student projects">
+      <p>Try some of our favorite student-coded projects made inside the imagi tool.</p>
+    </SectionHeader>
+    <StudentProjects />
+  </Section>
+
+  <Section>
+    <SectionHeader eyebrow="Stories" title="AI learning is already happening in real classrooms" />
+    <Grid cols={3}>
+      <Card image="/images/home/3.png" imageAlt="Students from Hawai'i presenting on stage" title="Hawai'i students reimagined programming with AI" href="/blog" linkLabel="Read the story">
+        <p>Students used design thinking and AI to solve real-world challenges through creative coding.</p>
+      </Card>
+      <Card image="/images/home/screenshot-2026-06-02-at-09.20.48.png" imageAlt="Teacher Lisa Haines" title="A cautious teacher became an AI creator" href="/blog/turning-students-into-ai-creators-not-consumers-how-one-teacher-found-her-confidence-with-lovable-imagi" linkLabel="Read the story">
+        <p>Lisa Haines used Lovable x imagi to help students build apps for classmates, siblings and real-world needs.</p>
+      </Card>
+      <Card image="/images/home/2.png" imageAlt="Students and mentors at the Code/Art hackathon" title="Students built apps in one day" href="/blog/inside-the-code-art-hackathon-how-students-built-apps-in-one-day" linkLabel="Read the story">
+        <p>A Code/Art hackathon showed how grades 6–12 can use AI, creativity and design thinking to build projects with real purpose.</p>
+      </Card>
+    </Grid>
+    <div class="more">
+      <Button href="/blog" variant="outline" size="l" arrow>Discover more</Button>
+    </div>
+  </Section>
+
+  <Section tone="muted">
+    <Split>
+      <Badge tone="brand" size="m">TEDx talk</Badge>
+      <h2 class="text-display-s">What if every kid could build and learn safely with AI, not just use it to cheat?</h2>
+      <p class="text-body-l text-secondary">Dora Palfi Osika, CEO and co-founder of imagi, explores in her TEDx talk how schools can move beyond fear and give students safe, creative access to AI, so they learn to think, build, and stay in control.</p>
+      <Fragment slot="media">
+        <a class="video" href="https://www.youtube.com/watch?v=DjskKyRV66o" target="_blank" rel="noopener" aria-label="Watch Dora's TEDx talk on YouTube">
+          <img src="/images/home/tedx-dora.jpg" alt="Dora Palfi Osika speaking on the TEDx stage" loading="lazy" />
+          <span class="video_play"><IconDisc icon="play" tone="highlight" size="l" /></span>
+        </a>
+      </Fragment>
+    </Split>
+  </Section>
+
+  <Section>
+    <LogoStrip title="Award-winning, and recognised across education">
+      <img src="/images/home/image-2-1.png" alt="FETC National Pitchfest finalist 2024" />
+      <img src="/images/home/image-4.png" alt="Supes' Choice 2024 startup company finalist" />
+      <img src="/images/home/image-1.png" alt="Selected for the HundrED Global Collection 2024" />
+      <img src="/images/home/image-3.png" alt="Nordic Baltic EdTech 50, 2023" />
+      <img src="/images/home/image-31.png" alt="SIIA 2024 Innovation Showcase finalist" />
+    </LogoStrip>
+    <CtaBand title="Bring real-world AI tools into your school safely and with confidence">
+      <p>Whether you're exploring AI for one classroom or planning adoption across a district, imagi gives you a safe, structured way to introduce AI literacy, with protected access, guided lessons, and creative projects that build confidence for teachers and students.</p>
+      <Fragment slot="actions">
+        <Button href="https://edu.imagilabs.com/" variant="secondary" size="l" arrow>Try imagi free</Button>
+        <Button href="/demo" variant="inverse" size="l">Book a demo</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+
+  <Section tone="subtle" narrow>
+    <SectionHeader title="Let's keep in touch">
+      <p>Join our newsletter for updates, discounts & resources for the classroom and beyond!</p>
+    </SectionHeader>
+    <Form submitLabel="Sign up to our newsletter">
+      <Field label="Email" name="email" type="email" placeholder="Your email" required full />
+    </Form>
+  </Section>
+</BaseLayout>
+
+<style>
+  .steps { display: flex; flex-direction: column; gap: var(--space-3xl); }
+  .more { display: flex; justify-content: center; }
+  .video { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-m); }
+  .video img { width: 100%; height: 100%; object-fit: cover; }
+  .video_play { position: absolute; inset: 0; display: grid; place-items: center; }
+  .video:hover .video_play :global(.disc) { background: var(--surface-brand); }
+</style>

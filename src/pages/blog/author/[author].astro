@@ -1,0 +1,26 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Hero from '../../../components/Hero.astro';
+import Section from '../../../components/Section.astro';
+import PostList from '../../../components/PostList.astro';
+
+export async function getStaticPaths() {
+  const authors = await getCollection('authors');
+  return authors.map((author) => ({ params: { author: author.id }, props: { author } }));
+}
+
+const { author } = Astro.props;
+const { Content } = await render(author);
+---
+
+<BaseLayout title={`Posts by ${author.data.name}`}>
+  <Hero eyebrow="Author" title={author.data.name}>
+    {author.data.role && <p>{author.data.role}</p>}
+    <Content />
+  </Hero>
+
+  <Section tone="subtle">
+    <PostList author={author.id} />
+  </Section>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+/**
+ * A full-width page section. Every section uses the same vertical rhythm (--section-y)
+ * and the same container, so spacing stays consistent across pages.
+ * Put the section's own layout on an element inside the slot.
+ */
+interface Props {
+  /** Background: page (white), subtle (cream), muted (sand), brand-soft (sage), dark (forest) */
+  tone?: 'page' | 'subtle' | 'muted' | 'brand-soft' | 'dark';
+  /** "hero" adds room under the header; "tight" halves the padding */
+  spacing?: 'default' | 'hero' | 'tight';
+  id?: string;
+  /** Narrow the content column (e.g. forms, articles) */
+  narrow?: boolean;
+}
+
+const { tone = 'page', spacing = 'default', id, narrow = false } = Astro.props;
+---
+
+<section id={id} class:list={['section', `section--${tone}`, `section--${spacing}`]}>
+  <div class="container">
+    <div class:list={['section_inner', { 'section_inner--narrow': narrow }]}>
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding-block: var(--section-y); }
+  .section--hero { padding-block: var(--space-3xl) var(--section-y); }
+  .section--tight { padding-block: calc(var(--section-y) / 2); }
+  .section--page { background: var(--surface-page); }
+  .section--subtle { background: var(--surface-subtle); }
+  .section--muted { background: var(--surface-muted); }
+  .section--brand-soft { background: var(--surface-brand-soft); }
+  .section--dark { background: var(--surface-dark); color: var(--text-inverse); }
+  .section_inner { display: flex; flex-direction: column; gap: var(--space-2xl); }
+  .section_inner--narrow { max-width: 760px; margin-inline: auto; }
+</style>

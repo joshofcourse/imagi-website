@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Split from '../components/Split.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Testimonial from '../components/Testimonial.astro';
+import Button from '../components/Button.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+---
+
+<BaseLayout
+  title="imagi for Families: Coding and AI Projects for Kids"
+  description="Your child builds real games and projects with code and AI, safely. Guided projects for ages 8 and up, with everything you need to see what they are making."
+>
+  <Hero eyebrow="For parents" title="The AI creation platform schools use, now coming home">
+    <p>Teachers use imagi to help students build with AI in a safe, compliant space. Soon kids 8 and up can keep creating at home, and you’ll be able to see everything they make.</p>
+    <Fragment slot="actions">
+      <Button href="https://410q0v.share-na2.hsforms.com/2m7asWYPLRUagLS9QypbztA" size="l" arrow external>Join the family waitlist</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <SectionHeader title="Kids learn to build with AI">
+      <p>Kids 8 and up use real-world AI tools, like the app builder Lovable, in a space made for them. They learn to use AI to make their own work, not to do the work for them, and they build skills they'll use well beyond school.</p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card icon="monitor" title="Screen time that makes something">
+        <p>Instead of watching another video, your child writes a few lines of code and ends up with pixel art, an animation or a small game they designed themselves.</p>
+      </Card>
+      <Card icon="sparkles" iconTone="accent" title="Building with AI, not cheating with it">
+        <p>Your child describes an app they want, AI builds a first version, and then the real work starts. They test it, find what is broken and fix it. They finish understanding what the AI actually did.</p>
+      </Card>
+      <Card icon="code" iconTone="brand" title="Real code, not a toy version">
+        <p>Your child learns Python, the language used in real jobs. No colorful blocks they will have to outgrow in a couple of years.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section tone="subtle">
+    <Split image="/images/for-parents/5_3f5973aa-49ff-4daa-a1f7-2e190e0270ea_480x480.webp" imageAlt="Two children coding pixel art on a laptop together">
+      <h2 class="text-display-s">How it works at home</h2>
+      <h3 class="text-heading-m">Starting is easier than you think</h3>
+      <p class="text-body-l text-secondary">Start with the free coding game. It runs on iPhone and iPad, costs nothing, and needs no experience. Ages 8 and up.</p>
+      <p class="text-body-l text-secondary">When your child wants more, imagi Edu gives them safe access to real AI tools like Lovable, inside an account you set up. You see every prompt and everything they build, and no personal data is collected.</p>
+      <p class="text-body-l text-secondary">Homeschooling? imagi can often count as an approved STEM expense under state Education Savings Account programs.</p>
+      <Button href="https://410q0v.share-na2.hsforms.com/2m7asWYPLRUagLS9QypbztA" arrow external>Join the waitlist</Button>
+    </Split>
+  </Section>
+
+  <Section>
+    <Split image="/images/for-parents/the_easiest_way_to_learn_coding_with_a_coding_app_for_kids_1.png" imageAlt="Three phone screens from the imagi coding game: lessons, Python code and pixel-art projects" reverse>
+      <h2 class="text-display-s">Try imagi for free</h2>
+      <p class="text-body-l text-secondary">Download the imagi coding game for at-home use and let kids ages 8-14+ learn coding independently.</p>
+      <a class="appstore" href="https://apps.apple.com/us/app/imagi-fun-coding-game/id1434239482" target="_blank" rel="noopener">
+        <img src="/images/for-parents/appstorebtn.png" alt="Download imagi on the App Store" />
+      </a>
+    </Split>
+  </Section>
+
+  <Section tone="muted">
+    <Grid cols={3}>
+      <Testimonial name="Kelly Powers" role="CS Teacher, Private School - NY, USA" image="/images/computer-science/kelly-p.jpeg">
+        You have something special - a rigorous and engaging curriculum where students are passionate about creating projects with code and sharing those projects.
+      </Testimonial>
+      <Testimonial name="Mr. Godinez" role="Academy of IT, Florida" image="/images/computer-science/1619653945474.jpeg">
+        Through imagi, students learn that their first attempt doesn't always work, and that's the point. It teaches them to refine their instructions and think critically about coding and AI.
+      </Testimonial>
+      <Testimonial name="Paige Besthoff" role="Computer Science Teacher, Public School - Spotswood, NJ" image="/images/computer-science/1644789063101.jpeg">
+        You don’t have to know anything about teaching computer science. After the PD our art, math and reading teachers were all able to incorporate the imagi platform into their curriculum. There are so many cross-curricular opportunities available.
+      </Testimonial>
+    </Grid>
+  </Section>
+
+  <Section>
+    <Split image="/images/for-parents/imagi-product1.webp" imageAlt="The imagiCharm in its box">
+      <h2 class="text-display-s">Pick your starting point</h2>
+      <p class="text-body-l text-secondary">Check out our collection of products!</p>
+      <Button href="https://imagilabs.com/collections/all" arrow>Shop now</Button>
+    </Split>
+  </Section>
+
+  <Section tone="subtle" narrow>
+    <SectionHeader title="Let's keep in touch">
+      <p>Join our newsletter for updates, discounts & resources for the classroom and beyond!</p>
+    </SectionHeader>
+    <Form submitLabel="Sign up to our newsletter">
+      <Field label="Email" name="email" type="email" placeholder="Your email" required full />
+    </Form>
+  </Section>
+</BaseLayout>
+
+<style>
+  .appstore { display: inline-block; }
+  .appstore img { height: 56px; width: auto; }
+</style>

@@ -1,0 +1,34 @@
+---
+/**
+ * "Trusted by schools" logo wall — the same set on every page that shows it.
+ * Edit the list below to change which schools appear (files are in /public/images/schools/).
+ */
+import LogoStrip from './LogoStrip.astro';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Trusted by schools and districts across the US and Europe' } = Astro.props;
+
+const schools = [
+  { file: '2.png', name: 'Alvin ISD' },
+  { file: '8.png', name: 'Bonn International School' },
+  { file: '10.png', name: 'Butler University' },
+  { file: '12.png', name: 'Ormiston Sudbury Academy' },
+  { file: '14.png', name: 'Budapest British International School' },
+  { file: '16.png', name: 'The Chestnut Hill School' },
+  { file: '22.png', name: 'Magnolia ISD' },
+  { file: '29.png', name: 'Springfield Public Schools' },
+  { file: '30.png', name: 'Hackley School' },
+  { file: '32.png', name: 'Mechanicville City School District' },
+  { file: '41.png', name: 'Ojai Unified School District' },
+  { file: '44.png', name: 'South Windsor Public Schools' },
+  { file: '47.png', name: 'Emma Willard School' },
+  { file: '62.png', name: 'KTH' },
+];
+---
+
+<LogoStrip title={title}>
+  {schools.map((s) => <img src={`/images/schools/${s.file}`} alt={s.name} loading="lazy" />)}
+</LogoStrip>

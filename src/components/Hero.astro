@@ -1,0 +1,62 @@
+---
+/**
+ * Page hero: the first section of every page. One per page.
+ * With an image it's a two-column split (text left, image right); without, it's centred.
+ * Slots: default = lead paragraph, "actions" = buttons, "meta" = small facts under the lead,
+ * "media" = custom right-hand content instead of an image.
+ */
+import Badge from './Badge.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  image?: string;
+  imageAlt?: string;
+  tone?: 'page' | 'subtle' | 'muted' | 'brand-soft' | 'dark';
+}
+
+const { eyebrow, title, image, imageAlt = '', tone = 'subtle' } = Astro.props;
+const split = Boolean(image) || Astro.slots.has('media');
+---
+
+<section class:list={['hero', `hero--${tone}`]}>
+  <div class="container">
+    <div class:list={['hero_inner', { 'hero_inner--split': split }]}>
+      <div class="hero_text">
+        {eyebrow && <Badge tone={tone === 'dark' ? 'brand' : 'dark'}>{eyebrow}</Badge>}
+        <h1 class="text-display-l">{title}</h1>
+        {Astro.slots.has('default') && <div class="hero_lead text-body-l"><slot /></div>}
+        {Astro.slots.has('meta') && <div class="hero_meta"><slot name="meta" /></div>}
+        {Astro.slots.has('actions') && <div class="hero_actions"><slot name="actions" /></div>}
+      </div>
+      {split && (
+        <div class="hero_media">
+          {Astro.slots.has('media') ? <slot name="media" /> : <img src={image} alt={imageAlt} loading="eager" />}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { padding-block: var(--space-3xl) var(--section-y); }
+  .hero--page { background: var(--surface-page); }
+  .hero--subtle { background: var(--surface-subtle); }
+  .hero--muted { background: var(--surface-muted); }
+  .hero--brand-soft { background: var(--surface-brand-soft); }
+  .hero--dark { background: var(--surface-dark); color: var(--text-inverse); }
+
+  .hero_inner { display: grid; gap: var(--space-2xl); align-items: center; }
+  .hero_text { display: flex; flex-direction: column; gap: var(--space-lg); align-items: center; text-align: center; max-width: 860px; margin-inline: auto; }
+  .hero_lead { display: flex; flex-direction: column; gap: var(--space-sm); color: var(--text-secondary); max-width: 680px; }
+  .hero--dark .hero_lead { color: inherit; opacity: 0.85; }
+  .hero_meta { display: flex; flex-wrap: wrap; gap: var(--space-xs); justify-content: center; }
+  .hero_actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); justify-content: center; align-items: center; }
+  .hero_media img { width: 100%; border-radius: var(--radius-lg); }
+
+  @media (min-width: 900px) {
+    .hero_inner--split { grid-template-columns: 1fr 1fr; gap: var(--space-3xl); }
+    .hero_inner--split .hero_text { align-items: flex-start; text-align: left; margin: 0; }
+    .hero_inner--split .hero_meta, .hero_inner--split .hero_actions { justify-content: flex-start; }
+  }
+</style>

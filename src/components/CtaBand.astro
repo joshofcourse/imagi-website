@@ -1,0 +1,27 @@
+---
+/**
+ * The closing call-to-action panel used at the bottom of pages.
+ * Slots: default = supporting line, "actions" = buttons.
+ */
+interface Props {
+  title: string;
+  tone?: 'brand' | 'dark' | 'soft';
+}
+
+const { title, tone = 'dark' } = Astro.props;
+---
+
+<div class:list={['cta', `cta--${tone}`]}>
+  <h2 class="text-display-s">{title}</h2>
+  {Astro.slots.has('default') && <div class="cta_text text-body-l"><slot /></div>}
+  {Astro.slots.has('actions') && <div class="cta_actions"><slot name="actions" /></div>}
+</div>
+
+<style>
+  .cta { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-lg); padding: var(--space-3xl) var(--space-xl); border-radius: var(--radius-lg); }
+  .cta--dark { background: var(--surface-dark); color: var(--text-inverse); }
+  .cta--brand { background: var(--surface-highlight); }
+  .cta--soft { background: var(--surface-brand-soft); }
+  .cta_text { max-width: 640px; opacity: 0.9; }
+  .cta_actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-sm); }
+</style>

@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Grid from '../components/Grid.astro';
+import Card from '../components/Card.astro';
+import Checklist from '../components/Checklist.astro';
+import Button from '../components/Button.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="Student Safety and Data Privacy"
+  description="How imagi protects student data, what students can and can’t access, and the controls schools and families have."
+>
+  <Hero eyebrow="Trust & Safety" title="Real-world AI, made safe for schools">
+    <p>imagi is built safety first. AI content is moderated before it reaches students, teachers can see every prompt, and we sign data privacy agreements with schools and districts.</p>
+    <Fragment slot="actions">
+      <Button href="#policies" size="l" arrow>Policies and documents</Button>
+      <Button href="/contact" variant="outline" size="l">Ask a privacy question</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <SectionHeader title="Safety and privacy, built in">
+      <p>imagi is built compliance and safety first, so schools and districts can bring real-world AI into the classroom with confidence.</p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card icon="shield-check" iconTone="accent" title="Built for COPPA compliance">
+        <p>Teachers create the classroom and add students, so imagi never needs personal information from students.</p>
+      </Card>
+      <Card icon="school" iconTone="highlight" title="Built for FERPA compliance">
+        <p>Student data stays under the school’s control. We share it only with the school, at its request.</p>
+      </Card>
+      <Card icon="globe" iconTone="brand" title="Built for GDPR compliance">
+        <p>Users can access, correct, export and delete their data. Transfers outside the EEA are protected by Standard Contractual Clauses.</p>
+      </Card>
+      <Card icon="lock" iconTone="highlight" title="SOC 2-aligned">
+        <p>Our security practices are aligned with SOC 2 standards for protecting data, access and systems.</p>
+      </Card>
+      <Card icon="file-check" iconTone="brand" title="Signed data privacy agreements">
+        <p>We sign DPAs with schools and districts, covering FERPA and state student privacy laws.</p>
+      </Card>
+      <Card icon="ban" iconTone="accent" title="Your data never trains AI">
+        <p>We don’t use student or teacher data to train AI models.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader eyebrow="Our promises" title="What we do, and what we never do">
+      <p>Clear answers to the questions schools, IT teams and families ask most.</p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card title="What we never do">
+        <Checklist mark="x">
+          <li>Sell or share student data</li>
+          <li>Use student or teacher data to train AI models</li>
+          <li>Show ads, or market to students</li>
+          <li>Use cookies for tracking or advertising</li>
+        </Checklist>
+      </Card>
+      <Card title="What teachers control">
+        <Checklist>
+          <li>Create the classroom and add students</li>
+          <li>See every prompt students write</li>
+          <li>Follow every project in one place</li>
+          <li>Request deletion of student data at any time</li>
+        </Checklist>
+      </Card>
+      <Card title="What we keep">
+        <Checklist>
+          <li>Only what the classroom needs, like project work</li>
+          <li>Stored primarily in the United States</li>
+          <li>Encrypted in transit, with restricted staff access</li>
+          <li>Deleted on request, or after 7 years without use</li>
+        </Checklist>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section>
+    <SectionHeader eyebrow="Safe by design" title="Built for creating, not chatting">
+      <p>Students use real-world AI tools like Lovable to build projects, inside a classroom their teacher manages. Real tools, made safe for schools, not a watered-down imitation.</p>
+    </SectionHeader>
+    <Grid cols={2}>
+      <Card tone="muted" eyebrow="Open-ended AI chat" title="Hard to guide, hard to see">
+        <Checklist mark="x">
+          <li>No clear task or goal</li>
+          <li>Little visibility for teachers</li>
+          <li>Easy to let AI do the thinking</li>
+        </Checklist>
+      </Card>
+      <Card tone="brand-soft" eyebrow="Building in imagi" title="Real projects, with teachers in the loop">
+        <Checklist>
+          <li>Students plan, prompt, test and fix real projects</li>
+          <li>Teachers see every prompt</li>
+          <li>AI content is moderated before it reaches students</li>
+          <li>One trusted platform, not dozens of tools</li>
+        </Checklist>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader eyebrow="FAQ" title="Common questions" />
+    <FaqList group="safety" />
+  </Section>
+
+  <Section id="policies">
+    <SectionHeader eyebrow="For IT and privacy teams" title="Policies and documents">
+      <p>Privacy questions? Email <a href="mailto:support@imagilabs.com">support@imagilabs.com</a></p>
+    </SectionHeader>
+    <Grid cols={3}>
+      <Card icon="file-text" iconTone="muted" title="Privacy Policy" href="https://imagilabs.com/pages/privacy-policy-edu-app" linkLabel="Read the policy" external>
+        <p>How imagi Edu collects, uses and protects student and teacher data.</p>
+      </Card>
+      <Card icon="file-text" iconTone="muted" title="Terms of Use" href="https://imagilabs.com/pages/terms-conditions-edu-app" linkLabel="Read the terms" external>
+        <p>The terms that apply to schools, teachers and students using imagi Edu.</p>
+      </Card>
+      <Card icon="file-check" iconTone="muted" title="Data Processing Addendum" href="https://imagilabs.com/data-processing-addendum" linkLabel="Read the DPA" external>
+        <p>Our data processing terms for schools and districts.</p>
+      </Card>
+    </Grid>
+  </Section>
+
+  <Section tone="subtle">
+    <CtaBand title="Get a free trial">
+      <p>Set up a classroom in minutes and see every prompt your students write.</p>
+      <Fragment slot="actions">
+        <Button href="https://edu.imagilabs.com/" variant="secondary" size="l" arrow>Try imagi free</Button>
+        <Button href="/demo" variant="inverse" size="l">Book a demo</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>

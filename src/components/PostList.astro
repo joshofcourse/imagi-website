@@ -1,0 +1,23 @@
+---
+/** Grid of published blog posts, newest first. Optionally only one author's posts. */
+import { getCollection } from 'astro:content';
+import Grid from './Grid.astro';
+import PostCard from './PostCard.astro';
+
+interface Props {
+  /** Author id (file name in src/content/authors), e.g. "imagi-team" */
+  author?: string;
+  /** Leave out this post (used for "more stories" under an article) */
+  exclude?: string;
+  limit?: number;
+}
+
+const { author, exclude, limit } = Astro.props;
+const posts = (await getCollection('posts', (p) => p.data.published && (!author || p.data.author.id === author) && p.id !== exclude))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, limit);
+---
+
+<Grid cols={3}>
+  {posts.map((post) => <PostCard post={post} />)}
+</Grid>

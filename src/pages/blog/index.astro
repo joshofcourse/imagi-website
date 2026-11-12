@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import PostList from '../../components/PostList.astro';
+---
+
+<BaseLayout
+  title="Blog"
+  description="Explore how imagi empowers educators and students through AI and coding initiatives, enhancing creativity and accessibility in classrooms across the US."
+>
+  <Hero eyebrow="Blog" title="Stories from imagi classrooms">
+    <p>How teachers and students are building with AI, plus news from the imagi team.</p>
+  </Hero>
+
+  <Section tone="subtle">
+    <PostList />
+  </Section>
+</BaseLayout>

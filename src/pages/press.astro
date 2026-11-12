@@ -1,0 +1,113 @@
+---
+import PostList from '../components/PostList.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Card from '../components/Card.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import PressList from '../components/PressList.astro';
+import Form from '../components/Form.astro';
+import Field from '../components/Field.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="Press | imagi in TechCrunch, the Financial Times and TEDx"
+  description="imagi in TechCrunch, the Financial Times, Dagens Industri and TEDx. Read our latest coverage, get the press kit, and reach our media team."
+>
+  <Hero eyebrow="Newsroom" title="Press">
+    <p>imagi in TechCrunch, the Financial Times, Dagens Industri and TEDx. Read our latest coverage, get the press kit, and reach our media team.</p>
+    <Fragment slot="actions">
+      <Button href="https://techcrunch.com/2026/07/23/edtech-platform-raises-4-5m-to-help-teach-students-how-to-vibe-code/" size="l" arrow external>Read about our latest funding round</Button>
+      <Button href="#press-kit" variant="outline" size="l">Press kit</Button>
+    </Fragment>
+  </Hero>
+
+  <Section tone="page" spacing="tight">
+    <div class="backers">
+      <div class="backers_group">
+        <p class="backers_label text-label-m">Backed by</p>
+        <div class="backers_list">
+          <Badge tone="neutral" size="m">Brighteye Ventures</Badge>
+          <Badge tone="neutral" size="m">DayOne Capital</Badge>
+          <Badge tone="neutral" size="m">FemInvest</Badge>
+        </div>
+      </div>
+      <div class="backers_group">
+        <p class="backers_label text-label-m">With angels from companies like</p>
+        <div class="backers_list">
+          <Badge tone="outline" size="m">OpenAI</Badge>
+          <Badge tone="outline" size="m">ElevenLabs</Badge>
+          <Badge tone="outline" size="m">Lovable</Badge>
+          <Badge tone="outline" size="m">Kahoot</Badge>
+          <Badge tone="outline" size="m">HubSpot</Badge>
+          <Badge tone="outline" size="m">GitHub</Badge>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="subtle">
+    <SectionHeader eyebrow="Coverage" title="imagi in the news" />
+    <PressList />
+  </Section>
+
+  <Section>
+    <SectionHeader eyebrow="Related articles" title="From our blog">
+      <p>Stay up to date with what is new in our industry, learn more about the upcoming products and events.</p>
+    </SectionHeader>
+    <PostList limit={3} />
+    <div class="more">
+      <Button href="/blog" variant="outline" size="l" arrow>Visit the blog</Button>
+    </div>
+  </Section>
+
+  <Section tone="muted" id="press-kit" narrow>
+    <SectionHeader eyebrow="Free to use" title="Press kit">
+      <p>Everything in our press kit is free to use in coverage of imagi. No need to ask us first. Inside you will find everything you need: logos, fonts, pictures, a fact sheet and more.</p>
+    </SectionHeader>
+    <Card title="Two small things that help us">
+      <p>Our name is imagi, lowercase, wherever it appears in a sentence. Our legal entity is imagi Education, Inc. Our founders are Dora Palfi, chief executive, and Beatrice Ionascu, chief technology officer.</p>
+      <p>If what you need is not in there, whether that is a particular image, an interview or a comment before you file, email us and tell us your deadline.</p>
+      <Fragment slot="footer">
+        <Button href="https://drive.google.com/drive/folders/14MOC9fxRgebuGZkDmDo-KXKwkhQ8Tp9b" size="l" arrow external>Download press kit</Button>
+      </Fragment>
+    </Card>
+  </Section>
+
+  <Section tone="subtle" id="contact" narrow>
+    <SectionHeader eyebrow="Media enquiries" title="Talk to us!">
+      <p>Whatever you are working on, the form connects straight to our team. Interviews, comment and fact checking are what reporters ask us for most, and we would far rather answer a question than watch a number get guessed at.</p>
+      <p>One thing helps us more than anything else: tell us your deadline.</p>
+    </SectionHeader>
+    <Form submitLabel="Submit">
+      <Field label="First name" name="firstname" required />
+      <Field label="Last name" name="lastname" required />
+      <Field label="Email" name="email" type="email" required full />
+      <Field label="Profession" name="profession" type="select" options={['Administrator', 'Coach', 'Coordinator', 'Curriculum Specialist', 'District Administrator', 'Gifted and Talented', 'Guardian', 'Homeschool', 'Librarian/Media Specialist', 'Observer', 'Superintendent/Assistant Superintendent', 'Teacher', 'Tech or STEM Coordinator', 'Other']} required />
+      <Field label="Country" name="country" required />
+      <Field label="How can we help?" name="message" type="textarea" required full />
+      <Field label="How did you hear about us?" name="how_did_you_hear_about_us" required full />
+    </Form>
+  </Section>
+
+  <Section>
+    <CtaBand title="There is a story here">
+      <p>Two billion kids are growing up in the age of AI, and the conversation is still mostly about cheating. If you are writing about what comes after that, we can give you teachers to talk to, classrooms to visit and numbers you can check. Tell us your deadline and we will work to it.</p>
+      <Fragment slot="actions">
+        <Button href="mailto:sayhi@imagilabs.com" variant="secondary" size="l" arrow>Contact the press team</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>
+
+<style>
+  .backers { display: grid; gap: var(--space-xl); }
+  .backers_group { display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); }
+  .backers_label { color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; }
+  .backers_list { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-xs); }
+  @media (min-width: 900px) { .backers { grid-template-columns: auto auto; justify-content: center; column-gap: var(--space-3xl); } }
+  .more { display: flex; justify-content: center; }
+</style>

@@ -1,0 +1,20 @@
+---
+/** A row of partner / school logos. Put <img> elements in the slot. */
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="logostrip">
+  {title && <p class="logostrip_title text-label-m">{title}</p>}
+  <div class="logostrip_row"><slot /></div>
+</div>
+
+<style>
+  .logostrip { display: flex; flex-direction: column; gap: var(--space-lg); align-items: center; }
+  .logostrip_title { color: var(--text-secondary); text-align: center; }
+  .logostrip_row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-xl) var(--space-2xl); }
+  .logostrip_row :global(img) { height: 64px; width: auto; max-width: 160px; object-fit: contain; }
+</style>

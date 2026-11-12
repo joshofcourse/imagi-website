@@ -1,0 +1,80 @@
+---
+/**
+ * The one card used across the site. Rounded (radius lg), no stroke.
+ * Optional: image on top, icon tile, eyebrow badge, coloured header band, tags, link.
+ * Slots: default = body text, "tags" = Badge chips, "footer" = anything at the bottom.
+ */
+import Badge from './Badge.astro';
+import IconDisc from './IconDisc.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  /** Card background */
+  tone?: 'page' | 'subtle' | 'muted' | 'brand-soft';
+  image?: string;
+  imageAlt?: string;
+  icon?: string;
+  iconTone?: 'brand' | 'highlight' | 'accent' | 'muted' | 'dark';
+  eyebrow?: string;
+  /** Coloured band behind the eyebrow + title */
+  band?: 'highlight' | 'accent' | 'brand' | 'orange';
+  href?: string;
+  linkLabel?: string;
+  external?: boolean;
+}
+
+const { title, tone = 'page', image, imageAlt = '', icon, iconTone = 'highlight', eyebrow, band, href, linkLabel, external = false } = Astro.props;
+---
+
+<article class:list={['card', `card--${tone}`, { 'card--banded': band }]}>
+  {image && <img class="card_image" src={image} alt={imageAlt} loading="lazy" />}
+  <div class:list={['card_head', band && `card_head--${band}`]}>
+    {icon && <IconDisc icon={icon} tone={iconTone} />}
+    {eyebrow && <Badge tone={band ? 'neutral' : 'brand'}>{eyebrow}</Badge>}
+    <h3 class="text-heading-m">{title}</h3>
+  </div>
+  <div class="card_body">
+    {Astro.slots.has('tags') && <div class="card_tags"><slot name="tags" /></div>}
+    {Astro.slots.has('default') && <div class="card_text text-body-s"><slot /></div>}
+    {Astro.slots.has('footer') && <div class="card_footer"><slot name="footer" /></div>}
+    {href && (
+      <a class="card_link text-label-m" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>
+        {linkLabel ?? 'Learn more'} <Icon name="arrow-right" size={18} />
+      </a>
+    )}
+  </div>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-s);
+    height: 100%;
+  }
+  /* Banded cards in a grid row share one band height (subgrid), so the colour blocks line up */
+  @supports (grid-template-rows: subgrid) {
+    :global(.grid) > .card--banded { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; }
+  }
+  .card--page { background: var(--surface-page); }
+  .card--subtle { background: var(--surface-subtle); }
+  .card--muted { background: var(--surface-muted); }
+  .card--brand-soft { background: var(--surface-brand-soft); }
+  .card_image { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+  .card_head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-md); padding: var(--space-xl) var(--space-xl) 0; }
+  .card_head--highlight, .card_head--accent, .card_head--brand, .card_head--orange { padding-bottom: var(--space-xl); }
+  .card_head--highlight { background: var(--surface-highlight); }
+  .card_head--accent { background: var(--surface-accent); }
+  .card_head--brand { background: var(--surface-brand); }
+  .card_head--orange { background: var(--color-icon-orange); }
+  .card_body { display: flex; flex-direction: column; gap: var(--space-md); padding: var(--space-md) var(--space-xl) var(--space-xl); flex: 1; }
+  .card_head--highlight + .card_body, .card_head--accent + .card_body, .card_head--brand + .card_body, .card_head--orange + .card_body { padding-top: var(--space-lg); }
+  .card_text { color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs); }
+  .card_tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+  .card_footer { margin-top: auto; }
+  .card_link { margin-top: auto; display: inline-flex; align-items: center; gap: var(--space-xs); text-decoration: none; color: var(--text-primary); }
+  .card_link:hover { text-decoration: underline; text-underline-offset: 4px; }
+</style>

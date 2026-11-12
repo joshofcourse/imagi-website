@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Split from '../components/Split.astro';
+import Badge from '../components/Badge.astro';
+import Button from '../components/Button.astro';
+import SchoolLogos from '../components/SchoolLogos.astro';
+import StudentProjects from '../components/StudentProjects.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<BaseLayout
+  title="Get Started with imagi"
+  description="Set up your imagi account and start your first project. A few minutes to sign up, with help available if you get stuck along the way."
+>
+  <Hero eyebrow="Get started" title="Get started with imagi in four steps">
+    <p>imagi gives students safe access to real-world AI tools through guided projects and teacher-ready lessons, so they build skills, not shortcuts.</p>
+    <Fragment slot="meta">
+      <Badge tone="neutral" size="m">No coding experience needed</Badge>
+      <Badge tone="neutral" size="m">Free for teachers</Badge>
+    </Fragment>
+    <Fragment slot="actions">
+      <Button href="https://edu.imagilabs.com/" size="l" arrow>Join free</Button>
+    </Fragment>
+  </Hero>
+
+  <Section>
+    <SectionHeader eyebrow="How it works" title="From first idea to future-ready skills">
+      <p>imagi gives students a safe place to think, build and create with real-world AI tools, and practice skills they’ll use in any career.</p>
+    </SectionHeader>
+
+    <div class="steps">
+      <Split image="/images/get-started/teacher-laptop.webp" imageAlt="A smiling teacher working on a laptop at a table with her high school students">
+        <Badge tone="brand" size="m">Step 1</Badge>
+        <h3 class="text-heading-l">Build something yourself</h3>
+        <p class="text-body-l text-secondary">Sign up and make your first project before your students do. You’ll see exactly what they’ll experience, and how much they can create.</p>
+        <div class="tags">
+          <Badge tone="neutral">Free for teachers</Badge>
+        </div>
+      </Split>
+
+      <Split image="/images/home/broll.00_43_12_07.still035-1.jpg" imageAlt="A teacher smiling at her laptop in a classroom" reverse>
+        <Badge tone="brand" size="m">Step 2</Badge>
+        <h3 class="text-heading-l">Create your classroom</h3>
+        <p class="text-body-l text-secondary">Create a classroom and add your students. You can see every prompt they write, and there’s no unnecessary data sharing.</p>
+        <p class="text-label-m">Skills they practice</p>
+        <div class="tags">
+          <Badge tone="neutral">Safe AI use</Badge>
+          <Badge tone="neutral">Digital responsibility</Badge>
+        </div>
+      </Split>
+
+      <Split image="/images/get-started/students-project.webp" imageAlt="Two high school students at a laptop, one pointing at their project on screen">
+        <Badge tone="brand" size="m">Step 3</Badge>
+        <h3 class="text-heading-l">Students solve real problems</h3>
+        <p class="text-body-l text-secondary">Assign a lesson with slides and a lesson plan included. Students start with a problem they care about, then plan, prompt, test, fix what breaks and explain their thinking.</p>
+        <p class="text-label-m">Skills they practice</p>
+        <div class="tags">
+          <Badge tone="neutral">Problem-solving</Badge>
+          <Badge tone="neutral">Critical thinking</Badge>
+          <Badge tone="neutral">Communication</Badge>
+        </div>
+      </Split>
+
+      <Split image="/images/get-started/student-career-quest.webp" imageAlt="A high school student smiling as she holds up a laptop showing Career Quest, a career discovery game she built" reverse>
+        <Badge tone="brand" size="m">Step 4</Badge>
+        <h3 class="text-heading-l">See what they build</h3>
+        <p class="text-body-l text-secondary">Study tools, websites, games and digital portfolios they’re proud to show. You can follow every project and their progress in one place.</p>
+        <p class="text-label-m">Skills they practice</p>
+        <div class="tags">
+          <Badge tone="neutral">Creativity</Badge>
+          <Badge tone="neutral">Iteration</Badge>
+          <Badge tone="neutral">Presenting their work</Badge>
+        </div>
+      </Split>
+    </div>
+
+    <div class="closer">
+      <p class="text-heading-m">Skills for any future career start in your classroom.</p>
+      <Button href="https://edu.imagilabs.com/" size="l" arrow>Join free</Button>
+    </div>
+  </Section>
+
+  <Section tone="subtle">
+    <SchoolLogos />
+  </Section>
+
+  <Section tone="muted">
+    <SectionHeader title="Real student projects">
+      <p>Try some of our favorite student-coded projects made inside the imagi tool.</p>
+    </SectionHeader>
+    <StudentProjects />
+  </Section>
+
+  <Section>
+    <CtaBand title="Start with one lesson">
+      <p>One lesson is all it takes to see your students go from using AI to building with it.</p>
+      <Fragment slot="actions">
+        <Button href="https://edu.imagilabs.com/" variant="secondary" size="l" arrow>Try imagi free</Button>
+      </Fragment>
+    </CtaBand>
+  </Section>
+</BaseLayout>
+
+<style>
+  .steps { display: flex; flex-direction: column; gap: var(--space-3xl); }
+  .steps :global(.split_media img) { aspect-ratio: 4 / 3; object-fit: cover; }
+  .tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+  .closer { display: flex; flex-direction: column; align-items: center; gap: var(--space-md); text-align: center; }
+</style>

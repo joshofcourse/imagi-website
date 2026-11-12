@@ -1,0 +1,37 @@
+---
+/** A list with a check (or cross) before each item. Put <li> elements in the slot. */
+interface Props {
+  mark?: 'check' | 'x';
+  cols?: 1 | 2;
+}
+
+const { mark = 'check', cols = 1 } = Astro.props;
+---
+
+<ul class:list={['checklist', `checklist--${mark}`, `checklist--cols-${cols}`]}><slot /></ul>
+
+<style>
+  .checklist { list-style: none; padding: 0; display: grid; gap: var(--space-sm); }
+  @media (min-width: 640px) { .checklist--cols-2 { grid-template-columns: 1fr 1fr; column-gap: var(--space-xl); } }
+  .checklist :global(li) { position: relative; padding-left: 36px; }
+  .checklist :global(li)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-pill);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px;
+  }
+  .checklist--check :global(li)::before {
+    background-color: var(--surface-highlight);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e1704' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  }
+  .checklist--x :global(li)::before {
+    background-color: var(--surface-muted);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e1704' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6 6 18'/%3E%3Cpath d='m6 6 12 12'/%3E%3C/svg%3E");
+  }
+</style>
