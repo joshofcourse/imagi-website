@@ -21,7 +21,7 @@ function prefixForSubpath() {
         for (const file of (await walk(root)).filter((f) => /\.(html|css)$/.test(f))) {
           const src = await readFile(file, 'utf8');
           const out = src
-            .replace(/(href|src|action|poster)="\/(?!\/)/g, `$1="${base}/`)
+            .replace(/(href|src|action|poster|data-[a-z-]+)="\/(?!\/)/g, `$1="${base}/`)
             .replace(/url\((['"]?)\/(?!\/)/g, `url($1${base}/`)
             .replace(/srcset="\/(?!\/)/g, `srcset="${base}/`);
           if (out !== src) await writeFile(file, out);
