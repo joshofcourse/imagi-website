@@ -1,7 +1,6 @@
 ---
 /** Grid of published blog posts, newest first. Optionally only one author's posts. */
 import { getCollection } from 'astro:content';
-import Grid from './Grid.astro';
 import PostCard from './PostCard.astro';
 
 interface Props {
@@ -18,6 +17,6 @@ const posts = (await getCollection('posts', (p) => p.data.published && (!author 
   .slice(0, limit);
 ---
 
-<Grid cols={3}>
+<div class="grid grid--3">
   {posts.map((post) => <PostCard post={post} />)}
-</Grid>
+</div>

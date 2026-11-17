@@ -1,19 +1,28 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import Section from '../../components/Section.astro';
 import PostList from '../../components/PostList.astro';
+import Badge from '../../components/Badge.astro';
 ---
 
 <BaseLayout
   title="Blog"
   description="Explore how imagi empowers educators and students through AI and coding initiatives, enhancing creativity and accessibility in classrooms across the US."
 >
-  <Hero eyebrow="Blog" title="Stories from imagi classrooms">
-    <p>How teachers and students are building with AI, plus news from the imagi team.</p>
-  </Hero>
+  <section class="hero hero--subtle">
+    <div class="hero_inner">
+      <div class="hero_text">
+        <Badge tone="dark">Blog</Badge>
+        <h1 class="text-display-l">Stories from imagi classrooms</h1>
+        <div class="hero_lead text-body-l">
+          <p>How teachers and students are building with AI, plus news from the imagi team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Section tone="subtle">
-    <PostList />
-  </Section>
+  <section class="section section--subtle">
+    <div class="section_inner">
+      <PostList />
+    </div>
+  </section>
 </BaseLayout>

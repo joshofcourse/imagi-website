@@ -1,70 +1,114 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import FormLayout from '../components/FormLayout.astro';
-import Checklist from '../components/Checklist.astro';
 import Button from '../components/Button.astro';
 import Form from '../components/Form.astro';
 import Field from '../components/Field.astro';
 import FaqList from '../components/FaqList.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Badge from '../components/Badge.astro';
 ---
 
 <BaseLayout
   title="Contact imagi"
   description="Reach the right team at imagi. Questions about classrooms, pricing, privacy, or your account, answered by a person within one business day."
 >
-  <Hero eyebrow="Contact us" title="Say hello to the imagi team.">
-    <p>Have a question, an idea, or want to see how imagi could work for your students? Drop us a note and we'll be in touch soon.</p>
-  </Hero>
-
-  <Section id="contact-form">
-    <FormLayout>
-      <Fragment slot="aside">
-        <SectionHeader align="left" eyebrow="Get in touch" title="Reach the right team at imagi.">
-          <p>Questions about classrooms, pricing, privacy, or your account, answered by a person within one business day.</p>
-        </SectionHeader>
-        <Checklist>
-          <li>Classrooms and getting started</li>
-          <li>Pricing and quotes</li>
-          <li>Privacy and student data</li>
-          <li>Your account and access</li>
-        </Checklist>
-        <div class="links">
-          <Button href="/quote" variant="outline" arrow>Get a quote</Button>
-          <Button href="/demo" variant="outline" arrow>Request a demo</Button>
-          <Button href="/w-9" variant="outline" arrow>Request our W-9</Button>
+  <section class="hero hero--subtle">
+    <div class="hero_inner">
+      <div class="hero_text">
+        <Badge tone="dark">Contact us</Badge>
+        <h1 class="text-display-l">Say hello to the imagi team.</h1>
+        <div class="hero_lead text-body-l">
+          <p>Have a question, an idea, or want to see how imagi could work for your students? Drop us a note and we'll be in touch soon.</p>
         </div>
-      </Fragment>
-      <Form submitLabel="Submit">
-        <Field label="First name" name="firstname" required />
-        <Field label="Last name" name="lastname" required />
-        <Field label="Email" name="email" type="email" required full />
-        <Field label="Profession" name="profession" type="select" options={['Administrator', 'Coach', 'Coordinator', 'Curriculum Specialist', 'District Administrator', 'Gifted and Talented', 'Guardian', 'Homeschool', 'Librarian/Media Specialist', 'Observer', 'Superintendent/Assistant Superintendent', 'Teacher', 'Tech or STEM Coordinator', 'Other']} required />
-        <Field label="Country" name="country" required />
-        <Field label="How can we help?" name="message" type="textarea" required />
-        <Field label="How did you hear about us?" name="how_did_you_hear_about_us" required full />
-      </Form>
-    </FormLayout>
-  </Section>
+      </div>
+    </div>
+  </section>
 
-  <Section tone="subtle" narrow>
-    <SectionHeader eyebrow="FAQ" title="Getting started: accounts & access" />
-    <FaqList group="getting-started" />
-  </Section>
+  <section class="section section--page" id="contact-form">
+    <div class="section_inner">
+      <div class="formlayout">
+        <div class="formlayout_aside">
+          <header class="section-header section-header--left">
+            <Badge tone="brand">Get in touch</Badge>
+            <h2 class="text-display-s">Reach the right team at imagi.</h2>
+            <div class="section-header_intro text-body-l">
+              <p>Questions about classrooms, pricing, privacy, or your account, answered by a person within one business day.</p>
+            </div>
+          </header>
+          <ul class="checklist checklist--check">
+            <li class="checklist_item">Classrooms and getting started</li>
+            <li class="checklist_item">Pricing and quotes</li>
+            <li class="checklist_item">Privacy and student data</li>
+            <li class="checklist_item">Your account and access</li>
+          </ul>
+          <div class="links">
+            <Button href="/quote" variant="outline" arrow>Get a quote</Button>
+            <Button href="/demo" variant="outline" arrow>Request a demo</Button>
+            <Button href="/w-9" variant="outline" arrow>Request our W-9</Button>
+          </div>
+        </div>
+        <div class="formlayout_main">
+          <Form submitLabel="Submit">
+            <Field label="First name" name="firstname" required />
+            <Field label="Last name" name="lastname" required />
+            <Field label="Email" name="email" type="email" required full />
+            <Field
+              label="Profession"
+              name="profession"
+              type="select"
+              options={[
+                'Administrator',
+                'Coach',
+                'Coordinator',
+                'Curriculum Specialist',
+                'District Administrator',
+                'Gifted and Talented',
+                'Guardian',
+                'Homeschool',
+                'Librarian/Media Specialist',
+                'Observer',
+                'Superintendent/Assistant Superintendent',
+                'Teacher',
+                'Tech or STEM Coordinator',
+                'Other',
+              ]}
+              required
+            />
+            <Field label="Country" name="country" required />
+            <Field label="How can we help?" name="message" type="textarea" required />
+            <Field label="How did you hear about us?" name="how_did_you_hear_about_us" required full />
+          </Form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Section>
-    <CtaBand title="Still not sure who to ask?">
-      <p>Send your question through the form above, we'll make sure it lands with the right person.</p>
-      <Fragment slot="actions">
-        <Button href="#contact-form" variant="secondary" size="l" arrow>Back to the form</Button>
-      </Fragment>
-    </CtaBand>
-  </Section>
+  <section class="section section--subtle">
+    <div class="section_inner section_inner--narrow">
+      <header class="section-header">
+        <Badge tone="brand">FAQ</Badge>
+        <h2 class="text-display-s">Getting started: accounts & access</h2>
+      </header>
+      <FaqList group="getting-started" />
+    </div>
+  </section>
+
+  <section class="section section--page">
+    <div class="section_inner">
+      <CtaBand title="Still not sure who to ask?">
+        <p>Send your question through the form above, we'll make sure it lands with the right person.</p>
+        <Fragment slot="actions">
+          <Button href="#contact-form" variant="secondary" size="l" arrow>Back to the form</Button>
+        </Fragment>
+      </CtaBand>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .links { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
 </style>

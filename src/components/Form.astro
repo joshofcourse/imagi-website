@@ -10,28 +10,45 @@ interface Props {
   action?: string;
   /** Show the standard consent checkboxes and privacy note */
   consent?: boolean;
+  /** Card colour: white (default) or cream, for coloured sections */
+  tone?: 'page' | 'subtle';
+  /** One column of fields (e.g. a single email field) */
+  single?: boolean;
 }
 
-const { submitLabel, action = '#', consent = true } = Astro.props;
+const { submitLabel, action = '#', consent = true, tone = 'page', single = false } = Astro.props;
 ---
 
-<form class="form" action={action} method="post">
-  <div class="form_fields"><slot /></div>
-  {consent && (
-    <div class="form_consent text-body-s">
-      <label class="form_check"><input type="checkbox" name="newsletter" /> <span>Sign me up for imagi's newsletter.</span></label>
-      <label class="form_check"><input type="checkbox" name="consent" required /> <span>I agree to imagi storing and processing my personal data.*</span></label>
-      <p class="form_note">You can unsubscribe anytime. Learn how we handle your data in our <a href="/privacy-policy">Privacy Policy</a>.</p>
-    </div>
-  )}
-  <div><Button type="submit" size="l" arrow>{submitLabel}</Button></div>
+<form class:list={['form', `form--${tone}`]} action={action} method="post">
+  <div class="form_main">
+    <div class:list={['form_fields', { 'form_fields--single': single }]}><slot /></div>
+    {consent && (
+      <div class="form_consent">
+        <label class="form_check text-body-s"><input class="form_checkbox" type="checkbox" name="newsletter" /> <span>Sign me up for imagi's newsletter.</span></label>
+        <label class="form_check text-body-s"><input class="form_checkbox" type="checkbox" name="consent" required /> <span>I agree to imagi storing and processing my personal data.*</span></label>
+      </div>
+    )}
+  </div>
+  <div class="form_footer">
+    <Button type="submit" size="l" arrow>{submitLabel}</Button>
+    {consent && <p class="form_note text-body-xs">You can unsubscribe anytime. Learn how we handle your data in our <a class="form_note-link" href="/privacy-policy">Privacy Policy</a>.</p>}
+  </div>
 </form>
 
 <style>
-  .form { display: flex; flex-direction: column; gap: var(--space-xl); padding: var(--space-xl); background: var(--surface-page); border-radius: var(--radius-lg); box-shadow: var(--shadow-m); width: 100%; }
+  /* Figma: Form — 32px padding, 32px corners, Shadow/L; fields, then consent ticks, then the button with the privacy note under it */
+  .form { display: flex; flex-direction: column; gap: calc(var(--space-xl) + var(--space-xs)); padding: var(--space-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-l); width: 100%; }
+  .form--page { background: var(--surface-page); }
+  .form--subtle { background: var(--surface-subtle); }
+  .form_main { display: flex; flex-direction: column; gap: var(--space-lg); }
   .form_fields { display: grid; gap: var(--space-lg); }
+  /* Two columns of fields from tablet up */
   @media (min-width: 640px) { .form_fields { grid-template-columns: 1fr 1fr; } }
-  .form_consent { display: flex; flex-direction: column; gap: var(--space-sm); color: var(--text-secondary); }
-  .form_check { display: flex; gap: var(--space-sm); align-items: flex-start; cursor: pointer; color: var(--text-primary); }
-  .form_check input { width: 20px; height: 20px; accent-color: var(--action-primary); margin-top: 1px; flex: none; }
+  @media (min-width: 640px) { .form_fields--single { grid-template-columns: 1fr; } }
+  .form_consent { display: flex; flex-direction: column; gap: var(--space-xs); }
+  .form_check { display: flex; gap: var(--space-xs); align-items: center; cursor: pointer; color: var(--text-primary); }
+  .form_checkbox { width: 18px; height: 18px; margin: 0; accent-color: var(--action-primary); flex: none; }
+  .form_footer { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-md); }
+  .form_note { color: var(--text-secondary); margin: 0; }
+  .form_note-link { color: inherit; }
 </style>

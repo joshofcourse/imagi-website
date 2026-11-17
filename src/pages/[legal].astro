@@ -2,9 +2,6 @@
 /** Legal pages (Privacy Policy, Terms…) from src/content/legal/*.md — edit the Markdown there. */
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
-import Prose from '../components/Prose.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('legal');
@@ -13,13 +10,26 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
+import Badge from '../components/Badge.astro';
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
-  <Hero eyebrow="Legal" title={page.data.title}>
-    {page.data.updated && <p>{page.data.updated}</p>}
-  </Hero>
-  <Section>
-    <Prose><Content /></Prose>
-  </Section>
+  <section class="hero hero--subtle">
+    <div class="hero_inner">
+      <div class="hero_text">
+        <Badge tone="dark">Legal</Badge>
+        <h1 class="text-display-l">{page.data.title}</h1>
+        <div class="hero_lead text-body-l">
+          {page.data.updated && <p>{page.data.updated}</p>}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--page">
+    <div class="section_inner">
+      <div class="prose text-body-m">
+        <Content />
+      </div>
+    </div>
+  </section>
 </BaseLayout>

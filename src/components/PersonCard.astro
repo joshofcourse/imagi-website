@@ -18,7 +18,7 @@ const { name, role, image, href, tone = 'page' } = Astro.props;
   <img class="person_photo" src={image} alt={name} loading="lazy" />
   <div class="person_text">
     <h3 class="text-heading-s">
-      {href ? <a href={href} target="_blank" rel="noopener">{name}</a> : name}
+      {href ? <a class="person_link" href={href} target="_blank" rel="noopener">{name}</a> : name}
     </h3>
     {role && <p class="person_role text-body-s">{role}</p>}
   </div>
@@ -31,7 +31,8 @@ const { name, role, image, href, tone = 'page' } = Astro.props;
   .person--muted { background: var(--surface-muted); }
   .person_photo { width: 120px; height: 120px; border-radius: var(--radius-pill); object-fit: cover; background: var(--surface-muted); }
   .person_text { display: flex; flex-direction: column; gap: var(--space-2xs); }
-  .person_text a { color: inherit; text-decoration: none; }
-  .person_text a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  /* Name, when it links to a profile */
+  .person_link { color: inherit; text-decoration: none; }
+  .person_link:hover { text-decoration: underline; text-underline-offset: 4px; }
   .person_role { color: var(--text-secondary); }
 </style>

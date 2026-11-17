@@ -1,6 +1,5 @@
 ---
-/** A quote with the person's name, role and optional photo. The slot is the quote. */
-import Icon from './Icon.astro';
+/** A quote in italic with the person's photo, name and role. The slot is the quote. Without a photo, a Sand circle holds its place (as in Figma). */
 
 interface Props {
   name: string;
@@ -13,25 +12,29 @@ const { name, role, image, tone = 'page' } = Astro.props;
 ---
 
 <figure class:list={['testimonial', `testimonial--${tone}`]}>
-  <Icon name="quote" size={28} />
-  <blockquote class="text-body-l"><slot /></blockquote>
-  <figcaption>
-    {image && <img src={image} alt="" loading="lazy" />}
-    <span>
-      <span class="text-label-m">{name}</span>
-      {role && <span class="testimonial_role text-body-s">{role}</span>}
+  <blockquote class="testimonial_quote text-body-l"><slot /></blockquote>
+  <figcaption class="testimonial_caption">
+    {image ? <img class="testimonial_photo" src={image} alt="" loading="lazy" /> : <span class="testimonial_photo testimonial_photo--empty"></span>}
+    <span class="testimonial_person">
+      <span class="testimonial_name text-body-s-medium">{name}</span>
+      {role && <span class="testimonial_role text-body-xs">{role}</span>}
     </span>
   </figcaption>
 </figure>
 
 <style>
-  .testimonial { display: flex; flex-direction: column; gap: var(--space-lg); padding: var(--space-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-s); height: 100%; margin: 0; }
+  /* White card with a thin border and 16px corners, no shadow (Figma: Testimonial) */
+  .testimonial { display: flex; flex-direction: column; gap: var(--space-xl); padding: var(--space-lg); border-radius: var(--radius-md); border: var(--border-thin) solid var(--border-default); height: 100%; margin: 0; }
   .testimonial--page { background: var(--surface-page); }
-  .testimonial--subtle { background: var(--surface-subtle); }
-  .testimonial--muted { background: var(--surface-muted); }
-  .testimonial :global(.icon) { color: var(--color-leaf); }
-  figcaption { display: flex; align-items: center; gap: var(--space-sm); margin-top: auto; }
-  figcaption > span { display: flex; flex-direction: column; }
-  figcaption img { width: 48px; height: 48px; border-radius: var(--radius-pill); object-fit: cover; }
-  .testimonial_role { color: var(--text-secondary); }
+  .testimonial--subtle { background: var(--surface-subtle); border-color: var(--color-white); }
+  .testimonial--muted { background: var(--surface-muted); border-color: var(--color-white); }
+  /* Quote: Body L size in the italic of the display cut */
+  .testimonial_quote { margin: 0; color: var(--text-primary); font-variation-settings: var(--cut-display), 'ital' 1; }
+  .testimonial_caption { display: flex; align-items: center; gap: var(--space-md); }
+  .testimonial_photo { flex: none; width: 48px; height: 48px; border-radius: var(--radius-pill); object-fit: cover; }
+  .testimonial_photo--empty { background: var(--color-sand); }
+  /* Name above role */
+  .testimonial_person { display: flex; flex-direction: column; gap: var(--space-2xs); }
+  .testimonial_name { color: var(--text-primary); }
+  .testimonial_role { color: var(--text-primary); }
 </style>

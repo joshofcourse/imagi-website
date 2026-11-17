@@ -4,7 +4,6 @@
  * Add, edit or reorder articles in the Markdown files, not here.
  */
 import { getCollection } from 'astro:content';
-import Grid from './Grid.astro';
 import Card from './Card.astro';
 
 interface Props {
@@ -16,10 +15,12 @@ const { cols = 3, linkLabel = 'Read the article' } = Astro.props;
 const items = (await getCollection('press')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Grid cols={cols}>
-  {items.map((item) => (
-    <Card title={item.data.title} image={item.data.image} imageAlt={item.data.title} href={item.data.url} linkLabel={linkLabel} external>
-      <p>{item.data.summary}</p>
-    </Card>
-  ))}
-</Grid>
+<div class={`grid grid--${cols}`}>
+  {
+    items.map((item) => (
+      <Card title={item.data.title} image={item.data.image} imageAlt={item.data.title} href={item.data.url} linkLabel={linkLabel} external>
+        <p>{item.data.summary}</p>
+      </Card>
+    ))
+  }
+</div>

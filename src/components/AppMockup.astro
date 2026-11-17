@@ -1,0 +1,266 @@
+---
+/**
+ * Browser window showing apps students built with AI, with the prompt they wrote underneath.
+ * Five scenes cycle in step with the typed word in the hero heading (any element with
+ * `data-words="a|b|c"` in the same section): word 1 ↔ scene 1, word 2 ↔ scene 2, and so on.
+ * Timing follows the live imagilabs.com hero: type 62ms/letter, hold 2.6s, erase 30ms/letter.
+ */
+---
+
+<div class="appmockup" data-figma="Site/AppMockup">
+  <img class="appmockup_bolt" src="/images/home/hero/hero-bolt.webp" alt="" />
+  <img class="appmockup_cursor" src="/images/home/hero/hero-cursor.webp" alt="" />
+  <div class="appmockup_window" role="img" aria-label="An app a student built with AI in imagi, with the prompt they wrote underneath">
+    <div class="appmockup_bar">
+      <span class="appmockup_dots"><i class="appmockup_dot"></i><i class="appmockup_dot"></i><i class="appmockup_dot"></i></span>
+      <span class="appmockup_url">cell-explorer.imagi.lovable.app</span>
+    </div>
+    <div class="appmockup_screen">
+      <!-- 1 · study tools -->
+      <div class="scene is-on" data-url="cell-explorer.imagi.lovable.app" data-prompt="Make a cell explorer for biology. When I click a part, explain what it does, then quiz me.">
+        <div class="scene_head"><b class="scene_title">Cell Explorer</b><span class="scene_meta">Biology, unit 3</span></div>
+        <div class="cell">
+          <div class="cell_art"><i class="cell_nucleus"></i><i class="cell_mito cell_mito--one"></i><i class="cell_mito cell_mito--two"></i><i class="cell_ribo cell_ribo--one"></i><i class="cell_ribo cell_ribo--two"></i><i class="cell_ribo cell_ribo--three"></i></div>
+          <div class="cell_card"><small class="cell_label">You clicked</small><strong class="cell_name">Mitochondria</strong><p class="cell_text">Turns food into energy the cell can use.</p><span class="mini">Quiz me</span></div>
+        </div>
+      </div>
+      <!-- 2 · real apps -->
+      <div class="scene" data-url="class-market.imagi.lovable.app" data-prompt="Build a stock market for our classroom economy with coins, prices that change and a leaderboard.">
+        <div class="scene_head"><b class="scene_title">Class Market</b><span class="scene_meta">Week 6</span></div>
+        <div class="market">
+          <ul class="market_stocks">
+            <li class="market_stock"><span class="market_name">Lemonade Stand</span><em class="market_price">12</em><b class="market_change market_change--up">+3</b></li>
+            <li class="market_stock"><span class="market_name">Pencil Bank</span><em class="market_price">8</em><b class="market_change market_change--down">-1</b></li>
+            <li class="market_stock"><span class="market_name">Homework Help</span><em class="market_price">15</em><b class="market_change market_change--up">+5</b></li>
+            <li class="market_stock"><span class="market_name">Snack Shop</span><em class="market_price">10</em><b class="market_change market_change--up">+2</b></li>
+          </ul>
+          <div class="market_chart"><span class="market_label">Your coins</span><strong class="market_total">240</strong><div class="market_bars"><i class="market_bar market_bar--zest" style="height:38%"></i><i class="market_bar" style="height:52%"></i><i class="market_bar market_bar--zest" style="height:46%"></i><i class="market_bar" style="height:70%"></i><i class="market_bar market_bar--zest" style="height:64%"></i><i class="market_bar" style="height:92%"></i></div></div>
+        </div>
+      </div>
+      <!-- 3 · a digital portfolio -->
+      <div class="scene" data-url="maya-portfolio.imagi.lovable.app" data-prompt="Create a portfolio site for my projects with a page for each one and a short bio.">
+        <div class="me"><span class="me_avatar">MR</span><div><b class="me_name">Maya R.</b><span class="me_role">Grade 11, design and code</span></div></div>
+        <div class="tiles">
+          <div class="tile"><i class="tile_swatch tile_swatch--sage"></i><span class="tile_label">Robot arm</span></div>
+          <div class="tile"><i class="tile_swatch tile_swatch--blush"></i><span class="tile_label">Poster series</span></div>
+          <div class="tile"><i class="tile_swatch tile_swatch--forest"></i><span class="tile_label">Budget app</span></div>
+          <div class="tile"><i class="tile_swatch tile_swatch--zest"></i><span class="tile_label">School podcast</span></div>
+        </div>
+      </div>
+      <!-- 4 · custom websites -->
+      <div class="scene" data-url="winter-dance.imagi.lovable.app" data-prompt="Make a website for our winter dance with the date, tickets and a vote for the playlist.">
+        <div class="site">
+          <div class="site_nav"><b>Winter Dance</b><span class="site_links"><em class="site_link">Tickets</em><em class="site_link">Playlist</em><em class="site_link">FAQ</em></span></div>
+          <div class="site_hero"><small class="site_date">Friday, December 12</small><strong class="site_title">Winter Dance</strong><span class="mini site_cta">Get tickets</span></div>
+          <div class="site_facts"><span class="site_fact">7 to 10 pm</span><span class="site_fact">School gym</span><span class="site_fact">Vote the playlist</span></div>
+        </div>
+      </div>
+      <!-- 5 · future-ready skills -->
+      <div class="scene" data-url="cell-explorer.imagi.lovable.app" data-prompt="The quiz repeats questions. Shuffle them and show my score at the end.">
+        <div class="scene_head"><b class="scene_title">Build log</b><span class="scene_meta">Cell Explorer</span></div>
+        <ol class="log">
+          <li class="log_item"><b class="log_num">1</b><span class="log_text">Built the explorer from one clear prompt</span></li>
+          <li class="log_item"><b class="log_num log_num--fix">2</b><span class="log_text">Tested it and found the quiz repeats questions</span></li>
+          <li class="log_item log_item--now"><b class="log_num log_num--now">3</b><span class="log_text log_text--now">Asked for a fix: shuffled questions and a final score</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="appmockup_prompt">
+      <p class="appmockup_ptext">Make a cell explorer for biology. When I click a part, explain what it does, then quiz me.</p>
+      <span class="appmockup_send"><svg class="appmockup_send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* The mockup is a picture of a student's app, so its inner type uses fixed small sizes, not the site's text styles */
+  .appmockup { position: relative; width: 100%; max-width: 530px; margin-inline: auto; }
+
+  /* 3D bolt and cursor that overlap the window corners */
+  .appmockup_bolt { position: absolute; z-index: 2; pointer-events: none; height: auto; width: 112px; right: -68px; top: -58px; }
+  @media (max-width: 599px) {
+    .appmockup_bolt { width: 72px; right: -12px; top: -40px; }
+  }
+  .appmockup_cursor { position: absolute; z-index: 2; pointer-events: none; height: auto; width: 50px; left: -34px; top: 264px; }
+  @media (max-width: 599px) {
+    .appmockup_cursor { width: 36px; left: -8px; top: 220px; }
+  }
+
+  .appmockup_window { position: relative; z-index: 1; border-radius: var(--radius-lg); overflow: hidden; background: var(--color-white); box-shadow: var(--shadow-l); color: var(--color-black); text-align: left; }
+  .appmockup_bar { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) var(--space-md); background: var(--color-sand); }
+  .appmockup_dots { display: flex; gap: 7px; flex: none; }
+  .appmockup_dot { width: 11px; height: 11px; border-radius: 50%; background: var(--color-grey-300); }
+  .appmockup_url { flex: 1; min-width: 0; background: var(--color-white); border-radius: var(--radius-pill); padding: 6px var(--space-md); font-size: 14px; line-height: 1.35; color: var(--color-grey-700); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .appmockup_screen { position: relative; height: 370px; }
+  @media (max-width: 599px) {
+    .appmockup_screen { height: 330px; }
+  }
+  .appmockup_prompt { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-md); background: var(--color-cream); }
+  .appmockup_ptext { flex: 1; min-width: 0; font-size: 15px; line-height: 1.3; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.6em; }
+  .appmockup_send { flex: none; width: 41px; height: 41px; border-radius: 50%; background: var(--color-lime); display: grid; place-items: center; }
+  .appmockup_send-icon { width: 17px; height: 17px; }
+
+  /* Scenes cross-fade */
+  .scene { position: absolute; inset: 0; padding: var(--space-lg) 27px; display: flex; flex-direction: column; gap: 18px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity 0.45s ease, transform 0.45s ease, visibility 0s linear 0.45s; }
+  @media (max-width: 599px) {
+    .scene { padding: 18px; gap: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scene { transition: none; }
+  }
+  /* The visible scene: the script moves `is-on` from scene to scene, so this stays a two-class selector */
+  .scene.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity 0.45s ease, transform 0.45s ease; }
+  .scene_head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-sm); }
+  .scene_title { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
+  .scene_meta { font-size: 14px; font-weight: 500; color: var(--color-grey-700); white-space: nowrap; }
+  @media (max-width: 599px) {
+    .scene_meta { display: none; }
+  }
+  /* Small lime button inside a scene */
+  .mini { display: inline-flex; align-items: center; align-self: flex-start; padding: 7px 15px; border-radius: var(--radius-pill); background: var(--color-lime); color: var(--color-black); font-size: 13.5px; font-weight: 700; line-height: 1.2; }
+
+  /* 1 · cell explorer */
+  .cell { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-lg); align-items: center; }
+  @media (max-width: 599px) {
+    .cell { grid-template-columns: minmax(0, 1fr); gap: 12px; align-content: start; }
+  }
+  .cell_art { position: relative; width: 100%; max-width: 225px; aspect-ratio: 1 / 0.86; margin: 0 auto; border-radius: 48% 52% 46% 54% / 55% 45% 55% 45%; background: #fce3ef; border: 3px solid var(--color-blossom); }
+  @media (max-width: 599px) {
+    .cell_art { max-width: 110px; }
+  }
+  .cell_nucleus { position: absolute; display: block; width: 36%; height: 40%; left: 32%; top: 28%; border-radius: 50%; background: var(--color-moss); }
+  .cell_nucleus::after { content: ''; position: absolute; width: 34%; height: 34%; left: 33%; top: 33%; border-radius: 50%; background: var(--color-leaf); }
+  /* Mitochondria: shared shape, then each one's position */
+  .cell_mito { position: absolute; display: block; width: 24%; height: 12%; border-radius: var(--radius-pill); background: var(--color-lime); border: 2px solid var(--color-leaf); }
+  .cell_mito--one { left: 9%; top: 18%; transform: rotate(-24deg); box-shadow: 0 0 0 4px rgb(128 220 30 / 0.28); }
+  .cell_mito--two { right: 8%; bottom: 18%; transform: rotate(18deg); }
+  /* Ribosomes: shared dot, then each one's position */
+  .cell_ribo { position: absolute; display: block; width: 6%; height: 7%; border-radius: 50%; background: var(--color-pink); }
+  .cell_ribo--one { left: 22%; bottom: 22%; }
+  .cell_ribo--two { right: 20%; top: 20%; }
+  .cell_ribo--three { left: 72%; top: 52%; }
+  .cell_card { background: var(--color-cream); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 6px; }
+  @media (max-width: 599px) {
+    .cell_card { padding: 12px; gap: 4px; }
+  }
+  .cell_label { font-style: normal; font-size: 12.5px; font-weight: 600; color: var(--color-grey-700); }
+  @media (max-width: 599px) {
+    .cell_label { display: none; }
+  }
+  .cell_name { font-style: normal; font-size: 19px; font-weight: 800; letter-spacing: -0.01em; }
+  .cell_text { font-style: normal; margin-bottom: 6px; font-size: 14px; line-height: 1.4; color: var(--color-grey-900); font-weight: 500; }
+
+  /* 2 · class market */
+  .market { flex: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: var(--space-md); align-items: stretch; }
+  @media (max-width: 599px) {
+    .market { grid-template-columns: minmax(0, 1fr); }
+  }
+  .market_stocks { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+  .market_stock { display: flex; align-items: center; gap: 10px; padding: 11px 13px; border-radius: 12px; background: var(--color-cream); font-size: 14px; font-weight: 600; line-height: 1.2; }
+  .market_name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .market_price { font-style: normal; font-weight: 800; }
+  .market_change { font-size: 12px; font-weight: 800; padding: 3px 8px; border-radius: var(--radius-pill); }
+  .market_change--up { background: var(--color-sage); color: var(--color-moss); }
+  .market_change--down { background: #fce3ef; color: #9c2e62; }
+  .market_chart { border-radius: 14px; background: var(--color-forest); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; }
+  @media (max-width: 599px) {
+    .market_chart { display: none; }
+  }
+  .market_label { font-size: 12.5px; font-weight: 700; color: rgb(255 254 237 / 0.75); }
+  .market_total { font-style: normal; font-size: 24px; font-weight: 800; color: var(--color-cream); letter-spacing: -0.02em; }
+  .market_bars { display: flex; align-items: flex-end; gap: 6px; height: 100px; }
+  .market_bar { flex: 1; border-radius: 6px 6px 2px 2px; background: var(--color-lime); display: block; }
+  /* Every other bar (1st, 3rd, 5th) is zest */
+  .market_bar--zest { background: var(--color-zest); }
+
+  /* 3 · portfolio */
+  .me { display: flex; align-items: center; gap: 14px; }
+  .me_avatar { flex: none; width: 54px; height: 54px; border-radius: 50%; background: var(--color-forest); color: var(--color-lime); display: grid; place-items: center; font-weight: 800; font-size: 18px; line-height: 1; }
+  .me_name { display: block; font-size: 21px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
+  .me_role { display: block; font-size: 14px; font-weight: 500; color: var(--color-grey-700); white-space: nowrap; }
+  .tiles { flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tile { border-radius: 14px; background: var(--color-cream); padding: 10px; display: flex; flex-direction: column; gap: var(--space-xs); min-height: 0; }
+  .tile_swatch { display: block; flex: 1; min-height: 34px; border-radius: 9px; }
+  .tile_swatch--sage { background: var(--color-sage); }
+  .tile_swatch--blush { background: #fce3ef; }
+  .tile_swatch--forest { background: var(--color-forest); }
+  .tile_swatch--zest { background: var(--color-zest); }
+  .tile_label { font-size: 13.5px; font-weight: 700; line-height: 1.2; }
+
+  /* 4 · dance website */
+  .site { flex: 1; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .site_nav { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13.5px; font-weight: 700; }
+  .site_links { display: flex; gap: 14px; color: var(--color-grey-700); font-weight: 600; }
+  @media (max-width: 599px) {
+    .site_links { display: none; }
+  }
+  .site_link { font-style: normal; }
+  .site_hero { flex: 1; border-radius: 16px; background: var(--color-forest); padding: 20px; display: flex; flex-direction: column; justify-content: center; gap: var(--space-xs); position: relative; overflow: hidden; }
+  /* Two decorative circles drawn on the dance site's banner */
+  .site_hero::after { content: ''; position: absolute; right: -30px; top: -30px; width: 130px; height: 130px; border-radius: 50%; background: var(--color-blossom); opacity: 0.9; }
+  .site_hero::before { content: ''; position: absolute; right: 50px; bottom: -40px; width: 86px; height: 86px; border-radius: 50%; background: var(--color-lime); }
+  /* The banner's text sits above its circles (position + z-index) */
+  .site_date { position: relative; z-index: 1; font-style: normal; font-size: 13px; font-weight: 700; color: var(--color-sage); }
+  .site_title { position: relative; z-index: 1; font-style: normal; font-size: 28px; font-weight: 800; letter-spacing: -0.03em; color: var(--color-cream); line-height: 1.05; }
+  .site_cta { position: relative; z-index: 1; }
+  .site_facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-xs); }
+  .site_fact { border-radius: 12px; background: var(--color-cream); padding: 10px; font-size: 13px; font-weight: 700; line-height: 1.25; text-align: center; }
+  @media (max-width: 599px) {
+    .site_fact { font-size: 11px; padding: 8px 6px; }
+  }
+
+  /* 5 · build log */
+  .log { list-style: none; padding: 0; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .log_item { display: flex; align-items: flex-start; gap: var(--space-sm); padding: 13px 15px; border-radius: 14px; background: var(--color-cream); }
+  .log_item--now { background: var(--color-forest); }
+  .log_num { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 800; background: var(--color-sage); color: var(--color-moss); }
+  .log_num--fix { background: #fce3ef; color: #9c2e62; }
+  .log_num--now { background: var(--color-lime); color: var(--color-black); }
+  .log_text { font-size: 14px; font-weight: 600; line-height: 1.35; padding-top: 6px; }
+  .log_text--now { color: var(--color-cream); }
+</style>
+
+<script>
+  // Types the hero heading's last words and switches the mockup scene to match.
+  document.querySelectorAll<HTMLElement>('.appmockup').forEach((mock) => {
+    const section = mock.closest('section') ?? document;
+    const wordEl = section.querySelector<HTMLElement>('[data-words]');
+    const words = (wordEl?.dataset.words ?? '').split('|').filter(Boolean);
+    const scenes = mock.querySelectorAll<HTMLElement>('.scene');
+    const url = mock.querySelector<HTMLElement>('.appmockup_url');
+    const prompt = mock.querySelector<HTMLElement>('.appmockup_ptext');
+    if (!wordEl || words.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let i = 0;
+    let text = words[0];
+    const show = (n: number) => {
+      scenes.forEach((s, k) => s.classList.toggle('is-on', k === n));
+      const s = scenes[n];
+      if (s && url) url.textContent = s.dataset.url ?? '';
+      if (s && prompt) prompt.textContent = s.dataset.prompt ?? '';
+    };
+    const type = () => {
+      const target = words[i];
+      if (text.length < target.length) {
+        text = target.slice(0, text.length + 1);
+        wordEl.textContent = text;
+        setTimeout(type, 62);
+      } else {
+        setTimeout(erase, 2600);
+      }
+    };
+    const erase = () => {
+      if (text.length > 0) {
+        text = text.slice(0, -1);
+        wordEl.textContent = text;
+        setTimeout(erase, 30);
+      } else {
+        i = (i + 1) % words.length;
+        show(i);
+        setTimeout(type, 260);
+      }
+    };
+    setTimeout(erase, 2600);
+  });
+</script>

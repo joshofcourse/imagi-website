@@ -40,27 +40,27 @@ const menus = [
 <header class="nav" data-figma="Site/Nav">
   <div class="container">
     <div class="nav_inner">
-      <a class="nav_logo" href="/" aria-label="imagi home"><Logo height={28} /></a>
+      <a class="nav_logo" href="/" aria-label="imagi home"><Logo height={32} /></a>
 
       <button class="nav_toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-panel"><Icon name="menu" /></button>
       <div class="nav_panel" id="nav-panel">
           <nav class="nav_menus" aria-label="Main">
             {menus.map((menu) => (
               <div class="nav_menu">
-                <button class="nav_trigger text-label-m" type="button" aria-haspopup="true">
+                <button class="nav_trigger text-body-s-medium" type="button" aria-haspopup="true">
                   {menu.label} <Icon name="chevron-down" size={16} />
                 </button>
                 <ul class="nav_dropdown">
                   {menu.links.map((link) => (
-                    <li><a class="text-label-m" href={link.href}>{link.label}</a></li>
+                    <li><a class="nav_dropdown-link text-body-s-medium" href={link.href}>{link.label}</a></li>
                   ))}
                 </ul>
               </div>
             ))}
           </nav>
           <div class="nav_actions">
-            <Button href="/demo" variant="outline" size="s">Book demo</Button>
-            <Button href="https://edu.imagilabs.com/" size="s">Log in | Try free</Button>
+            <Button href="/demo" variant="secondary" size="s">Book demo</Button>
+            <Button href="https://edu.imagilabs.com/" size="s">Login</Button>
           </div>
       </div>
     </div>
@@ -68,47 +68,115 @@ const menus = [
 </header>
 
 <style>
-  .nav { position: sticky; top: 0; z-index: 50; background: var(--surface-page); border-bottom: var(--border-thin) solid var(--border-default); }
-  .nav_inner { display: flex; align-items: center; justify-content: space-between; min-height: var(--header); gap: var(--space-lg); }
+  /* A floating bar: white, rounded, soft shadow, inset from the page edge */
+  /* Sticky, and pulled up by its own height so it floats over the first section instead of pushing it down */
+  .nav { position: sticky; top: 0; z-index: 50; padding-block: var(--space-md); margin-bottom: calc(var(--header) * -1); pointer-events: none; }
+  .nav_inner {
+    pointer-events: auto;
+    position: relative;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--space-2xl);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--surface-page); border-radius: var(--radius-md); box-shadow: var(--shadow-l);
+    max-width: 100%; margin-inline: auto;
+    transition: max-width 0.35s ease;
+  }
+  /* Scrolled (desktop): the bar narrows to 960px, but never tighter than its content needs (script below adds the class) */
+  @media (min-width: 1000px) { .nav_inner--compact { max-width: 960px; min-width: max-content; } }
+  @media (prefers-reduced-motion: reduce) { .nav_inner { transition: none; } }
   .nav_logo { display: inline-flex; color: var(--text-primary); }
 
-  /* Phones: a menu button opens a panel */
+  /* Phones: a menu button opens a panel under the bar. Desktop (1000px+): menus sit next to the logo */
   .nav_toggle { background: none; border: 0; cursor: pointer; padding: var(--space-xs); border-radius: var(--radius-sm); }
-  .nav_panel {
-    display: none;
-    position: absolute; left: 0; right: 0; top: 100%;
-    background: var(--surface-page); border-bottom: var(--border-thin) solid var(--border-default);
-    padding: var(--space-md) var(--gutter) var(--space-xl);
-    flex-direction: column; gap: var(--space-lg);
-    box-shadow: var(--shadow-m);
-  }
-  .nav[data-open] .nav_panel { display: flex; }
-  .nav_menus { display: flex; flex-direction: column; gap: var(--space-md); }
-  .nav_trigger { display: inline-flex; align-items: center; gap: var(--space-2xs); background: none; border: 0; padding: 0; cursor: default; color: var(--text-secondary); }
-  .nav_trigger :global(.icon) { display: none; }
-  .nav_dropdown { list-style: none; padding: var(--space-xs) 0 0; display: grid; gap: var(--space-xs); }
-  .nav_dropdown a { text-decoration: none; }
-  .nav_actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
-
-  /* Desktop: inline menus with hover/focus dropdowns */
   @media (min-width: 1000px) {
     .nav_toggle { display: none; }
-    .nav_panel { position: static; display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex: 1; padding: 0; border: 0; box-shadow: none; background: none; }
-    .nav_menus { flex-direction: row; gap: var(--space-xl); margin-inline: auto; }
+  }
+  .nav_panel {
+    display: none;
+    position: absolute; left: 0; right: 0; top: calc(100% + var(--space-xs));
+    background: var(--surface-page); border-radius: var(--radius-md); box-shadow: var(--shadow-l);
+    padding: var(--space-lg);
+    max-height: calc(100dvh - var(--header) - var(--space-md)); overflow-y: auto;
+    flex-direction: column; gap: var(--space-lg);
+  }
+  @media (min-width: 1000px) {
+    .nav_panel { position: static; display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex: 1; padding: 0; border-radius: 0; box-shadow: none; background: none; max-height: none; overflow: visible; }
+  }
+  /* Panel open on phones: the script sets data-open on .nav when the menu button is pressed */
+  .nav[data-open] .nav_panel { display: flex; }
+
+  .nav_menus { display: flex; flex-direction: column; gap: var(--space-md); }
+  @media (min-width: 1000px) {
+    .nav_menus { flex-direction: row; gap: var(--space-xs); }
+  }
+  @media (min-width: 1000px) {
     .nav_menu { position: relative; }
-    .nav_trigger { cursor: pointer; color: var(--text-primary); min-height: var(--header); }
+  }
+
+  /* Menu label. On desktop it turns into a sand pill while its dropdown is open */
+  .nav_trigger { display: inline-flex; align-items: center; gap: var(--space-2xs); background: none; border: 0; padding: 0; cursor: default; color: var(--text-secondary); }
+  @media (min-width: 1000px) {
+    .nav_trigger {
+      cursor: pointer; color: var(--text-primary);
+      padding: var(--space-xs) var(--space-md); border-radius: var(--radius-pill);
+      transition: background-color 0.15s;
+    }
+  }
+  /* Open state: hovering or tabbing into the menu (needs the parent .nav_menu) */
+  @media (min-width: 1000px) {
+    .nav_menu:hover .nav_trigger { background: var(--surface-muted); }
+  }
+  @media (min-width: 1000px) {
+    .nav_menu:focus-within .nav_trigger { background: var(--surface-muted); }
+  }
+
+  /* Chevron (rendered by Icon, so styled with :global) */
+  .nav_trigger :global(.icon) { display: none; }
+  @media (min-width: 1000px) {
     .nav_trigger :global(.icon) { display: block; transition: rotate 0.15s; }
+  }
+  /* Chevron flips while the menu is open */
+  @media (min-width: 1000px) {
+    .nav_menu:hover .nav_trigger :global(.icon) { rotate: 180deg; }
+  }
+  @media (min-width: 1000px) {
+    .nav_menu:focus-within .nav_trigger :global(.icon) { rotate: 180deg; }
+  }
+
+  .nav_dropdown { list-style: none; padding: var(--space-xs) 0 0; display: grid; gap: var(--space-xs); }
+  @media (min-width: 1000px) {
     .nav_dropdown {
-      position: absolute; top: calc(100% - var(--space-xs)); left: calc(var(--space-md) * -1);
+      position: absolute; top: calc(100% + var(--space-lg)); left: 0;
       min-width: 220px; padding: var(--space-xs);
       background: var(--surface-page); border-radius: var(--radius-md); box-shadow: var(--shadow-l);
       opacity: 0; visibility: hidden; translate: 0 4px; transition: opacity 0.15s, translate 0.15s, visibility 0.15s;
     }
-    .nav_menu:hover .nav_dropdown, .nav_menu:focus-within .nav_dropdown { opacity: 1; visibility: visible; translate: 0 0; }
-    .nav_menu:hover .nav_trigger :global(.icon), .nav_menu:focus-within .nav_trigger :global(.icon) { rotate: 180deg; }
-    .nav_dropdown a { display: block; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); }
-    .nav_dropdown a:hover { background: var(--surface-subtle); }
   }
+  /* Invisible bridge over the gap, so the pointer can travel from trigger to dropdown */
+  @media (min-width: 1000px) {
+    .nav_dropdown::before { content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: var(--space-md); }
+  }
+  /* Dropdown shows while the menu is hovered or focused (needs the parent .nav_menu) */
+  @media (min-width: 1000px) {
+    .nav_menu:hover .nav_dropdown { opacity: 1; visibility: visible; translate: 0 0; }
+  }
+  @media (min-width: 1000px) {
+    .nav_menu:focus-within .nav_dropdown { opacity: 1; visibility: visible; translate: 0 0; }
+  }
+
+  .nav_dropdown-link { text-decoration: none; }
+  @media (min-width: 1000px) {
+    .nav_dropdown-link { display: block; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); }
+  }
+  @media (min-width: 1000px) {
+    .nav_dropdown-link:hover { background: var(--surface-muted); }
+  }
+  @media (min-width: 1000px) {
+    .nav_dropdown-link:focus-visible { background: var(--surface-muted); }
+  }
+
+  .nav_actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+  /* The two buttons (rendered by Button, so styled with :global) */
+  .nav_actions :global(.button) { font-size: var(--body-s); line-height: var(--body-lh); padding-inline: var(--space-lg); }
 </style>
 
 <script>
@@ -118,4 +186,10 @@ const menus = [
     const open = nav!.toggleAttribute('data-open');
     toggle.setAttribute('aria-expanded', String(open));
   });
+
+  // Narrow the bar once the page has scrolled past the top
+  const navBar = nav?.querySelector<HTMLElement>('.nav_inner');
+  const setCompact = () => navBar?.classList.toggle('nav_inner--compact', window.scrollY > 24);
+  window.addEventListener('scroll', setCompact, { passive: true });
+  setCompact();
 </script>

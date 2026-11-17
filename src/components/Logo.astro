@@ -5,12 +5,14 @@ import raw from '../../public/brand/logo.svg?raw';
 interface Props {
   /** Height in px; width follows the logo's proportions */
   height?: number;
+  /** Extra class for the <svg>, so a page can size it with its own class */
+  class?: string;
 }
 
-const { height = 28 } = Astro.props;
+const { height = 28, class: svgClass } = Astro.props;
 const svg = raw
   .replace('fill="#0E1704"', 'fill="currentColor"')
-  .replace(/width="361" height="80"/, `width="${Math.round((height * 361) / 80)}" height="${height}" role="img" aria-label="imagi"`);
+  .replace(/width="361" height="80"/, `width="${Math.round((height * 361) / 80)}" height="${height}" role="img" aria-label="imagi"${svgClass ? ` class="${svgClass}"` : ''}`);
 ---
 
 <span class="logo" set:html={svg} />

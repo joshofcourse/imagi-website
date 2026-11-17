@@ -8,13 +8,14 @@ const { title } = Astro.props;
 ---
 
 <div class="logostrip">
-  {title && <p class="logostrip_title text-label-m">{title}</p>}
+  {title && <p class="logostrip_title text-body-m-medium">{title}</p>}
   <div class="logostrip_row"><slot /></div>
 </div>
 
 <style>
   .logostrip { display: flex; flex-direction: column; gap: var(--space-lg); align-items: center; }
-  .logostrip_title { color: var(--text-secondary); text-align: center; }
-  .logostrip_row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-xl) var(--space-2xl); }
-  .logostrip_row :global(img) { height: 64px; width: auto; max-width: 160px; object-fit: contain; }
+  .logostrip_title { color: var(--text-primary); text-align: center; }
+  .logostrip_row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-xl) calc(var(--space-2xl) + var(--space-xs)); }
+  /* Logos are slotted <img>s, so they are styled from here (Figma: 72px tall, about 54px apart) */
+  .logostrip_row :global(img) { height: 72px; width: auto; max-width: 160px; object-fit: contain; }
 </style>

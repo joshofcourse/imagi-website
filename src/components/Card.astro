@@ -34,12 +34,12 @@ const { title, tone = 'page', image, imageAlt = '', icon, iconTone = 'highlight'
     {eyebrow && <Badge tone={band ? 'neutral' : 'brand'}>{eyebrow}</Badge>}
     <h3 class="text-heading-m">{title}</h3>
   </div>
-  <div class="card_body">
+  <div class:list={['card_body', band && 'card_body--banded']}>
     {Astro.slots.has('tags') && <div class="card_tags"><slot name="tags" /></div>}
     {Astro.slots.has('default') && <div class="card_text text-body-s"><slot /></div>}
     {Astro.slots.has('footer') && <div class="card_footer"><slot name="footer" /></div>}
     {href && (
-      <a class="card_link text-label-m" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>
+      <a class="card_link text-body-s-medium" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>
         {linkLabel ?? 'Learn more'} <Icon name="arrow-right" size={18} />
       </a>
     )}
@@ -55,7 +55,8 @@ const { title, tone = 'page', image, imageAlt = '', icon, iconTone = 'highlight'
     box-shadow: var(--shadow-s);
     height: 100%;
   }
-  /* Banded cards in a grid row share one band height (subgrid), so the colour blocks line up */
+  /* Banded cards in a grid row share one band height (subgrid), so the colour blocks line up.
+     The .grid wrapper lives on the page, so this needs the parent selector. */
   @supports (grid-template-rows: subgrid) {
     :global(.grid) > .card--banded { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; }
   }
@@ -64,14 +65,15 @@ const { title, tone = 'page', image, imageAlt = '', icon, iconTone = 'highlight'
   .card--muted { background: var(--surface-muted); }
   .card--brand-soft { background: var(--surface-brand-soft); }
   .card_image { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
-  .card_head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-md); padding: var(--space-xl) var(--space-xl) 0; }
-  .card_head--highlight, .card_head--accent, .card_head--brand, .card_head--orange { padding-bottom: var(--space-xl); }
-  .card_head--highlight { background: var(--surface-highlight); }
-  .card_head--accent { background: var(--surface-accent); }
-  .card_head--brand { background: var(--surface-brand); }
-  .card_head--orange { background: var(--color-icon-orange); }
-  .card_body { display: flex; flex-direction: column; gap: var(--space-md); padding: var(--space-md) var(--space-xl) var(--space-xl); flex: 1; }
-  .card_head--highlight + .card_body, .card_head--accent + .card_body, .card_head--brand + .card_body, .card_head--orange + .card_body { padding-top: var(--space-lg); }
+  .card_head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-md); padding: var(--card-padding) var(--card-padding) 0; }
+  /* Coloured header bands */
+  .card_head--highlight { padding-bottom: var(--card-padding); background: var(--surface-highlight); }
+  .card_head--accent { padding-bottom: var(--card-padding); background: var(--surface-accent); }
+  .card_head--brand { padding-bottom: var(--card-padding); background: var(--surface-brand); }
+  .card_head--orange { padding-bottom: var(--card-padding); background: var(--color-icon-orange); }
+  .card_body { display: flex; flex-direction: column; gap: var(--space-md); padding: var(--space-md) var(--card-padding) var(--card-padding); flex: 1; }
+  /* Extra space under a coloured band */
+  .card_body--banded { padding-top: var(--space-lg); }
   .card_text { color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs); }
   .card_tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
   .card_footer { margin-top: auto; }

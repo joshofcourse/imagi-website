@@ -1,20 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import Split from '../components/Split.astro';
-import Grid from '../components/Grid.astro';
 import Card from '../components/Card.astro';
+import NewsCard from '../components/NewsCard.astro';
+import Icon from '../components/Icon.astro';
 import Badge from '../components/Badge.astro';
 import Button from '../components/Button.astro';
-import Stat from '../components/Stat.astro';
-import IconDisc from '../components/IconDisc.astro';
+import Logo from '../components/Logo.astro';
+import AppMockup from '../components/AppMockup.astro';
 import Testimonial from '../components/Testimonial.astro';
 import SchoolLogos from '../components/SchoolLogos.astro';
 import StudentProjects from '../components/StudentProjects.astro';
 import LogoStrip from '../components/LogoStrip.astro';
-import CtaBand from '../components/CtaBand.astro';
 import Form from '../components/Form.astro';
 import Field from '../components/Field.astro';
 ---
@@ -23,165 +19,489 @@ import Field from '../components/Field.astro';
   title="imagi"
   description="imagi gives K-12 students safe access to real-world AI tools like Lovable, so they can think, build and create."
 >
-  <Hero
-    eyebrow="imagi × Lovable"
-    title="Your students don't just use AI. They build real apps."
-    image="/images/home/columbus-student1.00_36_08_16.still022-1.jpg"
-    imageAlt="Two students smiling as they build a project on a laptop"
-  >
-    <p>imagi is a safe platform for students to think, build and create with real-world AI tools.</p>
-    <Fragment slot="meta">
-      <Badge tone="neutral" size="m">Study tools</Badge>
-      <Badge tone="neutral" size="m">Real apps</Badge>
-      <Badge tone="neutral" size="m">Digital portfolios</Badge>
-      <Badge tone="neutral" size="m">Custom websites</Badge>
-      <Badge tone="neutral" size="m">Future-ready skills</Badge>
-    </Fragment>
-    <Fragment slot="actions">
-      <Button href="https://edu.imagilabs.com/" size="l" arrow>Get started free</Button>
-      <Button href="/quote" variant="outline" size="l">Get a quote</Button>
-    </Fragment>
-  </Hero>
-
-  <Section spacing="tight">
-    <SchoolLogos />
-  </Section>
-
-  <Section tone="subtle">
-    <SectionHeader eyebrow="Why imagi" title="Because blocking AI is not a learning strategy">
-      <p>Students need more than access. They need boundaries, guidance, and the confidence to think for themselves. imagi gives schools a safe way to bring real-world AI tools into everyday learning so that students can build, question, create, and stay in control.</p>
-    </SectionHeader>
-    <Grid cols={3}>
-      <Card icon="shield-check" iconTone="highlight" title="Safe student access">
-        <p>Protected logins, managed environments, and school-ready controls so students can explore AI without being sent into unmanaged tools.</p>
-      </Card>
-      <Card icon="code" iconTone="brand" title="Real building, not just prompts">
-        <p>Guided activities help students turn ideas into real, working projects, connecting AI to actual coding, creation, and problem-solving, not just a finished worksheet.</p>
-      </Card>
-      <Card icon="graduation-cap" iconTone="accent" title="Confidence for teachers">
-        <p>Step-by-step training and support help you bring real AI tools into your classroom safely, so you don't need a technical background to lead the way.</p>
-      </Card>
-    </Grid>
-  </Section>
-
-  <Section>
-    <Grid cols={4}>
-      <Stat value="140+" label="Countries">Used in 140+ countries around the world</Stat>
-      <Stat value="100+" label="School districts">Trusted by 100+ districts across 30+ US states</Stat>
-      <Stat value="30k+" label="Teachers">30k+ teachers registered for K-12 AI literacy</Stat>
-      <Stat value="0.7M+" label="Learners">0.7M+ learners coding, creating and building</Stat>
-    </Grid>
-  </Section>
-
-  <Section tone="muted">
-    <SectionHeader eyebrow="How it works" title="How students learn to create with AI, step by step">
-      <p>imagi guides students from safe access to hands-on creation, helping them build real projects through coding, design thinking, and problem-solving.</p>
-    </SectionHeader>
-    <div class="steps">
-      <Split image="/images/home/broll.00_43_12_07.still035-1.jpg" imageAlt="A teacher smiling at her laptop in a classroom">
-        <Badge tone="brand" size="m">Step 1</Badge>
-        <h3 class="text-heading-l">Create a safe space</h3>
-        <p class="text-body-l text-secondary">Set up protected student access without personal accounts, unnecessary data sharing or open-ended exposure.</p>
-      </Split>
-      <Split image="/images/get-started/students-project.webp" imageAlt="Two students working on a project together on a laptop" reverse>
-        <Badge tone="brand" size="m">Step 2</Badge>
-        <h3 class="text-heading-l">Make AI use visible</h3>
-        <p class="text-body-l text-secondary">Guide students through structured lessons where they plan, prompt, test and explain their thinking.</p>
-      </Split>
-      <Split image="/images/home/screenshot-2026-06-03-at-16.43.49.png" imageAlt="A student holding up the laptop with the app she built">
-        <Badge tone="brand" size="m">Step 3</Badge>
-        <h3 class="text-heading-l">Let students build</h3>
-        <p class="text-body-l text-secondary">Students use AI to create problem-solving tools, apps and digital projects connected to real classroom goals.</p>
-      </Split>
+  <section class="homehero">
+    <div class="homehero_card">
+      <div class="homehero_art" aria-hidden="true">
+        <img class="homehero_art-left" src="/images/home/hero/hero-art-left.webp" alt="" />
+        <div class="homehero_art-right">
+          <img class="homehero_art-ribbon" src="/images/home/hero/hero-art-right.webp" alt="" />
+          <img class="homehero_art-crown" src="/images/home/hero/hero-crown.webp" alt="" />
+          <img class="homehero_art-hoop" src="/images/home/hero/hero-hoop.webp" alt="" />
+        </div>
+      </div>
+      <div class="homehero_text">
+        <div class="homehero_logos" aria-label="imagi and Lovable">
+          <Logo height={24} class="homehero_imagi" />
+          <span class="homehero_divider"></span>
+          <img class="homehero_lovable" src="/brand/lovable-wordmark-light.svg" alt="Lovable" height="26" />
+        </div>
+        <h1 class="text-display-l homehero_title" aria-label="Your students don't just use AI. They build study tools, real apps, a digital portfolio, custom websites and future-ready skills.">
+          <span aria-hidden="true">Your students don't just use AI. They build</span>
+          <span class="homehero_wordline" aria-hidden="true"><span class="homehero_word" data-words="study tools.|real apps.|a digital portfolio.|custom websites.|future-ready skills.">study tools.</span><span class="homehero_caret"></span></span>
+        </h1>
+        <p class="text-body-l homehero_lead">imagi is a safe platform for students to think, build and create with real-world AI tools.</p>
+        <div class="homehero_actions">
+          <Button href="https://edu.imagilabs.com/" variant="secondary" size="l" arrow>Teachers Get Started Free</Button>
+          <p class="text-body-s">Or <a class="homehero_quote-link" href="/quote">Get a quote for your school</a></p>
+        </div>
+      </div>
+      <div class="homehero_mockup">
+        <AppMockup />
+      </div>
     </div>
-  </Section>
+  </section>
 
-  <Section>
-    <SectionHeader eyebrow="Teacher voices" title="What teachers say" />
-    <Grid cols={3}>
-      <Testimonial name="Kelly Powers" role="CS Teacher, Private School - NY, USA" image="/images/computer-science/kelly-p.jpeg" tone="subtle">
-        You have something special - a rigorous and engaging curriculum where students are passionate about creating projects with code and sharing those projects.
-      </Testimonial>
-      <Testimonial name="Mr. Godinez" role="Academy of IT, Florida" image="/images/computer-science/1619653945474.jpeg" tone="subtle">
-        Through imagi, students learn that their first attempt doesn't always work — and that's the point. It teaches them to refine their instructions and think critically about coding and AI.
-      </Testimonial>
-      <Testimonial name="Paige Besthoff" role="Computer Science Teacher, Public School - Spotswood, NJ" image="/images/computer-science/1644789063101.jpeg" tone="subtle">
-        You don’t have to know anything about teaching computer science. After the PD our art, math and reading teachers were all able to incorporate the imagi platform into their curriculum.
-      </Testimonial>
-    </Grid>
-  </Section>
-
-  <Section tone="subtle">
-    <SectionHeader title="Real student projects">
-      <p>Try some of our favorite student-coded projects made inside the imagi tool.</p>
-    </SectionHeader>
-    <StudentProjects />
-  </Section>
-
-  <Section>
-    <SectionHeader eyebrow="Stories" title="AI learning is already happening in real classrooms" />
-    <Grid cols={3}>
-      <Card image="/images/home/3.png" imageAlt="Students from Hawai'i presenting on stage" title="Hawai'i students reimagined programming with AI" href="/blog" linkLabel="Read the story">
-        <p>Students used design thinking and AI to solve real-world challenges through creative coding.</p>
-      </Card>
-      <Card image="/images/home/screenshot-2026-06-02-at-09.20.48.png" imageAlt="Teacher Lisa Haines" title="A cautious teacher became an AI creator" href="/blog/turning-students-into-ai-creators-not-consumers-how-one-teacher-found-her-confidence-with-lovable-imagi" linkLabel="Read the story">
-        <p>Lisa Haines used Lovable x imagi to help students build apps for classmates, siblings and real-world needs.</p>
-      </Card>
-      <Card image="/images/home/2.png" imageAlt="Students and mentors at the Code/Art hackathon" title="Students built apps in one day" href="/blog/inside-the-code-art-hackathon-how-students-built-apps-in-one-day" linkLabel="Read the story">
-        <p>A Code/Art hackathon showed how grades 6–12 can use AI, creativity and design thinking to build projects with real purpose.</p>
-      </Card>
-    </Grid>
-    <div class="more">
-      <Button href="/blog" variant="outline" size="l" arrow>Discover more</Button>
+  <section class="section section--subtle section--tight">
+    <div class="section_inner">
+      <SchoolLogos />
     </div>
-  </Section>
+  </section>
 
-  <Section tone="muted">
-    <Split>
-      <Badge tone="brand" size="m">TEDx talk</Badge>
-      <h2 class="text-display-s">What if every kid could build and learn safely with AI, not just use it to cheat?</h2>
-      <p class="text-body-l text-secondary">Dora Palfi Osika, CEO and co-founder of imagi, explores in her TEDx talk how schools can move beyond fear and give students safe, creative access to AI, so they learn to think, build, and stay in control.</p>
-      <Fragment slot="media">
-        <a class="video" href="https://www.youtube.com/watch?v=DjskKyRV66o" target="_blank" rel="noopener" aria-label="Watch Dora's TEDx talk on YouTube">
-          <img src="/images/home/tedx-dora.jpg" alt="Dora Palfi Osika speaking on the TEDx stage" loading="lazy" />
-          <span class="video_play"><IconDisc icon="play" tone="highlight" size="l" /></span>
-        </a>
-      </Fragment>
-    </Split>
-  </Section>
+  <section class="section section--subtle">
+    <div class="section_inner">
+      <header class="section-header">
+        <Badge tone="brand">Why imagi</Badge>
+        <h2 class="text-display-s">Because blocking AI is not a learning strategy</h2>
+        <div class="section-header_intro">
+          <p>
+            Students need more than access. They need boundaries, guidance, and the confidence to think for themselves. imagi gives schools
+            a safe way to bring real-world AI tools into everyday learning so that students can build, question, create, and stay in
+            control.
+          </p>
+        </div>
+      </header>
+      <div class="grid grid--3">
+        <Card icon="shield-half" iconTone="highlight" title="Safe student access">
+          <p>
+            Protected logins, managed environments, and school-ready controls so students can explore AI without being sent into unmanaged
+            tools.
+          </p>
+        </Card>
+        <Card icon="book" iconTone="brand" title="Real building, not just prompts">
+          <p>
+            Guided activities help students turn ideas into real, working projects, connecting AI to actual coding, creation, and
+            problem-solving, not just a finished worksheet.
+          </p>
+        </Card>
+        <Card icon="graduation-cap" iconTone="accent" title="Confidence for teachers">
+          <p>
+            Step-by-step training and support help you bring real AI tools into your classroom safely, so you don't need a technical
+            background to lead the way.
+          </p>
+        </Card>
+      </div>
+    </div>
+  </section>
 
-  <Section>
-    <LogoStrip title="Award-winning, and recognised across education">
-      <img src="/images/home/image-2-1.png" alt="FETC National Pitchfest finalist 2024" />
-      <img src="/images/home/image-4.png" alt="Supes' Choice 2024 startup company finalist" />
-      <img src="/images/home/image-1.png" alt="Selected for the HundrED Global Collection 2024" />
-      <img src="/images/home/image-3.png" alt="Nordic Baltic EdTech 50, 2023" />
-      <img src="/images/home/image-31.png" alt="SIIA 2024 Innovation Showcase finalist" />
-    </LogoStrip>
-    <CtaBand title="Bring real-world AI tools into your school safely and with confidence">
-      <p>Whether you're exploring AI for one classroom or planning adoption across a district, imagi gives you a safe, structured way to introduce AI literacy, with protected access, guided lessons, and creative projects that build confidence for teachers and students.</p>
-      <Fragment slot="actions">
-        <Button href="https://edu.imagilabs.com/" variant="secondary" size="l" arrow>Try imagi free</Button>
-        <Button href="/demo" variant="inverse" size="l">Book a demo</Button>
-      </Fragment>
-    </CtaBand>
-  </Section>
+  <section class="homestats">
+    <div class="homestats_inner">
+      <div class="homestats_art" aria-hidden="true">
+        <canvas class="homestats_trail" width="940" height="260" data-frames="/images/home/stats/stats-trail-frames.webp" data-still="/images/home/stats/stats-trail.webp" data-count="40"></canvas>
+        <img class="homestats_donut" src="/images/home/stats/stats-donut.webp" alt="" loading="lazy" />
+        <img class="homestats_heart" src="/images/home/stats/stats-heart.webp" alt="" loading="lazy" />
+      </div>
+      <div class="homestats_row">
+        <div class="homestats_stat">
+          <p class="homestats_value text-display-l">140+</p>
+          <p class="homestats_label text-heading-m">Countries</p>
+          <p class="homestats_note text-body-s">Used in 140+ countries around the world</p>
+        </div>
+        <div class="homestats_stat homestats_stat--bump">
+          <p class="homestats_value text-display-l">100+</p>
+          <p class="homestats_label text-heading-m">School districts</p>
+          <p class="homestats_note text-body-s">Trusted by 100+ districts across 30+ US states</p>
+        </div>
+        <div class="homestats_stat">
+          <p class="homestats_value text-display-l">30k+</p>
+          <p class="homestats_label text-heading-m">Teachers</p>
+          <p class="homestats_note text-body-s">30k+ teachers registered for K-12 AI literacy</p>
+        </div>
+        <div class="homestats_stat">
+          <p class="homestats_value text-display-l">700k+</p>
+          <p class="homestats_label text-heading-m">Learners</p>
+          <p class="homestats_note text-body-s">700k+ learners coding, creating and building</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Section tone="subtle" narrow>
-    <SectionHeader title="Let's keep in touch">
-      <p>Join our newsletter for updates, discounts & resources for the classroom and beyond!</p>
-    </SectionHeader>
-    <Form submitLabel="Sign up to our newsletter">
-      <Field label="Email" name="email" type="email" placeholder="Your email" required full />
-    </Form>
-  </Section>
+  <section class="homesteps">
+    <div class="homesteps_inner">
+      <header class="homesteps_header">
+        <Badge tone="neutral">How it works</Badge>
+        <h2 class="homesteps_heading text-display-s">How students learn to create with AI, step by step</h2>
+        <p class="homesteps_intro text-body-m">
+          imagi guides students from safe access to hands-on creation, helping them build real projects through coding, design thinking, and problem-solving.
+        </p>
+      </header>
+      <div class="homesteps_stack">
+        <article class="homesteps_card">
+          <img class="homesteps_photo" src="/images/home/steps/step-1.webp" alt="A teacher smiling in a classroom while students work on laptops" loading="lazy" />
+          <div class="homesteps_panel homesteps_panel--white">
+            <img class="homesteps_icon homesteps_icon--cursor" src="/images/home/steps/step-icon-cursor.webp" alt="" loading="lazy" />
+            <Badge tone="neutral" size="m">Step 1</Badge>
+            <div class="homesteps_copy">
+              <h3 class="homesteps_title text-heading-l">Create a safe space</h3>
+              <p class="homesteps_text text-body-m">Set up protected student access without personal accounts, unnecessary data sharing or open-ended exposure.</p>
+            </div>
+          </div>
+        </article>
+        <article class="homesteps_card">
+          <img class="homesteps_photo" src="/images/home/steps/step-2.webp" alt="Two students pointing at a project on a laptop screen" loading="lazy" />
+          <div class="homesteps_panel homesteps_panel--zest">
+            <img class="homesteps_icon homesteps_icon--rainbow" src="/images/home/steps/step-icon-rainbow.webp" alt="" loading="lazy" />
+            <Badge tone="lime" size="m">Step 2</Badge>
+            <div class="homesteps_copy">
+              <h3 class="homesteps_title text-heading-l">Make AI use visible</h3>
+              <p class="homesteps_text text-body-m">Guide students through structured lessons where they plan, prompt, test and explain their thinking.</p>
+            </div>
+          </div>
+        </article>
+        <article class="homesteps_card">
+          <img class="homesteps_photo" src="/images/home/steps/step-3.webp" alt="A student holding up the laptop with the app she built" loading="lazy" />
+          <div class="homesteps_panel homesteps_panel--blossom">
+            <img class="homesteps_icon homesteps_icon--bulb" src="/images/home/steps/step-icon-bulb.webp" alt="" loading="lazy" />
+            <Badge tone="pink" size="m">Step 3</Badge>
+            <div class="homesteps_copy">
+              <h3 class="homesteps_title text-heading-l">Let students build</h3>
+              <p class="homesteps_text text-body-m">Students use AI to create problem-solving tools, apps and digital projects connected to real classroom goals.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--page">
+    <div class="section_inner">
+      <header class="section-header">
+        <Badge tone="neutral">Teacher voices</Badge>
+        <h2 class="text-display-s">What teachers say</h2>
+      </header>
+      <div class="grid grid--3">
+        <Testimonial
+          name="Kelly Powers"
+          role="CS Teacher, Private School - NY, USA"
+          image="/images/computer-science/kelly-p.jpeg"
+          tone="page"
+        >
+          You have something special - a rigorous and engaging curriculum where students are passionate about creating projects with code
+          and sharing those projects.
+        </Testimonial>
+        <Testimonial name="Mr. Godinez" role="Academy of IT, Florida" image="/images/computer-science/1619653945474.jpeg" tone="page">
+          Through imagi, students learn that their first attempt doesn't always work — and that's the point. It teaches them to refine their
+          instructions and think critically about coding and AI.
+        </Testimonial>
+        <Testimonial
+          name="Paige Besthoff"
+          role="Computer Science Teacher, Public School - Spotswood, NJ"
+          image="/images/computer-science/1644789063101.jpeg"
+          tone="page"
+        >
+          You don’t have to know anything about teaching computer science. After the PD our art, math and reading teachers were all able to
+          incorporate the imagi platform into their curriculum.
+        </Testimonial>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--page">
+    <div class="section_inner">
+      <header class="projects-header">
+        <div class="projects-header_text">
+          <h2 class="text-display-s">Real student projects</h2>
+          <p class="projects-header_intro text-body-m">Try some of our favorite student-coded projects made inside the imagi tool.</p>
+        </div>
+        <div class="madewith">
+          <p class="madewith_label text-body-s-medium">Made with</p>
+          <img class="madewith_logo" src="/brand/lovable-wordmark-dark.svg" alt="Lovable" width="188" height="32" />
+        </div>
+      </header>
+      <StudentProjects />
+    </div>
+  </section>
+
+  <section class="section section--page">
+    <div class="section_inner">
+      <div class="stories">
+        <header class="stories_header">
+          <Badge tone="neutral">Stories</Badge>
+          <h2 class="stories_heading text-heading-l">AI learning is already happening in real classrooms</h2>
+        </header>
+        <div class="stories_grid">
+          <NewsCard
+            image="/images/home/3.png"
+            imageAlt="Students from Hawai'i presenting on stage"
+            title="Hawai'i students reimagined programming with AI"
+            text="Students used design thinking and AI to solve real-world challenges through creative coding."
+            href="/blog"
+          />
+          <NewsCard
+            image="/images/home/screenshot-2026-06-02-at-09.20.48.png"
+            imageAlt="Teacher Lisa Haines"
+            title="A cautious teacher became an AI creator"
+            text="Lisa Haines used Lovable x imagi to help students build apps for classmates, siblings and real-world needs."
+            href="/blog/turning-students-into-ai-creators-not-consumers-how-one-teacher-found-her-confidence-with-lovable-imagi"
+          />
+          <NewsCard
+            image="/images/home/2.png"
+            imageAlt="Students and mentors at the Code/Art hackathon"
+            title="Students built apps in one day"
+            text="A Code/Art hackathon showed how grades 6–12 can use AI, creativity and design thinking to build projects with real purpose."
+            href="/blog/inside-the-code-art-hackathon-how-students-built-apps-in-one-day"
+          />
+        </div>
+        <div class="stories_more">
+          <Button href="/blog" variant="outline" size="m" arrow>See all stories</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tedx">
+    <img class="tedx_stage" src="/images/home/tedx/tedx-stage.webp" alt="" loading="lazy" />
+    <button class="tedx_play" type="button" aria-label="Play Dora's TEDx talk" data-video="DjskKyRV66o">
+      <svg class="tedx_play-icon" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="32" fill="currentColor" /><path d="M32 16L46.7224 40H17.2776L32 16Z" transform="rotate(90 32 32)" fill="var(--color-forest)" /></svg>
+    </button>
+    <div class="tedx_shade">
+      <div class="tedx_inner">
+        <div class="tedx_text">
+          <div class="tedx_logos" aria-label="imagi at TEDx">
+            <img class="tedx_imagi" src="/images/home/tedx/imagi-logo-zest.svg" alt="imagi" width="108" height="24" />
+            <span class="tedx_divider"></span>
+            <img class="tedx_logo" src="/images/home/tedx/tedx-logo.webp" alt="TEDx" width="73" height="23" />
+          </div>
+          <h2 class="tedx_title text-heading-l">What if every kid could build and learn safely with AI, not just use it to cheat?</h2>
+          <p class="tedx_lead text-body-s">
+            Dora Palfi Osika, CEO and co-founder of imagi, explores in her TEDx talk how schools can move beyond fear and give students safe,
+            creative access to AI, so they learn to think, build, and stay in control.
+          </p>
+        </div>
+        <div class="tedx_speaker">
+          <img class="tedx_avatar" src="/images/home/tedx/dora.webp" alt="" width="64" height="64" loading="lazy" />
+          <div class="tedx_person">
+            <p class="tedx_name text-body-m-medium">Dora Palfi Osika</p>
+            <p class="tedx_role text-body-xs">CEO &amp; Co-Founder, Imagi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <dialog class="tedx_modal" aria-label="Dora Palfi Osika's TEDx talk">
+      <button class="tedx_close" type="button" aria-label="Close video"><Icon name="x" size={24} /></button>
+      <div class="tedx_modal-frame">
+        <div class="tedx_player"></div>
+      </div>
+    </dialog>
+  </section>
+
+  <section class="section section--page">
+    <div class="section_inner">
+      <LogoStrip title="Award-winning, and recognised across education">
+        <img src="/images/home/image-2-1.png" alt="FETC National Pitchfest finalist 2024" />
+        <img src="/images/home/image-4.png" alt="Supes' Choice 2024 startup company finalist" />
+        <img src="/images/home/image-1.png" alt="Selected for the HundrED Global Collection 2024" />
+        <img src="/images/home/image-3.png" alt="Nordic Baltic EdTech 50, 2023" />
+        <img src="/images/home/image-31.png" alt="SIIA 2024 Innovation Showcase finalist" />
+      </LogoStrip>
+      <div class="homecta" data-homecta>
+        <div class="homecta_band">
+          <h2 class="homecta_title text-display-s">Set the <span class="homecta_highlight">rules</span> for the <span class="homecta_highlight">tools</span> in your <span class="homecta_highlight">schools</span></h2>
+          <p class="homecta_text text-body-m">
+            Whether you're exploring AI for one classroom or planning adoption across a district, imagi gives you a safe, structured way to
+            introduce AI literacy, with protected access, guided lessons, and creative projects that build confidence for teachers and
+            students.
+          </p>
+          <div class="homecta_actions">
+            <Button href="https://edu.imagilabs.com/" variant="secondary" size="l" arrow>Try imagi free</Button>
+            <Button href="/demo" variant="inverse" size="l">Book a demo</Button>
+          </div>
+        </div>
+        <div class="homecta_art" aria-hidden="true">
+          <div class="homecta_clip homecta_clip--left">
+            <div class="homecta_trail homecta_trail--left" style="--pull-x: 12; --pull-y: 3">
+              <img class="homecta_trail-still homecta_trail-media--left" src="/images/home/cta/cta-trail-left.webp" alt="" loading="lazy" />
+              <video class="homecta_trail-video homecta_trail-media--left" src="/video/cta-trail-left.webm" muted playsinline preload="none" hidden></video>
+            </div>
+          </div>
+          <div class="homecta_clip homecta_clip--right">
+            <div class="homecta_trail homecta_trail--right" style="--pull-x: -12; --pull-y: -4">
+              <img class="homecta_trail-still homecta_trail-media--right" src="/images/home/cta/cta-trail-right.webp" alt="" loading="lazy" />
+              <video class="homecta_trail-video homecta_trail-media--right" src="/video/cta-trail-right.webm" muted playsinline preload="none" hidden></video>
+            </div>
+          </div>
+          <img class="homecta_piece homecta_piece--student" src="/images/home/cta/cta-student.webp" alt="" loading="lazy" style="--delay: 60ms" />
+          <img class="homecta_piece homecta_piece--crown" src="/images/home/cta/cta-crown.webp" alt="" loading="lazy" style="--delay: 200ms; --spin: 40deg" />
+          <img class="homecta_piece homecta_piece--aistar" src="/images/home/cta/cta-aistar.webp" alt="" loading="lazy" style="--delay: 140ms; --spin: -45deg" />
+          <img class="homecta_piece homecta_piece--cursor" src="/images/home/cta/cta-cursor.webp" alt="" loading="lazy" style="--delay: 180ms; --spin: 30deg" />
+          <img class="homecta_piece homecta_piece--camera" src="/images/home/cta/cta-camera.webp" alt="" loading="lazy" style="--delay: 120ms; --spin: -35deg" />
+          <img class="homecta_piece homecta_piece--flower" src="/images/home/cta/cta-flower.webp" alt="" loading="lazy" style="--delay: 240ms; --spin: 50deg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="newsletter_inner">
+      <header class="newsletter_header">
+        <h2 class="newsletter_title text-heading-l">Let's keep in touch</h2>
+        <p class="newsletter_intro text-body-l">Join our newsletter for updates, discounts &amp; resources for the classroom and beyond!</p>
+      </header>
+      <Form submitLabel="Sign up to our newsletter" tone="subtle" single>
+        <Field label="Email" name="email" type="email" required full />
+      </Form>
+    </div>
+  </section>
 </BaseLayout>
 
-<style>
-  .steps { display: flex; flex-direction: column; gap: var(--space-3xl); }
-  .more { display: flex; justify-content: center; }
-  .video { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-m); }
-  .video img { width: 100%; height: 100%; object-fit: cover; }
-  .video_play { position: absolute; inset: 0; display: grid; place-items: center; }
-  .video:hover .video_play :global(.disc) { background: var(--surface-brand); }
-</style>
+<script>
+  // Closing CTA: when it scrolls into view, the student, icons and trails burst out of the green band.
+  // The trails are transparent videos that draw themselves; Safari and iPhone (which can't show transparent WebM) get
+  // Figma's still images instead, which burst out like the icons. Reduced motion shows the finished picture.
+  const cta = document.querySelector<HTMLElement>('[data-homecta]');
+  if (cta) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ua = navigator.userAgent;
+    const webkitOnly = /Safari\//.test(ua) && !/Chrome\/|Chromium\/|Edg\//.test(ua);
+    const useVideo = !reduce && !webkitOnly && document.createElement('video').canPlayType('video/webm; codecs="vp9"') !== '';
+    const videos = [...cta.querySelectorAll<HTMLVideoElement>('.homecta_trail-video')];
+    // Each trail swaps its still image for its video
+    const swap = (on: boolean) => videos.forEach((v) => { v.hidden = !on; const still = v.parentElement?.querySelector<HTMLElement>('.homecta_trail-still'); if (still) still.hidden = on; });
+    if (useVideo) swap(true);
+    if (!reduce) {
+      cta.classList.add('homecta--ready');
+      // Start loading the videos a little before the CTA arrives
+      const near = new IntersectionObserver(([e]) => { if (e.isIntersecting) { near.disconnect(); if (useVideo) videos.forEach((v) => { v.preload = 'auto'; v.load(); }); } }, { rootMargin: '600px 0px' });
+      near.observe(cta);
+      // Plays each time the CTA comes into view, and resets once it has fully left the screen, so scrolling back
+      // down plays it again.
+      let timer = 0;
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting && e.intersectionRatio >= 0.4) {
+          if (cta.classList.contains('homecta--burst')) return;
+          timer = window.setTimeout(() => {
+            cta.classList.add('homecta--burst');
+            if (useVideo) Promise.all(videos.map((v) => { v.currentTime = 0; return v.play(); })).catch(() => swap(false));
+          }, 150);
+        } else if (!e.isIntersecting) {
+          clearTimeout(timer);
+          cta.classList.remove('homecta--burst');
+          videos.forEach((v) => { v.pause(); v.currentTime = 0; });
+        }
+      }, { threshold: [0, 0.4] });
+      io.observe(cta);
+    }
+  }
+</script>
+
+<script>
+  // Stats band: the green trail draws in as the section scrolls into view (one frame of a 40-frame strip per step),
+  // and on desktop the second stat rises 72px in step with it. Reduced motion shows the finished state.
+  const statsSection = document.querySelector<HTMLElement>('.homestats');
+  const trail = document.querySelector<HTMLCanvasElement>('.homestats_trail');
+  if (statsSection && trail) {
+    const ctx = trail.getContext('2d');
+    const count = Number(trail.dataset.count) || 40;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const strip = new Image();
+    let ready = false;
+    let shown = -1;
+    const draw = (frame: number) => {
+      if (!ctx || !ready || frame === shown) return;
+      shown = frame;
+      ctx.clearRect(0, 0, trail.width, trail.height);
+      ctx.drawImage(strip, 0, frame * trail.height, trail.width, trail.height, 0, 0, trail.width, trail.height);
+    };
+    const update = () => {
+      // 0 when the section's top reaches 85% down the window, 1 when it reaches 25%
+      const top = statsSection.getBoundingClientRect().top;
+      const vh = window.innerHeight;
+      const p = reduce ? 1 : Math.min(1, Math.max(0, (vh * 0.85 - top) / (vh * 0.6)));
+      statsSection.style.setProperty('--homestats-progress', String(p));
+      draw(Math.round(p * (count - 1)));
+    };
+    let ticking = false;
+    const request = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; update(); }); } };
+    strip.onload = () => { ready = true; shown = -1; update(); };
+    strip.src = reduce ? (trail.dataset.still ?? '') : (trail.dataset.frames ?? '');
+    if (reduce) strip.onload = () => { ready = true; ctx?.drawImage(strip, 0, 0); statsSection.style.setProperty('--homestats-progress', '1'); };
+    else { window.addEventListener('scroll', request, { passive: true }); window.addEventListener('resize', request); update(); }
+  }
+</script>
+
+<script>
+  // How it works (desktop): cards stick in the middle of the window and the next one slides over the top.
+  // A card shrinks slightly as the next one covers it, and its green panel lags a little while the card moves.
+  const stepCards = [...document.querySelectorAll<HTMLElement>('.homesteps_card')];
+  const stepsDesktop = window.matchMedia('(min-width: 1000px)');
+  const stepsReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const SHRINK = 0.06;    // a covered card ends at 94% size
+  const PARALLAX = 120;   // panel starts this many px lower and settles to 0 as the card reaches its resting place
+  const LIFT = 160;       // once the card has stuck, the panel keeps rising this far while the next card slides over
+  let stepsTicking = false;
+  function updateSteps() {
+    stepsTicking = false;
+    const active = stepsDesktop.matches && !stepsReduce.matches;
+    const vh = window.innerHeight;
+    // Background: Cream at the top of the section, white by the end, so it runs straight into the white section below
+    const stepsSection = document.querySelector<HTMLElement>('.homesteps');
+    if (stepsSection) {
+      const r = stepsSection.getBoundingClientRect();
+      const fade = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh)));
+      stepsSection.style.setProperty('--homesteps-fade', String(fade));
+    }
+    stepCards.forEach((card, i) => {
+      const panel = card.querySelector<HTMLElement>('.homesteps_panel');
+      if (!active) { card.style.removeProperty('--homesteps-scale'); panel?.style.removeProperty('--homesteps-shift'); return; }
+      const rect = card.getBoundingClientRect();
+      const rest = (vh - rect.height) / 2;               // where the card sticks
+      const next = stepCards[i + 1];
+      // Shrink while the next card slides over this one
+      let covered = 0;
+      if (next) covered = Math.min(1, Math.max(0, (vh - next.getBoundingClientRect().top) / (vh - rest)));
+      card.style.setProperty('--homesteps-scale', String(1 - covered * SHRINK));
+      // Panel: one continuous move from PARALLAX px below its corner to LIFT px above it.
+      // The clock is the next card's top edge, which keeps moving the whole time (even while this card is stuck),
+      // so there's no pause when this card sticks. It starts when this card's lower half comes into view.
+      const start = vh - rect.height * 0.6;                       // this card's top when the panel starts moving
+      const gap = parseFloat(getComputedStyle(card.parentElement!).rowGap) || 0;
+      let p: number;
+      if (next) {
+        const clock = next.getBoundingClientRect().top;
+        const from = start + rect.height + gap;                   // next card's top when this card is at `start`
+        p = Math.min(1, Math.max(0, (from - clock) / Math.max(1, from - rest)));
+      } else {
+        p = Math.min(1, Math.max(0, (start - rect.top) / Math.max(1, start - rest))) * (PARALLAX / (PARALLAX + LIFT));
+      }
+      panel?.style.setProperty('--homesteps-shift', `${Math.round(PARALLAX - p * (PARALLAX + LIFT))}px`);
+    });
+  }
+  const requestSteps = () => { if (!stepsTicking) { stepsTicking = true; requestAnimationFrame(updateSteps); } };
+  window.addEventListener('scroll', requestSteps, { passive: true });
+  window.addEventListener('resize', requestSteps);
+  stepsDesktop.addEventListener('change', requestSteps);
+  updateSteps();
+</script>
+
+<script>
+  // TEDx: the play button opens the YouTube video in a modal; Close, Esc or clicking outside stops it and closes.
+  const tedxPlay = document.querySelector<HTMLButtonElement>('.tedx_play');
+  const tedxModal = document.querySelector<HTMLDialogElement>('.tedx_modal');
+  const tedxPlayer = tedxModal?.querySelector<HTMLElement>('.tedx_player');
+  if (tedxPlay && tedxModal && tedxPlayer) {
+    tedxPlay.addEventListener('click', () => {
+      const id = tedxPlay.dataset.video;
+      tedxPlayer.innerHTML = `<iframe class="tedx_iframe" src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="Dora Palfi Osika at TEDx" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+      tedxModal.showModal();
+    });
+    const close = () => tedxModal.close();
+    tedxModal.querySelector('.tedx_close')?.addEventListener('click', close);
+    // Click anywhere outside the video frame closes it
+    const tedxFrame = tedxModal.querySelector<HTMLElement>('.tedx_modal-frame');
+    tedxModal.addEventListener('click', (e) => {
+      const r = tedxFrame?.getBoundingClientRect();
+      if (!r || e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) close();
+    });
+    tedxModal.addEventListener('close', () => { tedxPlayer.innerHTML = ''; tedxPlay.focus(); });
+  }
+</script>
+

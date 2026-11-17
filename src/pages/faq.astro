@@ -1,77 +1,120 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import Grid from '../components/Grid.astro';
 import Card from '../components/Card.astro';
 import Button from '../components/Button.astro';
 import FaqList from '../components/FaqList.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Badge from '../components/Badge.astro';
 ---
 
 <BaseLayout
   title="Frequently Asked Questions"
   description="Answers on curriculum, standards, pricing, procurement, data privacy, and getting started with imagi in your school, district, or family."
 >
-  <Hero eyebrow="Help center" title="Get answers about imagi for your classroom or district.">
-    <p>Pick a topic, or contact our support team if you can’t find what you need.</p>
-  </Hero>
+  <section class="hero hero--subtle">
+    <div class="hero_inner">
+      <div class="hero_text">
+        <Badge tone="dark">Help center</Badge>
+        <h1 class="text-display-l">Get answers about imagi for your classroom or district.</h1>
+        <div class="hero_lead text-body-l">
+          <p>Pick a topic, or contact our support team if you can’t find what you need.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Section spacing="tight">
-    <Grid cols={4}>
-      <Card icon="sparkles" iconTone="highlight" title="General" href="#general" linkLabel="See answers" />
-      <Card icon="laptop" iconTone="brand" title="Getting started: accounts & access" href="#getting-started" linkLabel="See answers" />
-      <Card icon="wand" iconTone="accent" title="AI tools: Lovable" href="#lovable" linkLabel="See answers" />
-      <Card icon="heart" iconTone="highlight" title="imagiCharm device" href="#imagicharm" linkLabel="See answers" />
-      <Card icon="shield-check" iconTone="brand" title="Data privacy, security & compliance" href="#data-privacy" linkLabel="See answers" />
-      <Card icon="settings" iconTone="accent" title="Troubleshooting" href="#troubleshooting" linkLabel="See answers" />
-      <Card icon="credit-card" iconTone="highlight" title="Pricing & plans" href="#pricing-plans" linkLabel="See answers" />
-      <Card icon="mail" iconTone="muted" title="Still need help?" href="mailto:support@imagilabs.com" linkLabel="Email support" />
-    </Grid>
-  </Section>
+  <section class="section section--page section--tight">
+    <div class="section_inner">
+      <div class="grid grid--4">
+        <Card icon="gem" iconTone="highlight" title="General" href="#general" linkLabel="See answers" />
+        <Card icon="laptop" iconTone="brand" title="Getting started: accounts & access" href="#getting-started" linkLabel="See answers" />
+        <Card icon="heart" iconTone="accent" title="AI tools: Lovable" href="#lovable" linkLabel="See answers" />
+        <Card icon="grid-3x3" iconTone="highlight" title="imagiCharm device" href="#imagicharm" linkLabel="See answers" />
+        <Card
+          icon="zap"
+          iconTone="brand"
+          title="Data privacy, security & compliance"
+          href="#data-privacy"
+          linkLabel="See answers"
+        />
+        <Card icon="ghost" iconTone="accent" title="Troubleshooting" href="#troubleshooting" linkLabel="See answers" />
+        <Card icon="zap" iconTone="highlight" title="Pricing & plans" href="#pricing-plans" linkLabel="See answers" />
+        <Card icon="mail" iconTone="muted" title="Still need help?" href="mailto:support@imagilabs.com" linkLabel="Email support" />
+      </div>
+    </div>
+  </section>
 
-  <Section tone="subtle" id="general">
-    <SectionHeader title="General" />
-    <FaqList group="general" />
-  </Section>
+  <section class="section section--subtle" id="general">
+    <div class="section_inner">
+      <header class="section-header">
+        <h2 class="text-display-s">General</h2>
+      </header>
+      <FaqList group="general" />
+    </div>
+  </section>
 
-  <Section id="getting-started">
-    <SectionHeader title="Getting started: accounts & access" />
-    <FaqList group="getting-started" />
-  </Section>
+  <section class="section section--page" id="getting-started">
+    <div class="section_inner">
+      <header class="section-header">
+        <h2 class="text-display-s">Getting started: accounts & access</h2>
+      </header>
+      <FaqList group="getting-started" />
+    </div>
+  </section>
 
-  <Section tone="subtle" id="lovable">
-    <SectionHeader title="AI tools: Lovable" />
-    <FaqList group="lovable" />
-  </Section>
+  <section class="section section--subtle" id="lovable">
+    <div class="section_inner">
+      <header class="section-header">
+        <h2 class="text-display-s">AI tools: Lovable</h2>
+      </header>
+      <FaqList group="lovable" />
+    </div>
+  </section>
 
-  <Section id="imagicharm">
-    <SectionHeader title="imagiCharm" />
-    <FaqList group="imagicharm" />
-  </Section>
+  <section class="section section--page" id="imagicharm">
+    <div class="section_inner">
+      <header class="section-header">
+        <h2 class="text-display-s">imagiCharm</h2>
+      </header>
+      <FaqList group="imagicharm" />
+    </div>
+  </section>
 
-  <Section tone="subtle" id="data-privacy">
-    <SectionHeader title="Data privacy, security & compliance" />
-    <FaqList group="data-privacy" />
-  </Section>
+  <section class="section section--subtle" id="data-privacy">
+    <div class="section_inner">
+      <header class="section-header">
+        <h2 class="text-display-s">Data privacy, security & compliance</h2>
+      </header>
+      <FaqList group="data-privacy" />
+    </div>
+  </section>
 
-  <Section id="troubleshooting">
-    <SectionHeader title="Troubleshooting" />
-    <FaqList group="troubleshooting" />
-  </Section>
+  <section class="section section--page" id="troubleshooting">
+    <div class="section_inner">
+      <header class="section-header">
+        <h2 class="text-display-s">Troubleshooting</h2>
+      </header>
+      <FaqList group="troubleshooting" />
+    </div>
+  </section>
 
-  <Section tone="subtle" id="pricing-plans">
-    <SectionHeader title="Pricing & plans" />
-    <FaqList group="pricing-plans" />
-  </Section>
+  <section class="section section--subtle" id="pricing-plans">
+    <div class="section_inner">
+      <header class="section-header">
+        <h2 class="text-display-s">Pricing & plans</h2>
+      </header>
+      <FaqList group="pricing-plans" />
+    </div>
+  </section>
 
-  <Section>
-    <CtaBand title="We’re here to help. Connect anytime.">
-      <p>Have more questions? Our support team can help.</p>
-      <Fragment slot="actions">
-        <Button href="mailto:support@imagilabs.com" variant="secondary" size="l" arrow>Contact support</Button>
-      </Fragment>
-    </CtaBand>
-  </Section>
+  <section class="section section--page">
+    <div class="section_inner">
+      <CtaBand title="We’re here to help. Connect anytime.">
+        <p>Have more questions? Our support team can help.</p>
+        <Fragment slot="actions">
+          <Button href="mailto:support@imagilabs.com" variant="secondary" size="l" arrow>Contact support</Button>
+        </Fragment>
+      </CtaBand>
+    </div>
+  </section>
 </BaseLayout>

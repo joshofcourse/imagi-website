@@ -3,38 +3,40 @@
  * Styleguide documentation block for one component: description, how many times it's used,
  * where, and live examples (slot). Only used on /styleguide.
  */
-import { usage, describe } from '../lib/usage';
+import { usage, classUsage, describe } from '../lib/usage';
 
 interface Props {
-  /** Component file name, e.g. "Card" */
+  /** Component file name, e.g. "Card" — or, with `cls`, a title for a layout class */
   name: string;
+  /** Document a global layout class instead of a component, e.g. cls="section" */
+  cls?: string;
   /** Override the description taken from the component's doc comment */
   description?: string;
 }
 
-const { name, description } = Astro.props;
-const u = usage(name);
+const { name, description, cls } = Astro.props;
+const u = cls ? classUsage(cls) : usage(name);
 const desc = description ?? describe(name);
 const where = [
   ...u.direct.map((d) => `${d.label} (${d.uses}×)`),
 ];
 ---
 
-<article class="sgentry" id={`c-${name.toLowerCase()}`}>
+<article class="sgentry" id={`c-${(cls ?? name).toLowerCase()}`}>
   <header class="sgentry_head">
     <div class="sgentry_title">
-      <h3 class="text-heading-l">{name}</h3>
+      <h3 class="text-heading-l">{name}{cls && <code class="sgentry_cls">.{cls}</code>}</h3>
       <p class="text-body-s sgentry_desc">{desc}</p>
     </div>
     <dl class="sgentry_stats">
-      <div><dt class="text-label-s">Placed on pages</dt><dd class="text-heading-m">{u.directTotal}×</dd></div>
-      <div><dt class="text-label-s">Pages affected</dt><dd class="text-heading-m">{u.affectedPages}</dd></div>
+      <div class="sgentry_stat"><dt class="sgentry_stat-label text-body-xs-medium">Placed on pages</dt><dd class="sgentry_stat-value text-heading-m">{u.directTotal}×</dd></div>
+      <div class="sgentry_stat"><dt class="sgentry_stat-label text-body-xs-medium">Pages affected</dt><dd class="sgentry_stat-value text-heading-m">{u.affectedPages}</dd></div>
     </dl>
   </header>
   <div class="sgentry_where text-body-s">
-    {where.length > 0 && <p><strong>Placed on:</strong> {where.join(' · ')}</p>}
-    {u.inside.length > 0 && <p><strong>Also inside:</strong> {u.inside.map((c) => `${c.name} (${c.uses}×)`).join(' · ')}</p>}
-    {u.affectedPages > 0 && u.inside.length > 0 && <p><strong>So a change shows up on:</strong> {u.affected.join(' · ')}</p>}
+    {where.length > 0 && <p><strong class="sgentry_where-label">Placed on:</strong> {where.join(' · ')}</p>}
+    {u.inside.length > 0 && <p><strong class="sgentry_where-label">Also inside:</strong> {u.inside.map((c) => `${c.name} (${c.uses}×)`).join(' · ')}</p>}
+    {u.affectedPages > 0 && u.inside.length > 0 && <p><strong class="sgentry_where-label">So a change shows up on:</strong> {u.affected.join(' · ')}</p>}
     {u.affectedPages === 0 && <p>Not used on any page yet.</p>}
   </div>
   {Astro.slots.has('default') && <div class="sgentry_demo"><slot /></div>}
@@ -45,11 +47,12 @@ const where = [
   .sgentry_head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-lg); }
   .sgentry_title { display: flex; flex-direction: column; gap: var(--space-xs); max-width: 640px; }
   .sgentry_desc { color: var(--text-secondary); }
+  .sgentry_cls { margin-left: var(--space-sm); font-size: var(--body-s); font-weight: 400; padding: 2px 8px; background: var(--surface-muted); border-radius: var(--radius-sm); vertical-align: middle; }
   .sgentry_stats { display: flex; gap: var(--space-xl); }
-  .sgentry_stats div { display: flex; flex-direction: column; gap: var(--space-2xs); }
-  .sgentry_stats dt { color: var(--text-secondary); }
-  .sgentry_stats dd { margin: 0; }
+  .sgentry_stat { display: flex; flex-direction: column; gap: var(--space-2xs); }
+  .sgentry_stat-label { color: var(--text-secondary); }
+  .sgentry_stat-value { margin: 0; }
   .sgentry_where { display: flex; flex-direction: column; gap: var(--space-xs); padding: var(--space-md) var(--space-lg); background: var(--surface-subtle); border-radius: var(--radius-md); color: var(--text-secondary); }
-  .sgentry_where strong { color: var(--text-primary); font-weight: 500; }
+  .sgentry_where-label { color: var(--text-primary); font-weight: 500; }
   .sgentry_demo { display: flex; flex-direction: column; gap: var(--space-lg); padding: var(--space-xl); border: var(--border-thin) dashed var(--border-default); border-radius: var(--radius-md); background: var(--surface-muted); }
 </style>

@@ -1,9 +1,9 @@
 ---
 /**
- * "Trusted by schools" logo wall — the same set on every page that shows it.
+ * "Trusted by schools" logo rail — a slow, endless slider, the same set on every page that shows it.
  * Edit the list below to change which schools appear (files are in /public/images/schools/).
+ * Logos are shown as-is, up to 80px tall and 120px wide. The set is drawn twice so the loop is seamless.
  */
-import LogoStrip from './LogoStrip.astro';
 
 interface Props {
   title?: string;
@@ -29,6 +29,30 @@ const schools = [
 ];
 ---
 
-<LogoStrip title={title}>
-  {schools.map((s) => <img src={`/images/schools/${s.file}`} alt={s.name} loading="lazy" />)}
-</LogoStrip>
+<div class="schoollogos" data-figma="Site/SchoolLogos">
+  {title && <p class="schoollogos_title text-body-m">{title}</p>}
+  <div class="schoollogos_rail">
+    <div class="schoollogos_track">
+      <ul class="schoollogos_set">
+        {schools.map((s) => <li class="schoollogos_item"><img class="schoollogos_logo" src={`/images/schools/${s.file}`} alt={s.name} loading="lazy" /></li>)}
+      </ul>
+      <ul class="schoollogos_set" aria-hidden="true">
+        {schools.map((s) => <li class="schoollogos_item"><img class="schoollogos_logo" src={`/images/schools/${s.file}`} alt="" loading="lazy" /></li>)}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .schoollogos { display: flex; flex-direction: column; align-items: center; gap: var(--space-xl); mix-blend-mode: multiply; }
+  .schoollogos_title { color: var(--text-primary); text-align: center; }
+  /* Wider than the page column: runs to 32px from the window edges, as in Figma */
+  .schoollogos_rail { width: calc(100vw - var(--space-xl) * 2); overflow: hidden; }
+  /* Two copies side by side; sliding left by one copy's width loops seamlessly */
+  .schoollogos_track { display: flex; width: max-content; animation: schoollogos-slide 70s linear infinite; }
+  @media (prefers-reduced-motion: reduce) { .schoollogos_track { animation: none; } }
+  .schoollogos_set { display: flex; align-items: center; gap: 56px; padding: 0 56px 0 0; margin: 0; list-style: none; }
+  .schoollogos_item { flex: none; display: flex; align-items: center; justify-content: center; height: 80px; }
+  .schoollogos_logo { display: block; width: auto; height: auto; max-height: 80px; max-width: 120px; object-fit: contain; }
+  @keyframes schoollogos-slide { to { transform: translateX(-50%); } }
+</style>

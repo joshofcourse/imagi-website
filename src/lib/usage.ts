@@ -38,17 +38,26 @@ const containers = [
 const pageLabel = (route: string) => templatePages[route]?.label ?? route;
 const pageWeight = (route: string) => templatePages[route]?.count ?? 1;
 
-/** Routes that end up containing `name`, directly or through other components (BaseLayout → every page). */
-function routesUsing(name: string, seen = new Set<string>()): Set<string> {
+/** Counts `class="… name …"` tokens (also inside class:list / template strings). */
+const countClass = (src: string, cls: string) => {
+  const c = cls.replace(/[-]/g, '\\-');
+  const token = `(?<![\\w-])${c}(?![\\w-])`;
+  const re = new RegExp(`class=(?:"[^"]*?${token}[^"]*"|\\{\`[^\`]*?${token}[^\`]*\`\\})`, 'g');
+  return (strip(src).match(re) ?? []).length;
+};
+
+type Counter = (src: string) => number;
+
+/** Routes that end up containing a match, directly or through other components (BaseLayout → every page). */
+function routesMatching(counter: Counter, self?: string, seen = new Set<string>()): Set<string> {
   const out = new Set<string>();
-  if (seen.has(name)) return out;
-  seen.add(name);
-  if (name === 'BaseLayout') {
-    for (const p of pages) out.add(p.route);
-    return out;
+  for (const p of pages) if (counter(p.src) > 0) out.add(p.route);
+  for (const c of containers) {
+    if (c.name === self || seen.has(c.name) || counter(c.src) === 0) continue;
+    seen.add(c.name);
+    if (c.name === 'BaseLayout') { for (const p of pages) out.add(p.route); continue; }
+    for (const r of routesMatching((src) => count(src, c.name), c.name, seen)) out.add(r);
   }
-  for (const p of pages) if (count(p.src, name) > 0) out.add(p.route);
-  for (const c of containers) if (c.name !== name && count(c.src, name) > 0) for (const r of routesUsing(c.name, seen)) out.add(r);
   return out;
 }
 
@@ -63,16 +72,16 @@ export interface Usage {
   affected: string[];
 }
 
-export function usage(name: string): Usage {
+function usageBy(counter: Counter, self?: string): Usage {
   const direct = pages
-    .map((p) => ({ route: p.route, label: pageLabel(p.route), uses: count(p.src, name) }))
+    .map((p) => ({ route: p.route, label: pageLabel(p.route), uses: counter(p.src) }))
     .filter((d) => d.uses > 0)
     .sort((a, b) => b.uses - a.uses || a.route.localeCompare(b.route));
   const inside = containers
-    .filter((c) => c.name !== name)
-    .map((c) => ({ name: c.name, uses: count(c.src, name) }))
+    .filter((c) => c.name !== self)
+    .map((c) => ({ name: c.name, uses: counter(c.src) }))
     .filter((c) => c.uses > 0);
-  const routes = [...routesUsing(name)].sort();
+  const routes = [...routesMatching(counter, self)].sort();
   return {
     direct,
     directTotal: direct.reduce((a, d) => a + d.uses, 0),
@@ -80,6 +89,26 @@ export function usage(name: string): Usage {
     affectedPages: routes.reduce((a, r) => a + pageWeight(r), 0),
     affected: routes.map(pageLabel),
   };
+}
+
+/** Where a component (by file name) is used. */
+export const usage = (name: string) => usageBy((src) => count(src, name), name);
+/** Where a global layout class (e.g. "section", "grid") is used. */
+export const classUsage = (cls: string) => usageBy((src) => countClass(src, cls));
+
+const cssSrc = {
+  ...(import.meta.glob('../styles/*.css', { query: '?raw', import: 'default', eager: true }) as Record<string, string>),
+  ...compSrc,
+  ...layoutSrc,
+  ...pageSrc,
+};
+/** How many times a CSS variable is referenced with var(--name), and in which files. */
+export function tokenUsage(token: string) {
+  const re = new RegExp(`var\\(${token.replace(/[-]/g, '\\-')}\\)`, 'g');
+  const files = Object.entries(cssSrc)
+    .map(([file, src]) => ({ file: file.replace('../', 'src/'), uses: (src.match(re) ?? []).length }))
+    .filter((f) => f.uses > 0);
+  return { total: files.reduce((a, f) => a + f.uses, 0), files };
 }
 
 /** The first doc comment in a component file (its description). */

@@ -35,8 +35,8 @@ const Tag = href ? 'a' : 'button';
 <style>
   .button {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: var(--space-xs);
     border: var(--border-thick) solid transparent;
     border-radius: var(--radius-pill);
@@ -46,11 +46,13 @@ const Tag = href ? 'a' : 'button';
     max-width: 100%;
     cursor: pointer;
     transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+    padding-top: 17px;
+    min-height: 80px;
   }
   @media (min-width: 640px) { .button { white-space: nowrap; } }
-  .button--s { padding: 6px var(--space-md); font-size: var(--label-s); line-height: var(--label-s-lh); min-height: 36px; }
-  .button--m { padding: 10px var(--space-lg); font-size: var(--label-m); line-height: var(--label-m-lh); min-height: 48px; }
-  .button--l { padding: 14px var(--space-xl); font-size: var(--label-l); line-height: var(--label-l-lh); min-height: 56px; }
+  .button--s { padding: 6px var(--space-md); font-size: var(--body-xs); line-height: var(--body-lh); min-height: 36px; }
+  .button--m { padding: 10px var(--space-lg); font-size: var(--body-s); line-height: var(--body-lh); min-height: 48px; }
+  .button--l { padding: 14px var(--space-xl); font-size: var(--body-m); line-height: var(--body-lh); min-height: 56px; }
 
   .button--primary { background: var(--action-primary); color: var(--text-inverse); }
   .button--primary:hover { background: var(--action-primary-hover); }

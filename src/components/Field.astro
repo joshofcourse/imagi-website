@@ -18,32 +18,34 @@ const id = `field-${name}`;
 <div class:list={['field', { 'field--full': full || type === 'textarea' || type === 'checkboxes' }]}>
   {type === 'checkboxes' ? (
     <fieldset class="field_group">
-      <legend class="text-label-m">{label}{required && <span aria-hidden="true">*</span>}</legend>
+      <legend class="text-body-s-medium">{label}{required && <span aria-hidden="true">*</span>}</legend>
       <div class="field_options">
         {options.map((o) => (
-          <label class="field_check text-body-s"><input type="checkbox" name={name} value={o} /> <span>{o}</span></label>
+          <label class="field_check text-body-s"><input class="field_checkbox" type="checkbox" name={name} value={o} /> <span>{o}</span></label>
         ))}
       </div>
     </fieldset>
   ) : (
-    <label class="text-label-m" for={id}>{label}{required && <span aria-hidden="true">*</span>}</label>
+    <label class="text-body-s-medium" for={id}>{label}{required && <span aria-hidden="true">*</span>}</label>
   )}
   {type === 'checkboxes' ? null : type === 'textarea' ? (
-    <textarea id={id} name={name} required={required} placeholder={placeholder} rows="5" />
+    <textarea class="field_textarea" id={id} name={name} required={required} placeholder={placeholder} rows="5" />
   ) : type === 'select' ? (
-    <select id={id} name={name} required={required}>
+    <select class="field_select" id={id} name={name} required={required}>
       <option value="">Please select</option>
       {options.map((o) => <option>{o}</option>)}
     </select>
   ) : (
-    <input id={id} name={name} type={type} required={required} placeholder={placeholder} />
+    <input class="field_input" id={id} name={name} type={type} required={required} placeholder={placeholder} />
   )}
 </div>
 
 <style>
   .field { display: flex; flex-direction: column; gap: var(--space-xs); }
   .field--full { grid-column: 1 / -1; }
-  input, select, textarea {
+
+  /* Text, email, tel and number inputs */
+  .field_input {
     width: 100%;
     padding: var(--space-sm) var(--space-md);
     min-height: 48px;
@@ -52,10 +54,47 @@ const id = `field-${name}`;
     background: var(--surface-page);
     font-size: var(--body-s);
   }
-  textarea { resize: vertical; }
+  .field_input:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgb(128 220 30 / 0.25); }
+
+  .field_select {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    min-height: 48px;
+    border: var(--border-thin) solid var(--border-default);
+    border-radius: var(--radius-sm);
+    background: var(--surface-page);
+    font-size: var(--body-s);
+  }
+  .field_select:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgb(128 220 30 / 0.25); }
+
+  .field_textarea {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    min-height: 48px;
+    border: var(--border-thin) solid var(--border-default);
+    border-radius: var(--radius-sm);
+    background: var(--surface-page);
+    font-size: var(--body-s);
+    resize: vertical;
+  }
+  .field_textarea:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgb(128 220 30 / 0.25); }
+
+  /* type="checkboxes": a group of tick boxes */
   .field_group { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
   .field_options { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--space-xs) var(--space-lg); }
   .field_check { display: flex; gap: var(--space-xs); align-items: flex-start; cursor: pointer; }
-  .field_check input { width: 18px; height: 18px; min-height: 0; padding: 0; flex: none; margin-top: 2px; accent-color: var(--action-primary); }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgb(128 220 30 / 0.25); }
+  .field_checkbox {
+    width: 18px;
+    height: 18px;
+    min-height: 0;
+    padding: 0;
+    border: var(--border-thin) solid var(--border-default);
+    border-radius: var(--radius-sm);
+    background: var(--surface-page);
+    font-size: var(--body-s);
+    flex: none;
+    margin-top: 2px;
+    accent-color: var(--action-primary);
+  }
+  .field_checkbox:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgb(128 220 30 / 0.25); }
 </style>

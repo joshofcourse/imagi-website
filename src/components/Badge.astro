@@ -1,7 +1,7 @@
 ---
-/** Small pill label: eyebrows, tags and status chips. Matches the Figma Badge component. */
+/** Small label with 8px corners: eyebrows, tags and status chips. Matches the Figma Badge component. */
 interface Props {
-  tone?: 'brand' | 'neutral' | 'dark' | 'accent' | 'outline';
+  tone?: 'brand' | 'neutral' | 'dark' | 'accent' | 'outline' | 'lime' | 'pink';
   size?: 's' | 'm';
 }
 
@@ -15,15 +15,19 @@ const { tone = 'brand', size = 's' } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: var(--space-2xs);
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-sm);
     font-weight: 500;
     white-space: nowrap;
   }
-  .badge--s { padding: var(--space-2xs) var(--space-sm); font-size: var(--label-s); line-height: var(--label-s-lh); }
-  .badge--m { padding: 6px var(--space-md); font-size: var(--label-m); line-height: var(--label-m-lh); }
+  .badge--s { padding: var(--space-2xs) 10px; font-size: var(--body-xs); line-height: var(--body-lh); }
+  .badge--m { padding: 6px var(--space-sm); font-size: var(--body-s); line-height: var(--body-lh); }
   .badge--brand { background: var(--surface-highlight); color: var(--text-primary); }
   .badge--neutral { background: var(--surface-muted); color: var(--text-primary); }
   .badge--dark { background: var(--surface-dark); color: var(--text-inverse); }
   .badge--accent { background: var(--surface-accent); color: var(--text-primary); }
+  /* Lime chip on Zest panels (Figma: Badge Tone=Zest) */
+  .badge--lime { background: var(--surface-brand); color: var(--text-primary); }
+  /* Pink chip on Blossom panels (Figma: Badge Tone=Dark Pink) */
+  .badge--pink { background: var(--color-pink); color: var(--text-primary); }
   .badge--outline { box-shadow: inset 0 0 0 var(--border-thin) var(--border-strong); color: var(--text-primary); }
 </style>

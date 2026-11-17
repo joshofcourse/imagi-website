@@ -1,20 +1,149 @@
 ---
-/** "Real student projects" cards — apps students built in imagi with Lovable. Edit the list below. */
-import Card from './Card.astro';
-import Grid from './Grid.astro';
+/**
+ * "Real student projects" — an endless slider of apps students built in imagi with Lovable (Figma: Section — Real student projects).
+ * The middle slide is full size, its neighbours sit either side at 80%. Arrows (or a swipe) move one slide; it loops forever.
+ * Edit the list below. Laptop images are in /public/images/projects/ (cropped tight to the laptop, transparent background).
+ */
+import Button from './Button.astro';
+import Icon from './Icon.astro';
 
 const projects = [
-  { title: 'Easyan', image: 'student-prj_05.png', url: 'https://easyan.lovable.app/', text: 'A tool that makes 3D model creation simple. Design and build in three dimensions, right from the browser.' },
-  { title: 'Glitch Event', image: 'student-prj_02.png', url: 'https://glitch-event-hub.lovable.app/', text: 'A platform where the world is glitched, enemies get harder, and the final boss throws energy rings.' },
-  { title: 'Gorilla in the Jungle', image: 'student-prj_04.png', url: 'https://sky-high-flappy-bird.lovable.app/', text: 'A Flappy Bird-inspired game where players guide a gorilla through the jungle, avoiding obstacles.' },
-  { title: 'Team Balancer', image: 'student-prj_03.png', url: 'https://skill-balanced-teams.lovable.app/', text: 'An app that creates fair teams based on player skills.' },
+  {
+    title: 'Easyan',
+    image: 'laptop-easyan.webp',
+    url: 'https://easyan.lovable.app/',
+    text: 'A tool that makes 3D model creation simple. Design and build in three dimensions, right from the browser.',
+    color: 'zest',
+  },
+  {
+    title: 'Glitch Event',
+    image: 'laptop-glitch-event.webp',
+    url: 'https://glitch-event-hub.lovable.app/',
+    text: 'A platform where the world is glitched, enemies get harder, and the final boss throws energy rings.',
+    color: 'blossom',
+  },
+  {
+    title: 'Gorilla in the Jungle',
+    image: 'laptop-gorilla-in-the-jungle.webp',
+    url: 'https://sky-high-flappy-bird.lovable.app/',
+    text: 'A Flappy Bird-inspired game where players guide a gorilla through the jungle, avoiding obstacles.',
+    color: 'orange',
+  },
+  {
+    title: 'Team Balancer',
+    image: 'laptop-team-balancer.webp',
+    url: 'https://skill-balanced-teams.lovable.app/',
+    text: 'An app that creates fair teams based on player skills.',
+    color: 'leaf',
+  },
 ];
 ---
 
-<Grid cols={4}>
-  {projects.map((p) => (
-    <Card title={p.title} image={`/images/projects/${p.image}`} href={p.url} linkLabel="Try it" external>
-      {p.text}
-    </Card>
-  ))}
-</Grid>
+<div class="projects" data-figma="Site/StudentProjects" aria-roledescription="carousel" aria-label="Real student projects">
+  <div class="projects_viewport">
+    <div class="projects_track">
+      {
+        projects.map((p, i) => (
+          <article class={`projects_slide projects_slide--${p.color}`} aria-roledescription="slide" aria-label={`${i + 1} of ${projects.length}: ${p.title}`}>
+            <img class="projects_laptop" src={`/images/projects/${p.image}`} alt={`${p.title} on a laptop`} loading="lazy" />
+            <div class="projects_copy">
+              <div class="projects_text">
+                <h3 class="projects_title text-heading-l">{p.title}</h3>
+                <p class="projects_desc text-body-m">{p.text}</p>
+              </div>
+              <Button href={p.url} size="s" external>Try it!</Button>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+  <div class="projects_controls">
+    <button class="projects_arrow projects_arrow--prev" type="button" aria-label="Previous project"><Icon name="arrow-left" size={20} /></button>
+    <button class="projects_arrow projects_arrow--next" type="button" aria-label="Next project"><Icon name="arrow-right" size={20} /></button>
+  </div>
+</div>
+
+<style>
+  /* The slider runs edge to edge of the window; slides are 1000px (or 70% of the window) and keep Figma's 1000×600 shape */
+  .projects { --projects-w: min(1000px, 70vw); --projects-h: calc(var(--projects-w) * 0.6); display: flex; flex-direction: column; align-items: center; gap: var(--space-xl); }
+  @media (max-width: 899px) { .projects { --projects-w: calc(100vw - var(--space-3xl)); --projects-h: calc(var(--projects-w) * 1.5); } }
+  .projects_viewport { position: relative; width: 100vw; height: var(--projects-h); overflow: hidden; touch-action: pan-y; }
+  .projects_track { position: absolute; inset: 0; }
+  /* Each slide is centred, then moved and scaled by the script (--projects-x, --projects-scale) */
+  .projects_slide { position: absolute; top: 0; left: 50%; width: var(--projects-w); height: var(--projects-h); margin-left: calc(var(--projects-w) / -2); transform: translateX(var(--projects-x, 0px)) scale(var(--projects-scale, 1)); transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); -webkit-mask: url(/images/projects/slide-shape.svg) center / 100% 100% no-repeat; mask: url(/images/projects/slide-shape.svg) center / 100% 100% no-repeat; }
+  @media (prefers-reduced-motion: reduce) { .projects_slide { transition: none; } }
+  /* Slide shape (in the rule above): the Figma vector as a mask, so the laptop is cut by the same curved edge */
+  @media (max-width: 899px) { .projects_slide { -webkit-mask: none; mask: none; border-radius: var(--radius-lg); overflow: hidden; } }
+  .projects_slide--zest { background: var(--color-zest); }
+  .projects_slide--blossom { background: var(--color-blossom); }
+  .projects_slide--orange { background: var(--color-icon-orange); }
+  .projects_slide--leaf { background: var(--color-leaf); }
+  /* Laptop sits on the right and runs off the slide's edge, as in Figma */
+  .projects_laptop { position: absolute; left: 47.4%; top: 12.8%; width: 72.2%; height: auto; max-width: none; pointer-events: none; }
+  @media (max-width: 899px) { .projects_laptop { left: 10%; top: auto; bottom: 5%; width: 100%; } }
+  /* Text block: left side, vertically centred */
+  .projects_copy { position: absolute; left: 9.1%; top: 50%; translate: 0 -50%; width: 30.8%; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-lg); }
+  @media (max-width: 899px) { .projects_copy { top: var(--space-lg); translate: none; left: var(--space-lg); width: calc(100% - var(--space-lg) * 2); gap: var(--space-md); } }
+  .projects_text { display: flex; flex-direction: column; gap: var(--space-md); }
+  .projects_title { color: var(--text-primary); margin: 0; }
+  .projects_desc { color: var(--text-primary); margin: 0; }
+  .projects_controls { display: flex; gap: var(--space-xs); }
+  .projects_arrow { display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: var(--radius-pill); background: var(--color-moss); color: var(--text-inverse); cursor: pointer; transition: background-color 0.15s; }
+  .projects_arrow:hover { background: var(--color-forest); }
+</style>
+
+<script>
+  // Endless slider: every slide gets an offset from the current one (…-2, -1, 0, 1, 2…) and is placed by it.
+  // A slide wrapping round from one end to the other jumps off-screen first, so it never sweeps across the middle.
+  document.querySelectorAll<HTMLElement>('.projects').forEach((root) => {
+    const slides = [...root.querySelectorAll<HTMLElement>('.projects_slide')];
+    const n = slides.length;
+    if (!n) return;
+    // Each slide's offset from the middle (…-2, -1, 0, 1, 2…). Moving shifts every offset by one; a slide that goes
+    // past the far end wraps to the other side, jumping off-screen first so it slides in rather than sweeping across.
+    const offsets = slides.map((_, i) => (i > n / 2 ? i - n : i));
+    const gap = 39; // px between slides (Figma)
+    const xFor = (d: number, w: number) => {
+      if (d === 0) return 0;
+      const step = w * 0.9 + gap; // half a full slide + half an 80% slide + gap
+      return Math.sign(d) * (step + (Math.abs(d) - 1) * (w * 0.8 + gap));
+    };
+    function set(s: HTMLElement, d: number, w: number) {
+      s.style.setProperty('--projects-x', `${xFor(d, w)}px`);
+      s.style.setProperty('--projects-scale', d === 0 ? '1' : '0.8');
+      s.style.zIndex = String(10 - Math.abs(d));
+      s.toggleAttribute('inert', d !== 0);
+      s.setAttribute('aria-hidden', String(d !== 0));
+    }
+    function place(dir: number) {
+      const w = slides[0].offsetWidth;
+      slides.forEach((s, i) => {
+        let d = offsets[i] - dir;
+        let wrapped = false;
+        if (d > n / 2) { d -= n; wrapped = true; }
+        if (d < -n / 2) { d += n; wrapped = true; }
+        if (wrapped || dir === 0) {
+          // start just beyond where it's heading (off-screen), with no animation
+          s.style.transition = 'none';
+          set(s, dir === 0 ? d : d + Math.sign(d || 1), w);
+          void s.offsetWidth;
+          s.style.transition = '';
+        }
+        offsets[i] = d;
+        if (dir === 0) { s.style.transition = 'none'; set(s, d, w); void s.offsetWidth; s.style.transition = ''; }
+        else set(s, d, w);
+      });
+    }
+    const go = (dir: number) => place(dir);
+    root.querySelector('.projects_arrow--prev')?.addEventListener('click', () => go(-1));
+    root.querySelector('.projects_arrow--next')?.addEventListener('click', () => go(1));
+    // Swipe on touch screens
+    const viewport = root.querySelector<HTMLElement>('.projects_viewport');
+    let startX: number | null = null;
+    viewport?.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+    viewport?.addEventListener('pointerup', (e) => { if (startX === null) return; const dx = e.clientX - startX; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); startX = null; });
+    window.addEventListener('resize', () => place(0));
+    place(0);
+  });
+</script>

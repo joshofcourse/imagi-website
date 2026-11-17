@@ -58,7 +58,7 @@
 
   --action-primary: var(--color-forest);
   --action-primary-hover: var(--color-moss);
-  --action-secondary: var(--color-lime);
+  --action-secondary: var(--color-zest);
   --action-secondary-hover: var(--color-sprout);
 
   /* ---------- Tokens: space ---------- */
@@ -71,8 +71,17 @@
   --space-2xl: 48px;
   --space-3xl: 64px;
   --space-4xl: 96px;
-  /* Vertical padding of every page section */
-  --section-y: clamp(var(--space-3xl), 8vw, var(--space-4xl));
+  /* ---------- Layout spacing (semantic) ----------
+     These point at the space scale above. Change one and every place that uses it follows. */
+  --section-padding: clamp(var(--space-3xl), 8vw, var(--space-4xl)); /* top/bottom of every section */
+  --section-padding-tight: calc(var(--section-padding) / 2);          /* .section--tight */
+  --hero-padding-top: var(--space-xl);                                /* space under the nav */
+  --section-gap: var(--space-2xl);       /* between blocks inside a section (heading → grid) */
+  --content-gap: var(--space-md);        /* between heading, text and buttons in a block */
+  --grid-gap: var(--space-lg);           /* between cards in a grid */
+  --split-gap: var(--space-3xl);         /* between image and text in a split */
+  --card-padding: var(--space-xl);       /* inside cards, forms, testimonials */
+  --section-y: var(--section-padding);   /* old name, kept for compatibility */
 
   /* ---------- Tokens: radius & border ---------- */
   --radius-sm: 8px;
@@ -85,7 +94,7 @@
   /* ---------- Tokens: layout ---------- */
   --container: 1138px;
   --gutter: 24px;
-  --header: 80px;
+  --header: 100px;
 
   /* ---------- Tokens: shadow (Forest-tinted) ---------- */
   --shadow-s: 0 2px 8px rgb(21 53 14 / 0.06);
@@ -111,21 +120,26 @@
   --heading-m-lh: 1.25;
   --heading-s: 1.25rem;                                  /* 20 */
   --heading-s-lh: 1.3;
-  --body-l: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);  /* 20 */
-  --body-l-lh: 1.4;
-  --body-m: 1.125rem;                                    /* 18 */
-  --body-m-lh: 1.44;
-  --body-s: 1rem;                                        /* 16 */
-  --body-s-lh: 1.375;
-  --label-l: 1.125rem;                                   /* 18 */
-  --label-l-lh: 1.22;
-  --label-m: 1rem;                                       /* 16 */
-  --label-m-lh: 1.25;
-  --label-s: 0.875rem;                                   /* 14 */
-  --label-s-lh: 1.29;
+  /* Body: six sizes, each used in Regular (400) or Medium (500). One line height for all of them. */
+  --body-xl: 1.4375rem;                                  /* 23 */
+  --body-l: 1.3125rem;                                   /* 21 */
+  --body-m: 1.1875rem;                                   /* 19 */
+  --body-s: 1.0625rem;                                   /* 17 */
+  --body-xs: 0.9375rem;                                  /* 15 */
+  --body-2xs: 0.8125rem;                                 /* 13 */
+  --body-lh: 1.3;
 }
 
-/* ---------- Reset & base ---------- */
+/* =====================================================================
+   HOW THIS FILE IS WRITTEN (keep it this way so it stays easy to edit in Stacki)
+   - One rule per class. No grouped selectors (".a, .b") and no nested ones (".a .b").
+   - Every element that needs styling gets its own class in the HTML.
+   - A class's phone/desktop changes sit directly under it, one class per @media block.
+   - Variants are modifier classes on the element itself (e.g. hero_text--left), not parent-based.
+   - Only exceptions: the base reset (plain elements) and .prose, which styles Markdown that can't carry classes.
+   ===================================================================== */
+
+/* ---------- Reset & base (plain elements) ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -133,42 +147,364 @@ body {
   font-family: var(--font-family);
   font-variation-settings: var(--cut-text);
   font-size: var(--body-m);
-  line-height: var(--body-m-lh);
+  line-height: var(--body-lh);
   color: var(--text-primary);
   background: var(--surface-page);
   -webkit-font-smoothing: antialiased;
 }
-img, svg, video { display: block; max-width: 100%; }
-img { height: auto; }
+img { display: block; max-width: 100%; height: auto; }
+svg { display: block; max-width: 100%; }
+video { display: block; max-width: 100%; }
 a { color: inherit; }
-button, input, select, textarea { font: inherit; color: inherit; }
+button { font: inherit; color: inherit; }
+input { font: inherit; color: inherit; }
+select { font: inherit; color: inherit; }
+textarea { font: inherit; color: inherit; }
 :focus-visible { outline: var(--border-thick) solid var(--border-focus); outline-offset: 3px; }
 
-/* ---------- Text styles (match Figma text styles 1:1) ---------- */
-.text-display-l, .text-display-m, .text-display-s,
-.text-heading-l, .text-heading-m { font-variation-settings: var(--cut-display); text-wrap: balance; }
-.text-display-l { font-size: var(--display-l); line-height: var(--display-l-lh); font-weight: 700; letter-spacing: -0.01em; }
-.text-display-m { font-size: var(--display-m); line-height: var(--display-m-lh); font-weight: 700; letter-spacing: -0.01em; }
-.text-display-s { font-size: var(--display-s); line-height: var(--display-s-lh); font-weight: 700; letter-spacing: -0.005em; }
-.text-heading-l { font-size: var(--heading-l); line-height: var(--heading-l-lh); font-weight: 600; }
-.text-heading-m { font-size: var(--heading-m); line-height: var(--heading-m-lh); font-weight: 600; }
+/* Main content sits on top of the footer with rounded bottom corners; the footer slides out from underneath (see Footer.astro).
+   overflow: clip (not hidden) so sticky elements inside still work. */
+main { position: relative; z-index: 1; background: var(--surface-page); border-radius: 0 0 var(--radius-lg) var(--radius-lg); overflow: clip; }
+
+/* ---------- Text styles (match the 18 Figma text styles: Display L/M/S, Heading L/M/S, Body XL–2XS in Regular and Medium) ---------- */
+.text-display-l { font-size: var(--display-l); line-height: var(--display-l-lh); font-weight: 700; letter-spacing: -0.01em; font-variation-settings: var(--cut-display); text-wrap: balance; }
+.text-display-m { font-size: var(--display-m); line-height: var(--display-m-lh); font-weight: 700; letter-spacing: -0.01em; font-variation-settings: var(--cut-display); text-wrap: balance; }
+.text-display-s { font-size: var(--display-s); line-height: var(--display-s-lh); font-weight: 700; letter-spacing: -0.005em; font-variation-settings: var(--cut-display); text-wrap: balance; }
+.text-heading-l { font-size: var(--heading-l); line-height: var(--heading-l-lh); font-weight: 600; font-variation-settings: var(--cut-display); text-wrap: balance; }
+.text-heading-m { font-size: var(--heading-m); line-height: var(--heading-m-lh); font-weight: 600; font-variation-settings: var(--cut-display); text-wrap: balance; }
 .text-heading-s { font-size: var(--heading-s); line-height: var(--heading-s-lh); font-weight: 700; font-variation-settings: var(--cut-text); text-wrap: balance; }
-.text-body-l { font-size: var(--body-l); line-height: var(--body-l-lh); font-weight: 400; }
-.text-body-m { font-size: var(--body-m); line-height: var(--body-m-lh); font-weight: 400; }
-.text-body-s { font-size: var(--body-s); line-height: var(--body-s-lh); font-weight: 400; }
-.text-label-l { font-size: var(--label-l); line-height: var(--label-l-lh); font-weight: 500; }
-.text-label-m { font-size: var(--label-m); line-height: var(--label-m-lh); font-weight: 500; }
-.text-label-s { font-size: var(--label-s); line-height: var(--label-s-lh); font-weight: 500; }
+.text-body-xl { font-size: var(--body-xl); line-height: var(--body-lh); font-weight: 400; }
+.text-body-xl-medium { font-size: var(--body-xl); line-height: var(--body-lh); font-weight: 500; }
+.text-body-l { font-size: var(--body-l); line-height: var(--body-lh); font-weight: 400; }
+.text-body-l-medium { font-size: var(--body-l); line-height: var(--body-lh); font-weight: 500; }
+.text-body-m { font-size: var(--body-m); line-height: var(--body-lh); font-weight: 400; }
+.text-body-m-medium { font-size: var(--body-m); line-height: var(--body-lh); font-weight: 500; }
+.text-body-s { font-size: var(--body-s); line-height: var(--body-lh); font-weight: 400; }
+.text-body-s-medium { font-size: var(--body-s); line-height: var(--body-lh); font-weight: 500; }
+.text-body-xs { font-size: var(--body-xs); line-height: var(--body-lh); font-weight: 400; }
+.text-body-xs-medium { font-size: var(--body-xs); line-height: var(--body-lh); font-weight: 500; }
+.text-body-2xs { font-size: var(--body-2xs); line-height: var(--body-lh); font-weight: 400; }
+.text-body-2xs-medium { font-size: var(--body-2xs); line-height: var(--body-lh); font-weight: 500; }
 .text-secondary { color: var(--text-secondary); }
 
-/* ---------- Layout ---------- */
-/* Generic only: max width, centring and gutters. Section layout goes on a `*_inner` element inside it. */
-.container {
-  width: 100%;
-  max-width: calc(var(--container) + var(--gutter) * 2);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-}
-
+/* ---------- Helpers ---------- */
+/* Max width, centring and gutters */
+.container { width: 100%; max-width: calc(var(--container) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
 /* Visually hidden, still read by screen readers */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- Section: <section class="section section--subtle"><div class="section_inner">…</div></section> ---------- */
+.section { padding-block: var(--section-padding); }
+.section--tight { padding-block: var(--section-padding-tight); }
+.section--page { background: var(--surface-page); }
+.section--subtle { background: var(--surface-subtle); }
+.section--muted { background: var(--surface-muted); }
+.section--brand-soft { background: var(--surface-brand-soft); }
+.section--dark { background: var(--surface-dark); color: var(--text-inverse); }
+.section_inner { width: 100%; max-width: calc(var(--container) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); display: flex; flex-direction: column; gap: var(--section-gap); }
+.section_inner--narrow { max-width: calc(760px + var(--gutter) * 2); }
+
+/* ---------- Hero: first band of a page. The nav floats over it, so its top padding starts behind the nav ---------- */
+.hero { padding-block: calc(var(--header) + var(--hero-padding-top)) var(--section-padding); }
+.hero--page { background: var(--surface-page); }
+.hero--subtle { background: var(--surface-subtle); }
+.hero--muted { background: var(--surface-muted); }
+.hero--brand-soft { background: var(--surface-brand-soft); }
+.hero--dark { background: var(--surface-dark); color: var(--text-inverse); }
+.hero_inner { width: 100%; max-width: calc(var(--container) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); display: grid; gap: var(--section-gap); align-items: center; }
+/* Text + image side by side from 900px */
+@media (min-width: 900px) { .hero_inner--split { grid-template-columns: 1fr 1fr; gap: var(--split-gap); } }
+.hero_text { display: flex; flex-direction: column; gap: var(--space-lg); align-items: center; text-align: center; max-width: 860px; margin-inline: auto; }
+/* Left-aligned hero text (use in a split hero) */
+@media (min-width: 900px) { .hero_text--left { align-items: flex-start; text-align: left; margin: 0; } }
+.hero_lead { display: flex; flex-direction: column; gap: var(--space-sm); color: var(--text-secondary); max-width: 680px; }
+.hero_lead--inverse { color: inherit; opacity: 0.85; }
+.hero_meta { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-xs); }
+@media (min-width: 900px) { .hero_meta--left { justify-content: flex-start; } }
+.hero_actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-sm); }
+@media (min-width: 900px) { .hero_actions--left { justify-content: flex-start; } }
+.hero_image { width: 100%; border-radius: var(--radius-lg); }
+
+/* ---------- Home hero: Moss card (cut to the Figma frame vector) on Sprout, 3D artwork, centred copy, AppMockup hanging off the bottom ---------- */
+.homehero { background: linear-gradient(to bottom, var(--color-sprout) 42%, var(--color-cream) 100%); padding: var(--space-2xl) var(--space-xl) calc(var(--homehero-overhang) + var(--section-padding)); --homehero-overhang: calc(var(--space-4xl) + var(--space-3xl)); }
+@media (max-width: 699px) { .homehero { padding-inline: var(--space-sm); } }
+/* The card. It starts behind the floating nav (as in Figma); its copy starts below the nav */
+.homehero_card { position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center; gap: var(--space-3xl); padding: calc(var(--header) + var(--space-xs)) var(--gutter) 0; color: var(--text-inverse); --homehero-corner: clamp(80px, 19vw, 264px); }
+/* Card surface: Moss, cut to the hero frame vector from Figma (public/images/home/hero/hero-frame*.svg).
+   9-sliced: corners keep a fixed size, edge pieces stretch, so the shape keeps its proportions at any width.
+   The 3D artwork sits inside and is clipped by the same shape. */
+.homehero_art {
+  position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+  background: var(--color-moss);
+  -webkit-mask:
+    url(/images/home/hero/hero-frame-tl.svg) left top / var(--homehero-corner) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-tr.svg) right top / var(--homehero-corner) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-bl.svg) left bottom / var(--homehero-corner) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-br.svg) right bottom / var(--homehero-corner) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-t.svg) center top / calc(100% - var(--homehero-corner) * 2) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-b.svg) center bottom / calc(100% - var(--homehero-corner) * 2) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-l.svg) left center / var(--homehero-corner) calc(100% - var(--homehero-corner) * 2) no-repeat,
+    url(/images/home/hero/hero-frame-r.svg) right center / var(--homehero-corner) calc(100% - var(--homehero-corner) * 2) no-repeat,
+    linear-gradient(#000 0 0) center / calc(100% - var(--homehero-corner) * 2 + 2px) calc(100% - var(--homehero-corner) * 2 + 2px) no-repeat;
+  mask:
+    url(/images/home/hero/hero-frame-tl.svg) left top / var(--homehero-corner) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-tr.svg) right top / var(--homehero-corner) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-bl.svg) left bottom / var(--homehero-corner) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-br.svg) right bottom / var(--homehero-corner) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-t.svg) center top / calc(100% - var(--homehero-corner) * 2) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-b.svg) center bottom / calc(100% - var(--homehero-corner) * 2) var(--homehero-corner) no-repeat,
+    url(/images/home/hero/hero-frame-l.svg) left center / var(--homehero-corner) calc(100% - var(--homehero-corner) * 2) no-repeat,
+    url(/images/home/hero/hero-frame-r.svg) right center / var(--homehero-corner) calc(100% - var(--homehero-corner) * 2) no-repeat,
+    linear-gradient(#000 0 0) center / calc(100% - var(--homehero-corner) * 2 + 2px) calc(100% - var(--homehero-corner) * 2 + 2px) no-repeat;
+}
+/* Bottom-left artwork, pinned to the bottom-left corner (193px up at full width, as in Figma) */
+.homehero_art-left { position: absolute; left: 0; bottom: calc(var(--homehero-corner) * 0.73); width: min(25.5%, 351px); height: auto; }
+@media (max-width: 699px) { .homehero_art-left { display: none; } }
+/* Right-hand artwork group; the crown and hoop are placed on it so they stay put as the card resizes */
+.homehero_art-right { position: absolute; right: 0; bottom: 0; width: min(20.9%, 287px); }
+@media (max-width: 699px) { .homehero_art-right { display: none; } }
+.homehero_art-ribbon { display: block; width: 100%; height: auto; }
+.homehero_art-crown { position: absolute; left: 32%; top: 29.3%; width: 39%; height: auto; }
+.homehero_art-hoop { position: absolute; left: 32%; top: 71%; width: 33.4%; height: auto; }
+.homehero_text { display: flex; flex-direction: column; align-items: center; gap: var(--space-lg); text-align: center; max-width: 760px; }
+.homehero_logos { display: flex; align-items: center; gap: var(--space-lg); color: var(--text-inverse); }
+@media (max-width: 699px) { .homehero_logos { gap: var(--space-md); } }
+.homehero_lovable { display: block; height: 26px; width: auto; }
+@media (max-width: 699px) { .homehero_lovable { height: 21px; } }
+.homehero_imagi { display: block; }
+@media (max-width: 699px) { .homehero_imagi { height: 19px; width: auto; } }
+.homehero_divider { width: 1px; align-self: stretch; background: currentColor; opacity: 0.8; }
+.homehero_title { color: var(--text-inverse); }
+/* The line that types out (study tools. / real apps. / …) — always its own line */
+.homehero_wordline { display: block; color: var(--color-sprout); min-height: 1lh; }
+@media (min-width: 900px) { .homehero_wordline { white-space: nowrap; } }
+.homehero_caret { display: inline-block; width: 0.07em; height: 0.82em; margin-left: 0.06em; vertical-align: -0.06em; border-radius: 2px; background: currentColor; animation: homehero-blink 1.05s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) { .homehero_caret { display: none; } }
+@keyframes homehero-blink { 50% { opacity: 0; } }
+.homehero_lead { max-width: 540px; }
+.homehero_actions { display: flex; flex-direction: column; align-items: center; gap: var(--space-md); margin-top: var(--space-sm); }
+.homehero_quote-link { color: inherit; }
+/* Wraps the AppMockup so it hangs below the card */
+.homehero_mockup { width: 100%; margin-bottom: calc(var(--homehero-overhang) * -1); }
+
+/* ---------- Home stats: four numbers on Cream with a green trail that draws in on scroll (script in index.astro).
+   --homestats-progress (0–1) is set by the script; the second stat rises with it on desktop. Positions follow Figma at 1440px. ---------- */
+.homestats { position: relative; overflow: hidden; background: var(--color-cream); padding: calc(var(--space-4xl) + var(--space-3xl)) 0 calc(var(--space-4xl) * 2 + var(--space-3xl)); --homestats-progress: 0; }
+@media (max-width: 999px) { .homestats { padding-block: var(--section-padding); } }
+.homestats_inner { position: relative; width: 100%; max-width: calc(var(--container) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
+.homestats_art { position: absolute; inset: 0; pointer-events: none; }
+@media (max-width: 999px) { .homestats_art { display: none; } }
+/* Trail: 905px wide, centred 44px left of the stats' left edge and 229px down, tilted like in Figma */
+.homestats_trail { position: absolute; width: 905px; height: auto; aspect-ratio: 940 / 260; left: calc(var(--gutter) - 44px - 452px); top: calc(229px - 125px); rotate: -4.5deg; }
+.homestats_donut { position: absolute; width: 74px; height: auto; right: calc(var(--gutter) - 97px); top: -118px; }
+.homestats_heart { position: absolute; width: 91px; height: auto; right: calc(var(--gutter) + 17px); top: 216px; }
+.homestats_row { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2xl) var(--space-xl); }
+@media (min-width: 1000px) { .homestats_row { grid-template-columns: repeat(4, 225px); justify-content: space-between; gap: 80px; } }
+.homestats_stat { display: flex; flex-direction: column; gap: var(--space-lg); }
+/* Rises 72px as the trail draws in (desktop only) */
+@media (min-width: 1000px) { .homestats_stat--bump { translate: 0 calc(var(--homestats-progress) * -72px); } }
+.homestats_value { color: var(--text-primary); }
+.homestats_label { color: var(--text-primary); margin-top: calc(var(--space-lg) * -1); }
+.homestats_note { color: var(--text-primary); }
+
+/* ---------- Home "How it works": photo cards with a coloured panel (white, Zest, Blossom). Desktop: each card sticks in the middle of the window and the next
+   slides over it; the covered card shrinks slightly and the panel lags (script in index.astro sets --homesteps-scale / --homesteps-shift).
+   Tablet and phone: the cards simply stack. ---------- */
+/* Background fades from Cream to white as you scroll through (script sets --homesteps-fade from 0 to 1) */
+.homesteps { background: color-mix(in srgb, var(--color-cream), var(--color-white) calc(var(--homesteps-fade, 0) * 100%)); padding-block: calc(var(--space-4xl) + var(--space-xs)) var(--section-padding); }
+.homesteps_inner { width: 100%; max-width: calc(var(--container) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); display: flex; flex-direction: column; gap: var(--space-3xl); }
+.homesteps_header { display: flex; flex-direction: column; align-items: center; gap: var(--space-md); text-align: center; max-width: 600px; margin-inline: auto; }
+.homesteps_heading { color: var(--text-primary); }
+.homesteps_intro { color: var(--text-secondary); }
+.homesteps_stack { display: flex; flex-direction: column; gap: var(--space-lg); --homesteps-card-h: min(600px, calc(100vh - var(--header) - var(--space-3xl))); }
+@media (min-width: 1000px) { .homesteps_stack { gap: 40vh; padding-bottom: 20vh; } }
+.homesteps_card { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 520px; padding: var(--space-sm); border-radius: calc(var(--radius-lg) + var(--radius-md)); box-shadow: var(--shadow-l); background: var(--color-moss); }
+@media (min-width: 1000px) { .homesteps_card { position: sticky; top: calc(50vh - var(--homesteps-card-h) / 2); height: var(--homesteps-card-h); min-height: 0; padding: var(--space-lg); scale: var(--homesteps-scale, 1); transform-origin: 50% 0; } }
+/* The photo carries the rounded corners, so the panel can hang outside the card while it slides up */
+.homesteps_photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.homesteps_panel { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-md); padding: var(--space-lg); border-radius: calc(var(--radius-md) + var(--radius-sm)); }
+/* Panel colours per step (Figma: White / Zest / Blossom) */
+.homesteps_panel--white { background: var(--color-white); }
+.homesteps_panel--zest { background: var(--color-zest); }
+.homesteps_panel--blossom { background: var(--color-blossom); }
+@media (min-width: 1000px) { .homesteps_panel { width: 400px; translate: 0 var(--homesteps-shift, 0px); } }
+/* Little 3D icons on each panel's top-right corner (positions from Figma); they ride along with the panel */
+.homesteps_icon { position: absolute; height: auto; pointer-events: none; }
+.homesteps_icon--cursor { width: 90px; top: -45px; right: 17px; }
+.homesteps_icon--rainbow { width: 111px; top: -48px; right: 30px; }
+.homesteps_icon--bulb { width: 61px; top: -49px; right: 40px; }
+.homesteps_copy { display: flex; flex-direction: column; gap: var(--space-sm); }
+.homesteps_title { color: var(--text-primary); }
+.homesteps_text { color: var(--text-primary); }
+
+/* ---------- "Real student projects" header: title + intro on the left, "Made with Lovable" on the right ---------- */
+.projects-header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-xl); }
+.projects-header_text { display: flex; flex-direction: column; gap: var(--space-md); max-width: 600px; }
+.projects-header_intro { color: var(--text-secondary); max-width: 408px; }
+.madewith { display: flex; flex-direction: column; gap: var(--space-md); }
+.madewith_label { color: var(--text-primary); }
+.madewith_logo { display: block; width: 188px; height: auto; }
+@media (max-width: 699px) { .madewith_logo { width: 140px; } }
+
+/* ---------- Home "Stories": left-aligned header, three News Cards 32px apart, outline button. Spacing from Figma ---------- */
+.stories { display: flex; flex-direction: column; align-items: flex-start; gap: calc(var(--space-xl) + var(--space-xs)); }
+.stories_header { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-md); max-width: 480px; }
+.stories_heading { color: var(--text-primary); }
+.stories_grid { display: grid; grid-template-columns: 1fr; gap: var(--space-xl); width: 100%; margin-top: calc(var(--space-xs) * -1); row-gap: var(--space-lg); column-gap: var(--space-lg); }
+@media (min-width: 900px) { .stories_grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.stories_more { display: flex; }
+
+/* ---------- Home TEDx band: full-width stage photo, dark fade at the bottom, copy left, speaker right, play button opens a modal ---------- */
+.tedx { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: clamp(560px, 56vw, 800px); overflow: hidden; background: var(--color-black); color: var(--text-inverse); }
+.tedx_stage { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Play button sits 64px above the centre, as in Figma */
+.tedx_play { position: absolute; left: 50%; top: calc(50% - 64px); translate: -50% -50%; z-index: 2; width: 64px; height: 64px; padding: 0; border: 0; border-radius: var(--radius-pill); background: none; color: var(--color-white); cursor: pointer; transition: scale 0.2s ease; }
+@media (max-width: 899px) { .tedx_play { top: calc(var(--space-4xl) + var(--space-xl)); } }
+.tedx_play:hover { scale: 1.08; }
+.tedx_play-icon { display: block; width: 64px; height: 64px; }
+.tedx_shade { position: relative; padding: 160px var(--gutter) 56px; background: linear-gradient(to top, rgb(0 0 0 / 0.8), rgb(0 0 0 / 0.5) 75%, rgb(0 0 0 / 0)); }
+.tedx_inner { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-xl); max-width: var(--container); margin-inline: auto; }
+.tedx_text { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; flex: 1 1 360px; max-width: 600px; }
+.tedx_logos { display: flex; align-items: center; gap: 17px; }
+.tedx_imagi { display: block; width: 108px; height: 24px; }
+.tedx_divider { width: 1px; align-self: stretch; background: var(--color-white); }
+/* Figma squeezes the TEDx artwork into 73×23 */
+.tedx_logo { display: block; width: 73px; height: 23px; object-fit: fill; }
+.tedx_title { color: var(--text-inverse); margin: 0; }
+.tedx_lead { color: var(--text-inverse); margin: 0; }
+.tedx_speaker { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-md); }
+.tedx_avatar { display: block; width: 64px; height: 64px; border-radius: var(--radius-pill); object-fit: cover; }
+.tedx_person { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.tedx_name { color: var(--text-inverse); margin: 0; }
+.tedx_role { color: var(--text-inverse); margin: 0; }
+/* Video modal: a native <dialog>, so Esc and focus are handled by the browser */
+/* margin: auto centres the dialog (the reset removes the browser's default) */
+.tedx_modal { margin: auto; width: min(1100px, calc(100vw - var(--space-xl) * 2), calc((100vh - var(--space-3xl) * 2) * 16 / 9)); max-width: none; padding: 0; border: 0; background: transparent; overflow: visible; }
+.tedx_modal::backdrop { background: rgb(14 23 4 / 0.85); }
+.tedx_modal-frame { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius-md); overflow: hidden; background: var(--color-black); box-shadow: var(--shadow-l); }
+.tedx_player { position: absolute; inset: 0; }
+.tedx_iframe { width: 100%; height: 100%; border: 0; display: block; }
+/* Sits just above the video's top-right corner, clear of YouTube's own buttons */
+.tedx_close { position: absolute; top: -56px; right: 0; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: var(--radius-pill); background: var(--color-white); color: var(--text-primary); cursor: pointer; }
+.tedx_close:hover { background: var(--color-zest); }
+
+/* ---------- Home closing CTA: dark band (Figma: CTA Band) with a student, 3D icons and two trails that burst out of it on scroll.
+   Positions are Figma's, in units of the band's width (--u = 1/1138 of it), so the picture scales as one piece.
+   Script in index.astro adds homecta--ready (start state) and homecta--burst (fly out), and swaps the left trail's still for its video. ---------- */
+.homecta { position: relative; container-type: inline-size; }
+.homecta_band { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: var(--space-xl); min-height: calc(100cqw * 584 / 1138); justify-content: center; padding: var(--space-4xl) var(--space-xl); border-radius: var(--radius-lg); background: linear-gradient(206.5deg, var(--color-black) 1%, var(--color-moss) 98%); color: var(--text-inverse); text-align: center; }
+@media (max-width: 999px) { .homecta_band { min-height: 0; padding: var(--space-3xl) var(--space-lg); } }
+.homecta_title { max-width: 482px; color: var(--text-inverse); margin: 0; }
+.homecta_highlight { color: var(--color-zest); }
+.homecta_text { max-width: 482px; color: var(--text-inverse); margin: calc(var(--space-sm) * -1) 0 0; }
+.homecta_actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-sm); }
+/* Art layer: same box as the band. Pieces sit outside the band's edges, so it isn't clipped once burst. */
+.homecta_art { --u: calc(100cqw / 1138); position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+@media (max-width: 999px) { .homecta_art { display: none; } }
+/* Trails: each sits in its own Figma frame, which crops it so it pokes out of the band (left frame -127,0 418×553;
+   right frame 832,142 432×442, mirrored in Figma). Inside, each is Figma's image box with Figma's exact transform
+   (rotation, and the left one flipped), and the video fills the box the way Figma crops the image. */
+.homecta_clip { position: absolute; overflow: hidden; }
+.homecta_clip--left { left: calc(-127 * var(--u)); top: 0; width: calc(418 * var(--u)); height: calc(553 * var(--u)); z-index: 0; }
+.homecta_clip--right { left: calc(832 * var(--u)); top: calc(142 * var(--u)); width: calc(432 * var(--u)); height: calc(442 * var(--u)); z-index: 0; transform: scaleX(-1); }
+.homecta_trail { position: absolute; left: 0; top: 0; overflow: hidden; transform-origin: 0 0; }
+/* Figma: 506×257 box, matrix (0.760, -0.649, -0.649, -0.760) at 71.4, 384.5 (turned 40.5° and flipped) */
+.homecta_trail--left { width: calc(506.14 * var(--u)); height: calc(257.11 * var(--u)); translate: calc(71.43 * var(--u)) calc(384.52 * var(--u)); transform: matrix(0.7604, -0.6495, -0.6495, -0.7604, 0, 0); }
+/* Figma: 718×467 box, matrix (0.259, -0.966, 0.966, 0.259) at -143.9, 626.7 (turned 75°) */
+.homecta_trail--right { width: calc(718.1 * var(--u)); height: calc(466.98 * var(--u)); translate: calc(-143.86 * var(--u)) calc(626.65 * var(--u)); transform: matrix(0.2587, -0.9660, 0.9660, 0.2587, 0, 0); }
+/* Figma crops the image: left shows its first 93.7% of width; right starts 1.24% in and shows 98.8% */
+.homecta_trail-still { position: absolute; top: 0; height: 100%; max-width: none; object-fit: cover; object-position: left center; }
+.homecta_trail-video { position: absolute; top: 0; height: 100%; max-width: none; object-fit: cover; object-position: left center; }
+.homecta_trail-video[hidden] { display: none; }
+.homecta_trail-still[hidden] { display: none; }
+/* Figma's crop of each image (video and still share it) */
+.homecta_trail-media--left { left: 0; width: 106.73%; }
+.homecta_trail-media--right { left: -1.26%; width: 101.25%; }
+/* Pieces (student and icons) */
+.homecta_piece { position: absolute; display: block; height: auto; max-width: none; z-index: 1; }
+.homecta_piece--student { left: calc(9.3 * var(--u)); top: calc(131.5 * var(--u)); width: calc(290 * var(--u)); rotate: 3.17deg; --pull-x: 14; --pull-y: -6; }
+.homecta_piece--crown { left: calc(28 * var(--u)); top: calc(258 * var(--u)); width: calc(71 * var(--u)); z-index: 2; --pull-x: 40; --pull-y: 0; }
+.homecta_piece--aistar { left: calc(-40 * var(--u)); top: calc(132 * var(--u)); width: calc(79 * var(--u)); rotate: -38.82deg; --pull-x: 45; --pull-y: 9; }
+.homecta_piece--cursor { left: calc(943 * var(--u)); top: calc(210.3 * var(--u)); width: calc(53 * var(--u)); rotate: 10.68deg; --pull-x: -32; --pull-y: 4; }
+.homecta_piece--camera { left: calc(960.3 * var(--u)); top: calc(-27.3 * var(--u)); width: calc(80 * var(--u)); rotate: -14.12deg; --pull-x: -38; --pull-y: 26; }
+.homecta_piece--flower { left: calc(1008 * var(--u)); top: calc(388 * var(--u)); width: calc(81 * var(--u)); scale: -1 1; --pull-x: -42; --pull-y: -12; }
+
+/* ---- Burst (only once the script has run, so nothing is hidden without it) ----
+   Start: the art is clipped to the band's rounded box, and each piece is pulled towards the middle (--pull-x/y, % of the
+   band's width), small and turned. Burst: the clip opens outward while the pieces spring to their places, staggered. */
+.homecta--ready .homecta_art { clip-path: inset(0 round var(--radius-lg)); }
+.homecta--ready.homecta--burst .homecta_art { clip-path: inset(-30% -30% -30% -30% round 0px); transition: clip-path 1.1s cubic-bezier(0.25, 0.7, 0.3, 1); }
+.homecta--ready .homecta_piece { opacity: 0; transform: translate(calc(var(--pull-x) * 1cqw), calc(var(--pull-y) * 1cqw)) scale(0.35) rotate(var(--spin, 0deg)); }
+.homecta--ready.homecta--burst .homecta_piece { opacity: 1; transform: none; transition: transform 1s cubic-bezier(0.2, 1.35, 0.35, 1) var(--delay, 0ms), opacity 0.25s ease var(--delay, 0ms); }
+/* Without video, the trail stills burst out like the icons; with video, the trails draw themselves instead */
+.homecta--ready .homecta_trail { opacity: 0; }
+.homecta--ready.homecta--burst .homecta_trail { opacity: 1; transition: opacity 0.3s ease; }
+
+/* ---------- Home newsletter sign-up: Sage band, centred heading, cream form card (Figma: Let's keep in touch) ---------- */
+.newsletter { background: var(--color-sage); padding: calc(var(--space-4xl) - var(--space-sm)) var(--gutter); }
+.newsletter_inner { display: flex; flex-direction: column; align-items: center; gap: calc(var(--space-xl) + var(--space-xs)); max-width: 720px; margin-inline: auto; }
+.newsletter_header { display: flex; flex-direction: column; align-items: center; gap: var(--space-md); max-width: 480px; text-align: center; }
+.newsletter_title { color: var(--text-primary); margin: 0; }
+.newsletter_intro { color: var(--text-primary); opacity: 0.75; margin: 0; }
+
+/* ---------- Section heading block: eyebrow badge + h2 + intro ---------- */
+.section-header { display: flex; flex-direction: column; gap: var(--content-gap); max-width: 760px; align-items: center; text-align: center; margin-inline: auto; }
+.section-header--left { align-items: flex-start; text-align: left; margin-inline: 0; }
+.section-header_intro { color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-sm); }
+.section-header_intro--inverse { color: inherit; opacity: 0.85; }
+
+/* ---------- Split: image beside text from 900px ---------- */
+.split { display: grid; gap: var(--space-xl); align-items: center; }
+@media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; gap: var(--split-gap); } }
+.split_text { display: flex; flex-direction: column; gap: var(--content-gap); align-items: flex-start; }
+/* Put the image on the left (it comes after the text in the HTML) */
+@media (min-width: 900px) { .split_media--first { order: -1; } }
+.split_image { width: 100%; border-radius: var(--radius-lg); }
+
+/* ---------- Grid of cards ---------- */
+.grid { display: grid; gap: var(--grid-gap); grid-template-columns: 1fr; }
+@media (min-width: 640px) { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 640px) { .grid--3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 640px) { .grid--4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .grid--4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* ---------- Stat: big number + label + note ---------- */
+.stat { display: flex; flex-direction: column; gap: var(--space-xs); }
+.stat_note { color: var(--text-secondary); }
+
+/* ---------- Checklist: <ul class="checklist"><li class="checklist_item"> (checklist_item--x for a cross) ---------- */
+.checklist { list-style: none; padding: 0; display: grid; gap: var(--space-sm); }
+@media (min-width: 640px) { .checklist--cols-2 { grid-template-columns: 1fr 1fr; column-gap: var(--space-xl); } }
+.checklist_item { position: relative; padding-left: 36px; }
+.checklist_item::before { content: ''; position: absolute; left: 0; top: 0.1em; width: 24px; height: 24px; border-radius: var(--radius-pill); background-repeat: no-repeat; background-position: center; background-size: 14px; background-color: var(--surface-highlight); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e1704' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"); }
+.checklist_item--x::before { background-color: var(--surface-muted); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e1704' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6 6 18'/%3E%3Cpath d='m6 6 12 12'/%3E%3C/svg%3E"); }
+
+/* ---------- Prose: long-form Markdown (blog posts, legal pages).
+   The exception to "one class per rule": Markdown output can't carry classes, so these style its plain elements. ---------- */
+.prose { max-width: 720px; margin-inline: auto; width: 100%; }
+.prose > * + * { margin-top: var(--content-gap); }
+.prose h2 { margin-top: var(--space-2xl); font-variation-settings: var(--cut-display); font-size: var(--heading-l); line-height: var(--heading-l-lh); font-weight: 600; }
+.prose h3 { margin-top: var(--space-2xl); font-variation-settings: var(--cut-display); font-size: var(--heading-m); line-height: var(--heading-m-lh); font-weight: 600; }
+.prose h4 { margin-top: var(--space-2xl); font-size: var(--heading-s); line-height: var(--heading-s-lh); font-weight: 700; font-variation-settings: var(--cut-text); }
+.prose h5 { font-size: var(--heading-s); line-height: var(--heading-s-lh); font-weight: 700; font-variation-settings: var(--cut-text); }
+.prose h2 + * { margin-top: var(--space-sm); }
+.prose h3 + * { margin-top: var(--space-sm); }
+.prose h4 + * { margin-top: var(--space-sm); }
+.prose ul { padding-left: 1.4em; }
+.prose ol { padding-left: 1.4em; }
+.prose li + li { margin-top: var(--space-xs); }
+.prose img { border-radius: var(--radius-lg); margin-block: var(--space-lg); }
+.prose blockquote { padding: var(--space-lg) var(--space-xl); background: var(--surface-subtle); border-radius: var(--radius-md); font-size: var(--body-l); }
+.prose a { text-underline-offset: 3px; }
+.prose table { width: 100%; border-collapse: collapse; font-size: var(--body-s); }
+.prose th { text-align: left; padding: var(--space-sm); border-bottom: var(--border-thin) solid var(--border-default); vertical-align: top; }
+.prose td { text-align: left; padding: var(--space-sm); border-bottom: var(--border-thin) solid var(--border-default); vertical-align: top; }
+.prose hr { border: 0; border-top: var(--border-thin) solid var(--border-default); margin-block: var(--space-2xl); }
+
+/* ---------- Form beside supporting content ---------- */
+.formlayout { display: grid; gap: var(--section-gap); align-items: start; }
+@media (min-width: 900px) { .formlayout { grid-template-columns: 5fr 7fr; gap: var(--split-gap); } }
+.formlayout_aside { display: flex; flex-direction: column; gap: var(--space-xl); align-items: flex-start; }
+@media (min-width: 900px) { .formlayout_aside { position: sticky; top: calc(var(--header) + var(--space-xl)); } }
+.formlayout_main { min-width: 0; }

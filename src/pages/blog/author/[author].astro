@@ -1,8 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Hero from '../../../components/Hero.astro';
-import Section from '../../../components/Section.astro';
 import PostList from '../../../components/PostList.astro';
 
 export async function getStaticPaths() {
@@ -12,15 +10,26 @@ export async function getStaticPaths() {
 
 const { author } = Astro.props;
 const { Content } = await render(author);
+import Badge from '../../../components/Badge.astro';
 ---
 
 <BaseLayout title={`Posts by ${author.data.name}`}>
-  <Hero eyebrow="Author" title={author.data.name}>
-    {author.data.role && <p>{author.data.role}</p>}
-    <Content />
-  </Hero>
+  <section class="hero hero--subtle">
+    <div class="hero_inner">
+      <div class="hero_text">
+        <Badge tone="dark">Author</Badge>
+        <h1 class="text-display-l">{author.data.name}</h1>
+        <div class="hero_lead text-body-l">
+          {author.data.role && <p>{author.data.role}</p>}
+          <Content />
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Section tone="subtle">
-    <PostList author={author.id} />
-  </Section>
+  <section class="section section--subtle">
+    <div class="section_inner">
+      <PostList author={author.id} />
+    </div>
+  </section>
 </BaseLayout>
